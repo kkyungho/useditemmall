@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoya.mapper.CustomerMapper">
+	
+	<!-- 회원가입 -->
+	<insert id="join" parameterType="com.hoya.domain.CustomerVO">
+		
+		INSERT INTO HMAL_TBL(
+			hmal_id, 
+			hmal_pw,			 
+			hmal_name, 
+			hmal_email, 
+			hmal_zipcode, 
+			hmal_addr, 
+			hmal_deaddr, 
+			hmal_phone
+			)
+		VALUES(	
+			#{hmal_id}, 
+			#{hmal_pw},			 
+			#{hmal_name}, 
+			#{hmal_email}, 
+			#{hmal_zipcode}, 
+			#{hmal_addr}, 
+			#{hmal_deaddr}, 
+			#{hmal_phone}		
+			)
+										
+	</insert>
+	
+	<!-- 아이디중복확인 -->
+	<select id="reID" resultType="string">
+	
+		SELECT
+			hmal_id
+		FROM
+			HMAL_TBL
+		WHERE
+			hmal_id = #{hmal_id}
+			
+	</select>
+	
+	<!-- 로그인 -->
+	<select id="login" resultType="com.hoya.domain.CustomerVO">
+	
+		SELECT
+			hmal_id,
+			hmal_pw,
+			hmal_name,
+			hmal_email,
+			hmal_zipcode,
+			hmal_addr,
+			hmal_deaddr,
+			hmal_phone,
+			hmal_datesub,
+			hmal_updatedate,
+			hmal_lastlogin
+		FROM
+			HMAL_TBL
+		WHERE
+			hmal_id = #{hmal_id}
+	
+	</select>
+	
+	<!-- 비밀번호찾기(이메일) -->
+	<select id="sulfPwByEmail" resultType="String">
+	
+		SELECT
+			hmal_email
+		FROM
+			hmal_tbl
+		WHERE 
+			hmal_email = #{hmal_email}
+			
+	</select>
+	
+	<!-- 새로운 비밀번호 생성(이메일) -->
+	<update id="alterPw">
+	
+		UPDATE 
+			hmal_tbl
+		SET 
+			hmal_pw = #{hmal_pw} 
+		WHERE 
+			hmal_email = #{hmal_email}
+	
+	</update>
+	
+	<!-- 비밀번호변경1 -->
+	<select id="presentPwConfirm" resultType="String">
+	
+		SELECT
+			hmal_pw
+		FROM
+			hmal_tbl
+		WHERE
+			hmal_id = #{hmal_id}
+	
+	</select>
+	
+	<!-- 비밀번호변경2 -->
+	<update id="alterNewPw">
+		
+		UPDATE
+			hmal_tbl
+		SET
+			hmal_pw = #{alter_hmal_pw}
+		WHERE
+			hmal_id = #{hmal_id}
+			
+	</update>
+	
+	<!-- 회원수정 -->
+	<update id="alterUser">
+	
+		UPDATE
+			hmal_tbl
+		SET
+			hmal_email = #{hmal_email}, 
+			hmal_zipcode = #{hmal_zipcode}, 
+			hmal_addr = #{hmal_addr}, 
+			hmal_deaddr = #{hmal_deaddr}, 
+			hmal_phone = #{hmal_phone},			
+			hmal_updatedate = sysdate
+		WHERE
+			hmal_id = #{hmal_id}
+	
+	</update>
+	
+</mapper>

@@ -1,0 +1,83 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- 데이터베이스 연결정보 및 관련 설정작업 -->
+	<!-- pom.xml에서 dependency구문에 의하여 다운된 라이브러리에 존재하는 클래스들은 root-contex.xml파일에서 bean설정 목적으로 사용이 되어지고 있다. -->
+	<!-- 커넥션 풀기능지원 -->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig"> <!-- hikariConfig? 커넥션풀 사용하기위하여 사용됨 -->
+		<!-- <property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
+		<property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe" />-->
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe" /> 
+		<property name="username" value="hoya" />
+		<property name="password" value="1234" />
+	</bean>	
+	
+	<!-- 오라클서버와 연결 -->
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		<constructor-arg ref="hikariConfig" />
+	</bean>
+	
+	<!-- 데이터베이스와 연결된 상태에서 SQL실행에 대한 모든 기능을 지원 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- 트랜잭션 설정구문 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<tx:annotation-driven />
+		
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- AOP 관련설정 -->
+	<!-- 
+	<context:annotation-config></context:annotation-config>
+	<context:component-scan base-package="com.doccomsa.aop" />
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	-->
+	
+	 
+	<mybatis-spring:scan base-package="com.hoya.mapper"/>
+	<context:component-scan base-package="com.hoya.service" />
+	
+	 
+	<!-- 스케줄링 작업을 위한 설정 -->
+	<!-- 
+	<task:annotation-driven/>
+	<context:component-scan base-package="com.doccomsa.task" />		
+	-->
+	
+	<!-- 올릴때는 value="" 이부분 지우고 올릴것 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host"  value="smtp.gmail.com" />
+		<property name="port" value="587"></property>
+		<property name="username" value="kyung2643@gmail.com"></property>
+		<property name="password" value="dnjstnddl1!"></property>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>		 
+	</bean>
+	
+</beans>

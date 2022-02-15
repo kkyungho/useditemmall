@@ -1,0 +1,295 @@
+package com.hoya.web;
+
+import javax.inject.Inject;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.hoya.domain.CustomerVO;
+import com.hoya.domain.EmailDTO;
+import com.hoya.service.CustomerService;
+
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
+
+@Log4j
+@AllArgsConstructor
+@RequestMapping("/customer/*")
+@Controller
+public class CustomerController {
+
+	@Inject
+	private PasswordEncoder cryptPassEnc;
+	
+	@Inject
+	private CustomerService service;
+	
+	@Inject
+	private JavaMailSender mailSender;
+		
+	// 주요기능 : 회원기능
+	
+	
+	// 회원가입 폼 : /customer/join -> jsp파일명
+	@GetMapping("/join")
+	public void join() {
+			
+	}
+		
+		
+	// 회원가입저장
+	@PostMapping("/join")
+	public String joinOk(CustomerVO vo, RedirectAttributes rttr) throws Exception{
+		
+		vo.setHmal_pw(cryptPassEnc.encode(vo.getHmal_pw()));
+		
+		log.info("CustomerVO: " + vo);
+		
+		service.join(vo);
+		
+		return "redirect:/customer/login";
+	}
+		
+		
+	// 아이디중복체크
+	@ResponseBody
+	@GetMapping("/reID")
+	public ResponseEntity<String> reID(@RequestParam("hmal_id") String hmal_id) throws Exception{
+		
+		String result = "";
+		ResponseEntity<String> entity = null;
+		
+		result = StringUtils.isEmpty(service.reID(hmal_id)) ? "Y" : "N";
+		
+		entity = new ResponseEntity<String>(result, HttpStatus.OK);
+		
+		return entity;
+	}
+	
+	// 메일인증요청
+	@ResponseBody
+	@GetMapping("/certiMail")
+	public ResponseEntity<String> certiMail(@RequestParam("hmal_email") String hmal_email, HttpSession session){
+		
+		ResponseEntity<String> entity = null;
+		
+		String certiCode = makeCertiCode();
+		session.setAttribute("certiCode", certiCode);
+		
+		// 인증코드를 세션에 임시적으로 저장		
+		EmailDTO dto = new EmailDTO("Hmarket", "kyung2643@naver.com", hmal_email, "Hmarket 인증메일", certiCode);
+		
+		// 메일내용을 구성하는 클래스
+		MimeMessage message = mailSender.createMimeMessage();
+		
+		try {
+			// 받는 사람 메일설정
+			message.addRecipient(RecipientType.TO, new InternetAddress(hmal_email));
+			// 보내는 사람 설정(메일, 이름)
+			message.addFrom(new InternetAddress[] {new InternetAddress(dto.getSenderMail(), dto.getSenderName())});
+			// 제목
+			message.setSubject(dto.getMessage(), "utf-8");
+			// 본문내용(인증코드)
+			message.setText(dto.getMessage(), "utf-8");
+			
+			mailSender.send(message);
+			
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			entity = new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
+		}
+		
+		
+		
+		
+		return entity;
+	}
+		
+	// 메일인증요청확인
+	@ResponseBody
+	@GetMapping("/mailCertiConfirm")
+	public ResponseEntity<String> MailCertiConfirm(@RequestParam("hCertiCode") String hCertiCode, HttpSession session){
+		
+		ResponseEntity<String> entity = null;
+		
+		String certiCode = (String) session.getAttribute("certiCode");
+		
+		if(certiCode.equals(hCertiCode)) {
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+		}else {
+			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+		}
+		
+		return entity;
+		
+	}
+	
+	
+	// 회원가입시 메일인증코드 생성
+	private String makeCertiCode() {
+		
+		String certiCode = "";
+		
+		for(int i=0; i<6; i++) {
+			certiCode += String.valueOf((int) (Math.random() * 9) + 1);
+		}
+		
+		return certiCode;
+	}
+		
+	// 2월11일 작업
+	// 회원수정 폼	
+	@GetMapping("/alterUser")
+	public void alterUser(HttpSession session, Model model) {
+		
+		CustomerVO vo = (CustomerVO) session.getAttribute("loginStatus");
+		
+		String hmal_id = vo.getHmal_id();
+		
+		model.addAttribute(service.login(hmal_id));
+	}
+		
+	// 2월11일 작업
+	// 회원수정 저장
+	@PostMapping("/alterUser")
+	public String alterUser(CustomerVO vo, HttpSession session, RedirectAttributes rttr) {
+		
+		String redirectURL = "";
+		
+		log.info("회원수정정보: " + vo);
+		
+		CustomerVO session_vo = (CustomerVO) session.getAttribute("loginStatus");
+				
+		if(cryptPassEnc.matches(vo.getHmal_pw(), session_vo.getHmal_pw())) {
+			
+			service.alterUser(vo);
+			
+			redirectURL = "/";
+			rttr.addFlashAttribute("msg", "alterUserOk");
+			
+		}else {
+			redirectURL = "/customer/alterUser";
+			rttr.addFlashAttribute("msg", "alterUserFail");
+		}
+		
+		return "redirect: " + redirectURL;
+	}
+		
+		
+	// 로그인 틀
+	@GetMapping("/login")
+	public void login() {
+			
+	}
+		
+	// 로그인
+	@ResponseBody
+	@PostMapping("/login")
+	public ResponseEntity<String> login(@RequestParam("hmal_id") String hmal_id, @RequestParam("hmal_pw") String hmal_pw, HttpSession session) throws Exception{
+		
+		String result = "";
+		ResponseEntity<String> entity = null;
+		
+		CustomerVO vo = service.login(hmal_id);
+		
+		if(vo == null) { // id가 존재안하는 의미.
+			result = "idfail";			
+		}else { // id가 존재하는 의미.
+			
+			if(cryptPassEnc.matches(hmal_pw, vo.getHmal_pw())) {
+				result = "success";
+				
+				session.setAttribute("loginStatus", vo); // 로그인 성공 상태정보를 세션으로 저장
+			}else {
+				result = "pwfail";
+			}
+		}
+		
+		entity = new ResponseEntity<String>(result, HttpStatus.OK);
+		
+		return entity;
+	}
+		
+	// 로그아웃
+	@GetMapping("/logout")
+	public String logout(HttpSession session, RedirectAttributes rttr) {
+		
+		session.invalidate();
+		
+		return "redirect:/";
+	}
+	
+	// 비밀번호 찾기 폼
+	@GetMapping("/surfPw")
+	public void surfPwReq() {
+		
+	}
+	
+	// 2월11일 작업
+	@ResponseBody
+	@PostMapping("/surfPw")
+	public ResponseEntity<String> sulfPwAction(@RequestParam("hmal_email") String hmal_email){
+		
+		ResponseEntity<String> entity = null;
+		
+		
+		
+		return entity;
+	}
+	
+	// 2월11일 작업
+	// 비밀번호 변경
+	@ResponseBody
+	@PostMapping("/alterPw")
+	public ResponseEntity<String> alterPw(@RequestParam("ori_hmal_pw") String ori_hmal_pw, @RequestParam("alter_hmal_pw") String alter_hmal_pw, HttpSession session){
+		
+		ResponseEntity<String> entity = null;
+		
+		CustomerVO vo = (CustomerVO) session.getAttribute("loginStatus");
+		
+		String hmal_id = vo.getHmal_id();
+		
+		log.info("파라미터: " + hmal_id);
+		log.info("파라미터: " + ori_hmal_pw);
+		log.info("파라미터: " + alter_hmal_pw);
+		
+		String result = service.presentPwConfirm(hmal_id, cryptPassEnc, ori_hmal_pw, cryptPassEnc.encode(alter_hmal_pw));
+		
+		entity = new ResponseEntity<String>(result, HttpStatus.OK);		
+		
+		
+		return entity;
+	}
+		
+	// 마이페이지
+	@GetMapping("/mypage")
+	public void mypage() {
+			
+	}
+		
+		
+		
+	// 7)아이디 및 비밀번호 찾기
+	@GetMapping("/searchIDPW")
+	public void searchIDPW() {
+			
+	}
+}

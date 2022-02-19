@@ -34,4 +34,7 @@ public interface CustomerMapper {
 	// 2월11일 작업
 	// 비밀번호 변경2
 	public int alterNewPw(@Param("hmal_id") String hmal_id, @Param("alter_hmal_pw") String alter_hmal_pw);
+	
+	// 회원삭제
+	public int userDelete(@Param("hmal_id") String hmal_id);
 }

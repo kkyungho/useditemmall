@@ -30,13 +30,13 @@
     </style>
     
     <script>
-    
-    	let msg = '${msg}';
-    	if(msg == 'alterUserFail'){
-    		alert("비밀번호를 확인바랍니다.");
-    	}
-    
-    </script>
+  	
+	  	let msg = '${msg}'; 
+	  	if(msg == 'alterUserFail'){
+	  		alert("비밀번호를 확인바랍니다.");
+	  	}
+  
+  	</script>
     
     <!-- Custom styles for this template -->
     <!-- <link href="pricing.css" rel="stylesheet"> -->
@@ -64,17 +64,13 @@
   </div>
   <div class="form-row">
 	<div class="col-md-5">
-	  <label for="ori_hmal_pw">현재비밀번호 </label>
-	  <input type="password" class="form-control" id="ori_hmal_pw" name="ori_hmal_pw">
+	  <label for="hmal_pw">비밀번호 </label>
+	  <input type="password" class="form-control" id="hmal_pw" name="hmal_pw">
 	</div>    	   
 	<div class="col-md-5">
-	   <label for="alter_hmal_pw">변경비밀번호</label>
-	   <input type="password" class="form-control" id="alter_hmal_pw" name="alter_hmal_pw" >
-	</div>   	      
-    <div class="col-md-2">
-    	<label for="ori_hmal_pw">&nbsp;</label>
-    	<button type="button" class="form-control" id="btnAlterPw" >비밀번호 변경</button>
-    </div>	
+	   <label for="hmal_repw">비밀번호확인</label>
+	   <input type="password" class="form-control" id="hmal_repw" name="hmal_repw" >
+	</div>   
   </div>
   <div class="form-group">
     <label for="hmal_name">이름</label>
@@ -90,7 +86,7 @@
    <div class="form-row">
    <div class="col-md-2">
       <label for="hmal_zipcode">우편번호</label>
-      <input type="text" class="form-control" id="mbsp_zipcode" name="mbsp_zipcode" value='<c:out value="${customerVO.hmal_zipcode }" />'>
+      <input type="text" class="form-control" id="hmal_zipcode" name="hmal_zipcode" value='<c:out value="${customerVO.hmal_zipcode }" />'>
     </div>
     <div class="col-md-2">
       <label for="btnPostCode">&nbsp;</label>
@@ -113,6 +109,7 @@
   </div>
 
   <button type="button" id="btnAlterUser" class="btn btn-primary">회원수정</button>
+  <button type="button" id="btnUserDelete" class="btn btn-danger">회원탈퇴</button>
 </form>
   
   
@@ -123,7 +120,8 @@
 
 <script>
 
-	$(document).ready(function(){
+	$(document).ready(function(){			
+		
 		
 		//폼에서 일반버튼<input type="button">을 클릭하면 호출되는 이벤트설정
 		$("#btnAlterUser").on("click", function(){
@@ -143,43 +141,8 @@
 			
 			$("#alterUserForm").submit();
 			
-		});	
+		});			
 		
-		// 비밀번호변경
-		$("#btnAlterPw").on("click", function(){
-			
-			let ori_hmal_pw = $("#ori_hmal_pw");
-			let alter_hmal_pw = $("#alter_hmal_pw");
-			
-			if(ori_hmal_pw.val() == "" || ori_hmal_pw.val() == null){
-				alert("현재 비밀번호를 입력하세요.");
-				ori_hmal_pw.focus();
-				return;
-			}
-			
-			if(alter_hmal_pw.val() == "" || alter_hmal_pw.val() == null){
-				alert("변경할 비밀번호를 입력하세요.");
-				alter_hmal_pw.focus();
-				return;
-			}
-			
-			$.ajax({
-				url: '/customer/alterPw',
-				type: 'post',
-				dataType: 'text',
-				data: { ori_hmal_pw : ori_hmal_pw.val(), alter_hmal_pw : alter_hmal_pw.val() },
-				success: function(data){
-					
-					if(data == "success"){
-						alert("비밀번호 변경완료.");						
-					}else if(data == "noPw"){
-						alert("현재 비밀번호가 다릅니다. 확인하세요.");
-						ori.hmal_pw.val("");
-						ori.hmal_pw.focus();
-					}
-				}
-			});
-		});
 	
 	});
 </script>
@@ -240,7 +203,7 @@
                   }
   
                   // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                  document.getElementById('hmal_zipcode').value = data.zonecode;
+                  document.getElementById("hmal_zipcode").value = data.zonecode;
                   document.getElementById("hmal_addr").value = addr;
                   // 커서를 상세주소 필드로 이동한다.
                   document.getElementById("hmal_deaddr").focus();

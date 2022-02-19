@@ -44,10 +44,11 @@
   <body>
   <script>
   	
-  	let msg = '${msg}';
+  	let msg = '${msg}'; 
   	if(msg == 'alterUserOk'){
   		alert("회원정보가 수정됨");
   	}
+  
   </script>
     
 <%@include file="/WEB-INF/views/include/header.jsp" %>

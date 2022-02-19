@@ -8,7 +8,7 @@ import lombok.Data;
 public class CustomerVO {
 
 	private String hmal_id;
-	private String hmal_pw;	
+	private String hmal_pw;	 
 	private String hmal_name;
 	private String hmal_email;
 	private String hmal_zipcode;

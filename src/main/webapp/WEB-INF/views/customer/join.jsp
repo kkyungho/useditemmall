@@ -111,7 +111,7 @@
 	    <div class="col-md-4">
 	      <label for="hmal_deaddr">상세주소</label>
 	      <input type="text" class="form-control" id="hmal_deaddr" name="hmal_deaddr">
-        <input type="hidden" id="sample2_extraAddress" placeholder="참고항목">
+          <input type="hidden" id="sample2_extraAddress" placeholder="참고항목">
 	    </div>	    
 	   </div>
 
@@ -313,7 +313,7 @@
                   }
   
                   // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                  document.getElementById('hmal_zipcode').value = data.zonecode;
+                  document.getElementById("hmal_zipcode").value = data.zonecode;
                   document.getElementById("hmal_addr").value = addr;
                   // 커서를 상세주소 필드로 이동한다.
                   document.getElementById("hmal_deaddr").focus();

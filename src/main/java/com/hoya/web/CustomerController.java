@@ -157,7 +157,7 @@ public class CustomerController {
 		
 	// 2월11일 작업
 	// 회원수정 폼	
-	@GetMapping("/alterUser")
+	@GetMapping(value = {"/alterUser", "/changeOut"})
 	public void alterUser(HttpSession session, Model model) {
 		
 		CustomerVO vo = (CustomerVO) session.getAttribute("loginStatus");
@@ -168,13 +168,14 @@ public class CustomerController {
 	}
 		
 	// 2월11일 작업
+	// 2월15일 작업
 	// 회원수정 저장
 	@PostMapping("/alterUser")
 	public String alterUser(CustomerVO vo, HttpSession session, RedirectAttributes rttr) {
 		
 		String redirectURL = "";
 		
-		log.info("회원수정정보: " + vo);
+		log.info("회원수정정보: " + vo);  // "ori_hmal_pw"
 		
 		CustomerVO session_vo = (CustomerVO) session.getAttribute("loginStatus");
 				
@@ -191,6 +192,25 @@ public class CustomerController {
 		}
 		
 		return "redirect: " + redirectURL;
+	}
+	
+	// 2월15일 작업
+	// 회원삭제
+	@ResponseBody
+	@PostMapping("/userDelete")
+	public ResponseEntity<String> userDelete(@RequestParam("hmal_pw") String hmal_pw, HttpSession session){
+		
+		ResponseEntity<String> entity = null;
+		
+		CustomerVO vo = (CustomerVO) session.getAttribute("loginStatus");
+		
+		String hmal_id = vo.getHmal_id();
+		
+		entity = new ResponseEntity<String>(String.valueOf(service.userDelete(hmal_id, hmal_pw, cryptPassEnc)), HttpStatus.OK);
+		
+		session.invalidate();
+		
+		return entity;
 	}
 		
 		
@@ -211,7 +231,7 @@ public class CustomerController {
 		CustomerVO vo = service.login(hmal_id);
 		
 		if(vo == null) { // id가 존재안하는 의미.
-			result = "idfail";			
+			result = "idFail";			
 		}else { // id가 존재하는 의미.
 			
 			if(cryptPassEnc.matches(hmal_pw, vo.getHmal_pw())) {
@@ -219,7 +239,7 @@ public class CustomerController {
 				
 				session.setAttribute("loginStatus", vo); // 로그인 성공 상태정보를 세션으로 저장
 			}else {
-				result = "pwfail";
+				result = "pwFail";
 			}
 		}
 		
@@ -244,6 +264,7 @@ public class CustomerController {
 	}
 	
 	// 2월11일 작업
+	// 비밀번호 찾기(이메일)
 	@ResponseBody
 	@PostMapping("/surfPw")
 	public ResponseEntity<String> sulfPwAction(@RequestParam("hmal_email") String hmal_email){
@@ -267,9 +288,9 @@ public class CustomerController {
 		
 		String hmal_id = vo.getHmal_id();
 		
-		log.info("파라미터: " + hmal_id);
-		log.info("파라미터: " + ori_hmal_pw);
-		log.info("파라미터: " + alter_hmal_pw);
+		log.info("아이디: " + hmal_id);
+		log.info("현재 비밀번호: " + ori_hmal_pw);
+		log.info("변경 비밀번호: " + alter_hmal_pw);
 		
 		String result = service.presentPwConfirm(hmal_id, cryptPassEnc, ori_hmal_pw, cryptPassEnc.encode(alter_hmal_pw));
 		

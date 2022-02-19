@@ -127,4 +127,14 @@
 	
 	</update>
 	
+	<!-- 회원삭제 -->
+	<delete id="userDelete">
+		
+		DELETE FROM
+			hmal_tbl
+		WHERE
+			hmal_id = #{hmal_id}
+	
+	</delete>
+	
 </mapper>

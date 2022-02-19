@@ -30,4 +30,7 @@ public interface CustomerService {
 	// 2월11일 작업
 	// 비밀번호변경
 	public String presentPwConfirm(String hmal_id, PasswordEncoder cryptPassEnc, String ori_hmal_pw, String alter_hmal_pw);
+	
+	// 회원삭제
+	public int userDelete(String hmal_id, String hmal_pw, PasswordEncoder cryptPassEnc);
 }

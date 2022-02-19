@@ -76,6 +76,20 @@ public class CustomerServiceImpl implements CustomerService{
 		return result;
 	}
 
+	// 회원삭제
+	@Override
+	public int userDelete(String hmal_id, String hmal_pw, PasswordEncoder cryptPassEnc) {
+		
+		int count = 0;
+		
+		if(cryptPassEnc.matches(hmal_pw, mapper.presentPwConfirm(hmal_id))) {
+			count = mapper.userDelete(hmal_id);
+		}
+		
+		
+		return count;
+	}
+
 	
 
 }

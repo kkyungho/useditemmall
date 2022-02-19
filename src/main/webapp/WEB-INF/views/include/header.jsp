@@ -8,7 +8,10 @@
   <!-- <h5 class="my-0 mr-md-auto font-weight-normal" href="">Hmall</h5> -->
   <!-- 로고이미지 넣기(2022.02.09 오류발생) -->
   <!-- <img src="/WEB-INF/views/include/logo.png"> -->
-  <a class="my-0 mr-md-auto font-weight-normal text-dark" href="/">Hmarket</a>   
+  <a href="/">
+  	<img src="/WEB-INF/views/include/logo.png">
+  </a> 
+    
   <nav class="my-2 my-md-0 mr-md-3">
 
     <!-- 로그인 이전상태 표시 -->
@@ -25,6 +28,7 @@
     
     	<a class="p-2 text-dark" href="/customer/logout">로그아웃</a>
     	<a class="p-2 text-dark" href="/customer/alterUser">회원수정</a>
+    	<a class="p-2 text-dark" href="/customer/changeOut">비밀번호변경/회원탈퇴</a>
     	<a class="p-2 text-dark" href="/customer/mypage" >내상점</a>
     	
     </c:if>

@@ -258,20 +258,55 @@ public class CustomerController {
 	}
 	
 	// 비밀번호 찾기 폼
-	@GetMapping("/surfPw")
-	public void surfPwReq() {
+	@GetMapping("/findPw")
+	public void findPwReq() {
 		
 	}
 	
 	// 2월11일 작업
 	// 비밀번호 찾기(이메일)
 	@ResponseBody
-	@PostMapping("/surfPw")
-	public ResponseEntity<String> sulfPwAction(@RequestParam("hmal_email") String hmal_email){
+	@PostMapping("/findPw")
+	public ResponseEntity<String> findPwAction(@RequestParam("hmal_email") String hmal_email){
 		
 		ResponseEntity<String> entity = null;
 		
-		
+		if(!StringUtils.isEmpty(service.findPwByEmail(hmal_email))) {
+			
+			String tempPw = makeCertiCode();
+			
+			EmailDTO dto = new EmailDTO("Hmarket", "kyung2643@gmail.com", hmal_email, "Hmarket 인증메일", tempPw);
+			
+			MimeMessage message = mailSender.createMimeMessage();
+			
+			try {
+				// 받는 사람 메일설정
+				message.addRecipient(RecipientType.TO, new InternetAddress(hmal_email));
+				// 보내는 사람설정(이메일,이름)
+				message.addFrom(new InternetAddress[] {new InternetAddress(dto.getSenderMail(), dto.getSenderName())});
+				// 제목
+				message.setSubject(dto.getSubject(), "utf-8");
+				// 본문내용(인증코드)
+				message.setText(dto.getMessage(), "utf-8");
+				
+				mailSender.send(message);
+				
+				String encryptPw = cryptPassEnc.encode(tempPw);
+				service.alterPw(hmal_email, encryptPw);
+				
+				entity = new ResponseEntity<String>("success", HttpStatus.OK);
+				
+			}catch(Exception ex){
+				ex.printStackTrace();
+				
+				entity = new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
+			}
+			
+			
+		}else {
+			
+			entity = new ResponseEntity<String>("noMail", HttpStatus.OK);
+		}
 		
 		return entity;
 	}

@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
-    <title>Pricing example · Bootstrap v4.6</title>
+    <title>Hmarket</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">
     
@@ -47,7 +47,7 @@
   
   <!-- 회원가입 폼 작업 -->  
   <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">로그인</div>
                     <div class="card-body">
@@ -80,8 +80,8 @@
 					        
                             						
                             <div style="text-align: center">
-                                <button type="button"  id="btnlogin" class="btn btn-primary center">로그인</button>	                  
-                            	<button type="button"  id="btnSulfPw" class="btn btn-link center">비밀번호 찾기</button>                                
+                                <button type="button"  id="btnlogin" class="btn btn-light center">로그인</button>	                  
+                            	<button type="button"  id="btnFindPw" class="btn btn-warning center">비밀번호 찾기</button>                                
                             </div>
                              
                           </form>
@@ -92,7 +92,7 @@
         </div>
   
 
-   <%@include file="/WEB-INF/views/include/footer.jsp" %> 
+   
    
 </div>
 
@@ -140,6 +140,9 @@
         });
       });
     
+      $("#btnFindPw").on("click", function(){
+    	 location.href = "/customer/findPw"; 
+      });
   });
 
 </script>

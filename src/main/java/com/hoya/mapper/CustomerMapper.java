@@ -25,7 +25,7 @@ public interface CustomerMapper {
 	
 	// 2월11일 작업
 	// 새로운 비밀번호 생성(이메일)
-	public int alterPw(@RequestParam("hmal_email") String hmal_email, @RequestParam("hmal_pw") String hmal_pw);
+	public int alterPw(@Param("hmal_email") String hmal_email, @Param("hmal_pw") String hmal_pw);
 	
 	// 2월11일 작업
 	// 비밀번호 변경1

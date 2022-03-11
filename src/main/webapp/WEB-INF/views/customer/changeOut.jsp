@@ -11,24 +11,7 @@
     <title>Hmarket</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">
-    
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-    
+        
     <script>
   	
 	  	let msg = '${msg}'; 
@@ -38,48 +21,45 @@
   
   	</script>
     
-    <!-- Custom styles for this template -->
-    <!-- <link href="pricing.css" rel="stylesheet"> -->
+    
   </head>
   <body>
     
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 
-<!-- 
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-  <h1 class="display-4">Pricing</h1>
-  <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
-</div>
- -->
 <div class="container">
   
-  <!-- 회원가입 폼 작업 -->
-  <h3>비밀번호변경/회원탈퇴</h3>
-  <div class="form-row">
-	<div class="col-md-5">	  
-	  <label for="ori_hmal_pw">현재비밀번호(비밀번호변경) </label>
-	  <input type="password" class="form-control" id="ori_hmal_pw" name="ori_hmal_pw">
-	</div>    	   
-	<div class="col-md-5">
-	   <label for="alter_hmal_pw">변경비밀번호</label>
-	   <input type="password" class="form-control" id="alter_hmal_pw" name="alter_hmal_pw" >
-	</div>   	      
-    <div class="col-md-2">
-    	<label for="ori_hmal_pw">&nbsp;</label>
-    	<button type="button" class="form-control" id="btnAlterPw" >비밀번호 변경</button>
-    </div>	
-  </div>
-  
-  <div class="form-row">
-  <div class="col-md-5">
-	   <label for="hmal_pw">현재비밀번호(회원탈퇴)</label>
-	   <input type="password" class="form-control" id="hmal_pw" name="hmal_pw" >
-	</div>		      
-    <div class="col-md-2">
-    	<label for="hmal_pw">&nbsp;</label>
-    	<button type="button" class="form-control" id="btnUserDelete">회원탈퇴</button>
-    </div>	
-  </div>
+  <!-- 비밀번호변경/회원탈퇴 -->
+  <section class="content container-fluid">
+  	<div class="container" style="width: 70%; min-width: 900px; background-color: white; font-size: 16px;">
+  		<form action="/customer/changeOut" method="post">
+		  <div class="container" style="width: 800px; padding: 10% 5%;">
+		  	<h4>비밀번호 변경/회원탈퇴</h4>
+		  	<br>		    
+			<div class="form-group">
+	    		<label for="ori_hmal_pw">✔ 현재 비밀번호</label>
+	    		<input type="password" class="form-control" id="ori_hmal_pw" name="ori_hmal_pw"
+	    			placeholder="현재 비밀번호를 입력해주세요." style="max-width: 630px;">
+	    	</div>
+	    	<div class="form-group">
+			    <label for="alter_hmal_pw">✔ 변경 비밀번호</label>
+			    <input type="password" class="form-control" id="alter_hmal_pw" name="alter_hmal_pw"
+			    	placeholder="변경할 비밀번호를 입력해주세요." style="width: 630px;"><br>
+			    <label for="ori_hmal_pw">&nbsp;</label>
+			    <button type="button" id="btnAlterPw" class="btn btn-warning">비밀번호변경</button>
+			</div>
+			<div class="form-group">
+				<label for="hmal_pw">✔ 현재비밀번호(회원탈퇴)</label>
+	   			<input type="password" class="form-control" id="hmal_pw" name="hmal_pw" 
+	   				placeholder="현재 비밀번호를 입력해주세요." style="max-width: 630px;"><br>
+	   			<label for="hmal_pw">&nbsp;</label>
+    			<button type="button" id="btnUserDelete" class="btn btn-danger" >회원탈퇴</button>
+			</div>			     		  
+	  		
+	  	   </div> 
+		</form>	 
+	  </div> 
+  </section>  
   
   
   
@@ -117,7 +97,8 @@
 				success: function(data){
 					
 					if(data == "success"){
-						alert("비밀번호 변경완료.");						
+						alert("비밀번호 변경완료.");	
+						location.href = "/";
 					}else if(data == "noPw"){
 						alert("현재 비밀번호가 다릅니다. 확인하세요.");
 						ori.hmal_pw.val("");
@@ -146,7 +127,7 @@
 				success: function(data){
 					
 					if(data == "1"){
-						alert("회원정보가 삭제되었습니다.");
+						alert("회원탈퇴가 완료되었습니다.");
 						location.href = "/";
 					}else if(data == "0"){
 						alert("현재 비밀번호가 다릅니다. 확인하세요.");

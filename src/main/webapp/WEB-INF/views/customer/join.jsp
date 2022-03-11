@@ -11,163 +11,122 @@
     <title>Hmarket</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-
+	
     
-    <!-- Custom styles for this template -->
-    <!-- <link href="pricing.css" rel="stylesheet"> -->
+    
   </head>
   <body>
     
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 
-<!-- 
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-  <h1 class="display-4">Pricing</h1>
-  <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
-</div>
- -->
+
 <div class="container">
   
   <!-- 회원가입 작업 -->
-  <div class="py-5 text-center">
-  	<h3>회원가입</h3>
-  </div>
   
-  <div class="col-md-12 order-md-1">
-	  <form action="/customer/join" method="post" id="joinForm">
-	  <div class="form-row">
-	    <div class="col-md-10">
-		    <label for="hmal_id">아이디</label>
-		    <input type="text" class="form-control" id="hmal_id" name="hmal_id">
-		</div>
-		<div class="col-md-2">
-			<label id="idUseState">&nbsp;</label>
-		    <button type="button" class="form-control" id="btnUseIDChk">중복체크</button>
-	    </div>
-	  </div>
-	  
-	  <div class="form-group">
-	    <label for="hmal_pw">비밀번호</label>
-	    <input type="password" class="form-control" id="hmal_pw" name="hmal_pw">
-	  </div>
-	  <div class="form-group">
-	    <label for="hmal_pwcheck">비밀번호 확인</label>
-	    <input type="password" class="form-control" id="hmal_pwcheck" name="hmal_pwcheck">
-	  </div>
-	  <div class="form-group">
-	    <label for="hmal_name">이름</label>
-	    <input type="text" class="form-control" id="hmal_name" name="hmal_name">
-	  </div>
-
-	  <div class="form-row">
-	    <div class="col-md-6">
-		    <label for="hmal_email">이메일</label>
-		    <input type="text" class="form-control" id="hmal_email" name="hmal_email">
-		  </div>	
-		  <div class="col-md-2">
-			  <label for="btnMailCertiReq">메일확인바랍니다.</label>
-		    <button type="button" class="form-control" id="btnMailCertiReq">메일인증요청</button>
-	    </div>   
-	    <div class="col-md-2">
-		    <label for="certi_mail">메일인증코드입력</label>
-		    <input type="text" class="form-control" id="certi_mail" name="certi_mail">
-		  </div>	
-		  <div class="col-md-2">
-			  <label id="certiMailState">&nbsp;</label>
-		    <button type="button" class="form-control" id="btnMailCertiConfirm">메일인증확인</button>
-	    </div>	    
-	  </div>
-	 
-	   <div class="form-row">
-	   <div class="col-md-2">
-	      <label for="hmal_zipcode">우편번호</label>
-	      <input type="text" class="form-control" id="hmal_zipcode" name="hmal_zipcode">
-	    </div>
-	    <div class="col-md-2">
-	      <label for="btnPostCode">&nbsp;</label>
-	      <input type="button" class="form-control" id="btnPostCode" name="btnPostCode"  value="우편번호찾기" onclick="sample2_execDaumPostcode()">
-	    </div>
-	    <div class="col-md-4">
-	      <label for="hmal_addr">기본주소</label>
-	      <input type="text" class="form-control" id="hmal_addr" name="hmal_addr">
-	    </div>
-	    <div class="col-md-4">
-	      <label for="hmal_deaddr">상세주소</label>
-	      <input type="text" class="form-control" id="hmal_deaddr" name="hmal_deaddr">
-          <input type="hidden" id="sample2_extraAddress" placeholder="참고항목">
-	    </div>	    
-	   </div>
-
-	   <div class="form-group">
-      	<label for="hmal_phone">전화번호</label>
-      	<input type="text" class="form-control" id="hmal_phone" name="hmal_phone">        
-       </div>     	   
-	
-	  <button type="submit" id="btnJoin" class="btn btn-primary">회원가입</button>
-	  <button type="reset" class="btn btn-primary" >취소</button>
-	</form>
-</div>  
-  
+  <section class="content container-fluid">
+  	<div class="container" style="width: 70%; min-width: 900px; background-color: white; font-size: 16px;">
+  		<form action="/customer/join" method="post" id="joinForm">
+		  <div class="container" style="width: 800px; padding: 10% 5%;">
+		  	<h4>회원가입</h4><br>
+		  	✔ 아래 항목을 작성해주세요.<br><br><br>
+		    <div class="form-group" style="width: 100%;">
+			    <label for="hmal_id">✔ 아이디</label><br />
+			    <input type="text" class="form-control" id="hmal_id" name="hmal_id" 
+			    	placeholder="아이디를 입력해주세요." style="max-width:540px; width: calc(100% - 100px); margin-right: 5px; display: inline-block;">				
+				<button type="button" id="btnUseIDChk" class="btn btn-light">중복확인</button>
+			</div>
+			<div class="form-group">
+	    		<label for="hmal_pw">✔ 비밀번호</label>
+	    		<input type="password" class="form-control" id="hmal_pw" name="hmal_pw"
+	    			placeholder="비밀번호를 입력해주세요." style="max-width: 630px;">
+	    	</div>
+	    	<div class="form-group">
+			    <label for="hmal_pw_check">✔ 비밀번호 확인</label>
+			    <input type="password" class="form-control" id="hmal_pw_check" name="hmal_pw_check"
+			    	placeholder="비밀번호 확인을 위해 다시 한번 입력 해주세요." style="width: 630px;">
+			</div>
+			<div class="form-group">
+			    <label for="hmal_name">✔ 이름</label>
+			    <input type="text" class="form-control" id="hmal_name" name="hmal_name"
+			    	placeholder="이름을 입력해주세요." style="max-width: 630px;">
+			</div>
+			<div class="form-group">
+		    	<label for="hmal_email">✔ 이메일</label><br />
+		    	<input type="text" class="form-control" id="hmal_email" name="hmal_email"
+		    		placeholder="이메일 주소를  입력해주세요." style="max-width: 526px; width: calc(100% - 115px); margin-right: 5px; display: inline-block;">
+		    	<button type="button" class="btn btn-light" id="btnMailCertiReq">메일인증요청</button>
+		    </div>
+		    <div class="form-group" >
+		    	<label for="certi_mail">✔ 이메일 인증코드</label><br />
+		    	<input type="text" class="form-control" id="certi_mail" name="certi_mail"
+		    		placeholder="인증코드를 입력해주세요." style="max-width: 500px; width: calc(100% - 70px); margin-right: 5px; display: inline-block;" >
+		    	<button type="button" class="btn btn-light" id="btnMailCertiConfirm">메일인증확인</button>
+		    </div>
+		    <div class="form-group">
+			    <label for="inputAddr">✔  주소</label>			      
+			    <input type="text" class="form-control" id="hmal_zipcode" name="hmal_zipcode"
+			     	placeholder="우편번호" style="max-width: 510px; width: calc(100% - 128px); margin-right: 5px; display: inline-block;" readonly>
+			    <input type="button" class="btn btn-light" id="btnPostCode" name="btnPostCode"  value="우편번호찾기" onclick="sample2_execDaumPostcode()"><br>
+			    <input type="text" class="form-control" id="hmal_addr" name="hmal_addr"
+			    	placeholder="주소" style="max-width: 630px; margin: 3px 0px;" readonly>
+			    <input type="text" class="form-control" id="hmal_deaddr" name="hmal_deaddr"
+			    	placeholder="상세주소" style="max-width: 630px;">
+			    <input type="hidden" id="sample2_extraAddress" placeholder="참고항목">			        
+			 </div>
+			 <div>
+		  	 	<label for="hmal_phone">✔  전화번호</label>
+      		 	<input type="tel" class="form-control" id="hmal_phone" name="hmal_phone"
+      		 		placeholder="휴대폰  번호를 입력해주세요." style="max-width: 630px;">
+      		 </div><br><br>      		  
+	  		 <div class="form-group text-center">
+	  		 	<button type="submit" id="btnJoin" class="btn btn-light">회원가입</button>
+	  			<button type="reset" id="btnCancle" class="btn btn-danger">취소</button>
+	  		 </div> 
+	  	   </div> 
+		</form>	 
+	  </div> 
+  </section>  
 
   <%@include file="/WEB-INF/views/include/footer.jsp" %>
 </div>
 
 <script>
 
-  $(document).ready(function(){
+  $(document).ready(function(){	
 	  
+	let form = $("#joinForm");
     // 아이디중복체크
-    let isReID = false;
+    let isReID = false;    
     
     // 메일인증확인체크
-    let isMailCertiConfirm = false;
+    let isMailCertiConfirm = false;    
 	
-    $("#joinForm").on("submit", function(){
-      
-      console.log("아이디중복체크? " + isReID)
+    /*
+    $("#joinForm").on("submit", function(){      
       
       if(isReID == false){
-        alert("아이디 중복체크 확인바람");		  
+        alert("아이디 중복체크를 확인해주세요.");		  
         $("#hmal_id").focus();
         return false;
-      }
-      
+      }       
+     
       if(isMailCertiConfirm == false){
-        alert("메일인증요청 확인바람");
+        //alert("메일인증요청을 확인해주세요.");
         $("#btnMailCertiReq").focus();
         return false;
       }
-    });
-    
-    
-    
-    
-		
+    });  
+	*/
 	
     //아이디중복체크
     $("#btnUseIDChk").on("click", function(){
+    	
 	  isReID = false;
       let hmal_id = $("#hmal_id");
 
       if(hmal_id.val() == "" || hmal_id.val() == null){
-        alert("아이디를 입력하세요");
+        alert("아이디를 먼저 입력해주세요");
         hmal_id.focus();
         return;
       }
@@ -179,14 +138,14 @@
         data: { hmal_id : hmal_id.val() },
         success: function(data){
           
-          $("#idUseState").css("color","black");
+          $("#btnUseIDChk").css("color","black");
           if(data == "Y"){
             isReID = true;
-            $("#idUseState").html("아이디 사용가능");
+            $("#btnUseIDChk").html("사용가능");
           }else if(data == "N"){
         	  hmal_id.val("");
-            $("#idUseState").css("color","red");
-            $("#idUseState").html("아이디 사용불가능");
+            $("#btnUseIDChk").css("color","red");
+            $("#btnUseIDChk").html("사용불가능");
           }
         }
       });
@@ -213,9 +172,9 @@
           
           if(data == "success"){
         	  isMailCertiConfirm = true;
-            alert("인증요청 메일발송됨.");
+            alert("인증요청 메일발송되었습니다. 확인해주세요.");
           }else if(data == "fail"){
-        	  alert("인증요청 메일발송 에러.");
+        	alert("인증 실패. 다시 시도해주세요.");
           }
         }
       });
@@ -242,12 +201,96 @@
           if(data == "success"){        	
             alert("인증요청 성공.");
           }else if(data == "fail"){
-        	  alert("인증요청 실패\n 인증코드를 다시 입력하세요. 또는 인증요청을 다시 하기바랍니다.");
-        	  certi_mail.val("");
+        	alert("인증요청 실패\n 인증코드를 다시 입력하세요. 또는 인증요청을 다시 하기바랍니다.");
+        	certi_mail.val("");
           }
         }
       });
     });
+  	
+    // 회원가입 버튼 클릭 시 
+	$("#btnJoin").on("click", function(){
+		
+		let hmal_id = $("#hmal_id");
+		let hmal_pw = $("#hmal_pw");
+		let hmal_pw_check = $("#hmal_pw_check");
+		let hmal_name = $("#hmal_name");		
+		let hmal_email = $("#hmal_email");		
+		let hmal_phone = $("#hmal_phone");
+		let hmal_zipcode = $("input[name='hmal_zipcode']");
+		let hmal_addr = $("input[name='hmal_addr']");
+		let hmal_deaddr = $("input[name='hmal_deaddr']");
+		
+		// 유효성 검사 
+		
+		if(hmal_id.val() == "" || hmal_id.val() == null){
+			alert("아이디를 입력해주세요");
+			hmal_id.focus();
+			return false;
+			
+		} else if(isReID ==false){
+			alert("아이디 중복 체크를 해주세요.");
+			$("#btnUseIDChk").focus();
+			return false;
+			
+		} else if(hmal_pw.val() == "" || hmal_pw.val() == null){
+			alert("비밀번호를 입력해주세요.");
+			hmal_pw.focus();
+			return false;
+			
+		} else if(hmal_pw_check.val() == "" || hmal_pw_check.val() == null){
+			alert("비밀번호 확인 란을 입력해주세요.");
+			hmal_pw_check.focus();
+			return false;
+			
+		} else if(hmal_pw.val() != hmal_pw_check.val()){
+			alert("입력하신 비밀번호가 다릅니다.\n비밀번호를 다시 확인해주세요.");
+			hmal_pw_check.focus();
+			return false;
+
+		} else if(hmal_name.val()== "" || hmal_name.val() == null){
+			alert("이름을 입력해주세요.");
+			hmal_name.focus();
+			return false;
+		
+		} else if(hmal_email.val()== "" || hmal_email.val() == null){
+			alert("이메일을 입력해주세요.");
+			hmal_email.focus();
+			return false;
+
+		} else if(hmal_phone.val() == "" || hmal_phone.val() == null){
+			alert("휴대폰 번호를 입력해주세요.");
+			hmal_phone.focus();
+			return false;
+
+		} else if(hmal_zipcode.val() == "" || hmal_zipcode.val() == null){
+			alert("우편번호를 입력해주세요.");
+			$("#btnPostCode").focus();
+			return false;
+			
+		} else if(hmal_addr.val() == "" || hmal_addr.val() == null){
+			alert("주소를 입력해주세요.");
+			$("#btnPostCode").focus();
+			return false;
+			
+		} else if(hmal_deaddr.val() == "" || hmal_deaddr.val() == null){
+			alert("상세 주소를 입력해주세요.");
+			hmal_deaddr.focus();
+			return false;
+
+		} else {
+			form.submit();
+		}
+	});
+	
+    // 취소 버튼 클릭시
+	$("#btnCancle").on("click", function(){
+		
+		let result = confirm("가입을 취소하시겠습니까?");
+		if(result){
+			location.href="/"; 
+		} else{}
+	});
 
   	
     

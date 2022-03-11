@@ -21,7 +21,6 @@
         -ms-user-select: none;
         user-select: none;
       }
-
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
@@ -85,7 +84,7 @@
       // 메일인증확인
       $("#btnMailSend").on("click", function(){
     	 
-    	  let hmal_email = $("#hmal_emial");
+    	  let hmal_email = $("#hmal_email");
     	  
     	  if(hmal_email.val() == "" || hmal_email.val() == null){
     		  alert("인증코드를 입력하세요.");
@@ -113,7 +112,6 @@
     	  
       });
   });
-
 </script>
 
     

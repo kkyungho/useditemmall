@@ -3,95 +3,47 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.88.1">
+    
     <title>Hmarket</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">
-    
+        
+        
     <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-
     
-    <!-- Custom styles for this template -->
-    <!-- <link href="pricing.css" rel="stylesheet"> -->
+    h2{
+    	text-align : center;    	
+    }
+    
+    </style>
   </head>
   <body>
     
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 
-<!-- 
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-  <h1 class="display-4">Pricing</h1>
-  <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
-</div>
- -->
+
 <div class="container">
   
-  <!-- 회원가입 폼 작업 -->  
-  <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">로그인</div>
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group row">
-                                <label for="hmal_id" class="col-md-4 col-form-label text-md-right">아이디</label>
-                                <div class="col-md-6">
-                                    <input type="text" id="hmal_id" name="hmal_id" class="form-control" placeholder="아이디" required>
-                                </div> 
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="hmal_pw" class="col-md-4 col-form-label text-md-right">비밀번호</label>
-                                <div class="col-md-6">
-                                    <input type="password" id="hmal_pw" name="hmal_pw" class="form-control" placeholder="비밀번호" required>
-                                </div>
-                            </div>
-                            
-							<!-- 
-                            <div class="form-group row">
-                                <div class="col-md-6 offset-md-4">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="remember"> Remember Me
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            -->					        
-					        
-                            						
-                            <div style="text-align: center">
-                                <button type="button"  id="btnlogin" class="btn btn-light center">로그인</button>	                  
-                            	<button type="button"  id="btnFindPw" class="btn btn-warning center">비밀번호 찾기</button>                                
-                            </div>
-                             
-                          </form>
-                    	</div>
-                    	
-                </div>
-            </div>
-        </div>
+  <!-- 로그인 -->  
+  <section class="content container-fluid">
+     <div class="container" style="width: 450px; height: 620px; background-color: white; margin-top: 30px;">
+         <form id="loginForm" class="form-login" action="/customer/login" method="post" style="padding: 50px 30px;">
+             <h2 class="form-login-heading">로그인</h2>
+             <br><br>
+             <label for="hmal_id" class="sr-only">아이디</label>
+             <input type="text" id="hmal_id" name="hmal_id" class="form-control" placeholder="아이디" 
+             	style="margin-bottom: 15px;" required autofocus>  
+             <label for="hmal_pw" class="sr-only">비밀번호</label>
+             <input type="password" id="hmal_pw" name="hmal_pw" class="form-control" placeholder="비밀번호" required><br><br>                    
+          <div style="text-align: center">
+             <button type="button"  id="btnlogin" class="btn btn-light center">로그인</button>	                  
+         	<button type="button"  id="btnFindPw" class="btn btn-warning center">비밀번호 찾기</button>                                
+          </div>
+         </form>
+     </div>
+  </section>
   
-
+<%@include file="/WEB-INF/views/include/footer.jsp" %>
    
    
 </div>
@@ -126,7 +78,7 @@
           success: function(data){
             
             if(data == "success"){
-              alert("로그인 성공.");
+              alert("회원님 반갑습니다.");
               location.href = "/";
             }else if(data == "idFail"){
               alert("아이디를 확인해주세요.");

@@ -80,4 +80,9 @@
 		</property>		 
 	</bean>
 	
+	<!-- 상품이미지 업로드 폴더 -->
+	 <bean id="uploadFolder" class="java.lang.String">
+	 	<constructor-arg value="c:\\dev\\upload" />
+	 </bean>
+	
 </beans>

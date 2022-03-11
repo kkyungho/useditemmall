@@ -12,23 +12,6 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">
     
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-    
     <script>
   	
 	  	let msg = '${msg}'; 
@@ -38,79 +21,70 @@
   
   	</script>
     
-    <!-- Custom styles for this template -->
-    <!-- <link href="pricing.css" rel="stylesheet"> -->
+    
   </head>
   <body>
     
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 
-<!-- 
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-  <h1 class="display-4">Pricing</h1>
-  <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
-</div>
- -->
 <div class="container">
   
-  <!-- 회원가입 폼 작업 -->
-  <h3>회원수정</h3>
-  <form action="/customer/alterUser" method="post" id="alterUserForm">
-  <div class="form-row">
-    <div class="col-md-12">
-	    <label for="hmal_id">아이디</label>
-	    <input type="text" class="form-control" id="hmal_id" name="hmal_id" value='<c:out value="${customerVO.hmal_id }" />'  readonly>
-	</div>
-  </div>
-  <div class="form-row">
-	<div class="col-md-5">
-	  <label for="hmal_pw">비밀번호 </label>
-	  <input type="password" class="form-control" id="hmal_pw" name="hmal_pw">
-	</div>    	   
-	<div class="col-md-5">
-	   <label for="hmal_repw">비밀번호확인</label>
-	   <input type="password" class="form-control" id="hmal_repw" name="hmal_repw" >
-	</div>   
-  </div>
-  <div class="form-group">
-    <label for="hmal_name">이름</label>
-    <input type="text" class="form-control" id="hmal_name" name="hmal_name" value='<c:out value="${customerVO.hmal_name }" />' readonly>
-  </div>
-  <div class="form-row">
-    <div class="col-md-12">
-	    <label for="hmal_email">이메일</label>
-	    <input type="text" class="form-control" id="hmal_email" name="hmal_email" value='<c:out value="${customerVO.hmal_email }" />'>
-	</div>
-  </div>
- 
-   <div class="form-row">
-   <div class="col-md-2">
-      <label for="hmal_zipcode">우편번호</label>
-      <input type="text" class="form-control" id="hmal_zipcode" name="hmal_zipcode" value='<c:out value="${customerVO.hmal_zipcode }" />'>
-    </div>
-    <div class="col-md-2">
-      <label for="btnPostCode">&nbsp;</label>
-      <input type="button" class="form-control" id="btnPostCode" name="btnPostCode"  value="우편번호찾기" onclick="sample2_execDaumPostcode()">
-    </div>
-    <div class="col-md-4">
-      <label for="hmal_addr">기본주소</label>
-      <input type="text" class="form-control" id="hmal_addr" name="hmal_addr" value='<c:out value="${customerVO.hmal_addr }" />'>
-    </div>
-    <div class="col-md-4">
-      <label for="hmal_deaddr">나머지주소</label>
-      <input type="text" class="form-control" id="hmal_deaddr" name="hmal_deaddr" value='<c:out value="${customerVO.hmal_deaddr }" />'>
-      <input type="hidden" id="sample2_extraAddress" placeholder="참고항목">
-    </div>    
-   </div>
-   
-   <div class="form-group">
-    <label for="hmal_phone">전화번호</label>
-    <input type="text" class="form-control" id="hmal_phone" name="hmal_phone" value='<c:out value="${customerVO.hmal_phone }" />'>
-  </div>
-
-  <button type="button" id="btnAlterUser" class="btn btn-primary">회원수정</button>
-  <button type="button" id="btnUserDelete" class="btn btn-danger">회원탈퇴</button>
-</form>
+  <!-- 회원수정 -->
+  <section class="content container-fluid">
+  	<div class="container" style="width: 70%; min-width: 900px; background-color: white; font-size: 16px;">
+  		<form action="/customer/alterUser" method="post" id="alterUserForm">
+		  <div class="container" style="width: 800px; padding: 10% 5%;">
+		  	<h4>회원수정</h4><br>
+		  	✔ 아래 항목을 수정해주세요.<br><br><br>
+		    <div class="form-group" style="width: 100%;">
+			    <label for="hmal_id">  아이디</label><br />
+			    <input type="text" class="form-control" id="hmal_id" name="hmal_id" 
+			    	 style="max-width:630px;" value='<c:out value="${customerVO.hmal_id }" />'  readonly>				
+			</div>
+			<div class="form-group">
+	    		<label for="hmal_pw">✔ 비밀번호</label>
+	    		<input type="password" class="form-control" id="hmal_pw" name="hmal_pw"
+	    			style="max-width: 630px;">
+	    	</div>
+	    	<div class="form-group">
+			    <label for="hmal_repw">✔ 비밀번호 확인</label>
+			    <input type="password" class="form-control" id="hmal_repw" name="hmal_repw"
+			    	style="width: 630px;">
+			</div>
+			<div class="form-group">
+			    <label for="hmal_name">  이름</label>
+			    <input type="text" class="form-control" id="hmal_name" name="hmal_name"
+			    	style="max-width: 630px;" value='<c:out value="${customerVO.hmal_name }" />' readonly>
+			</div>
+			<div class="form-group">
+		    	<label for="hmal_email">✔ 이메일</label><br />
+		    	<input type="text" class="form-control" id="hmal_email" name="hmal_email"
+		    		style="max-width: 526px; width: calc(100% - 115px); margin-right: 5px; display: inline-block;" value='<c:out value="${customerVO.hmal_email }" />'>		    	
+		    </div>		    
+		    <div class="form-group">
+			    <label for="inputAddr">✔  주소</label>			      
+			    <input type="text" class="form-control" id="hmal_zipcode" name="hmal_zipcode" value='<c:out value="${customerVO.hmal_zipcode }" />'
+			     	style="max-width: 510px; width: calc(100% - 128px); margin-right: 5px; display: inline-block;" readonly>
+			    <input type="button" class="btn btn-light" id="btnPostCode" name="btnPostCode"  value="우편번호찾기" onclick="sample2_execDaumPostcode()"><br>
+			    <input type="text" class="form-control" id="hmal_addr" name="hmal_addr" value='<c:out value="${customerVO.hmal_addr }" />'
+			    	style="max-width: 630px; margin: 3px 0px;" readonly>
+			    <input type="text" class="form-control" id="hmal_deaddr" name="hmal_deaddr" value='<c:out value="${customerVO.hmal_deaddr }" />'
+			    	style="max-width: 630px;">
+			    <input type="hidden" id="sample2_extraAddress" placeholder="참고항목">			        
+			 </div>
+			 <div>
+		  	 	<label for="hmal_phone">✔  전화번호</label>
+      		 	<input type="tel" class="form-control" id="hmal_phone" name="hmal_phone" value='<c:out value="${customerVO.hmal_phone }" />'
+      		 		placeholder="휴대폰  번호를 입력해주세요." style="max-width: 630px;">
+      		 </div><br><br>      		  
+	  		 <div class="form-group text-center">
+	  		 	<button type="submit" id="btnAlterUser" class="btn btn-light">회원수정</button>
+	  			<button type="reset" id="btnCancle" class="btn btn-danger">취소</button>
+	  		 </div> 
+	  	   </div> 
+		</form>	 
+	  </div> 
+  </section>
   
   
   
@@ -120,17 +94,78 @@
 
 <script>
 
-	$(document).ready(function(){			
+	$(document).ready(function(){	
+		
+		/* 회원수정 버튼 클릭 시 */ 
+		$("#btnAlterUser").on("click", function(){
+			
+			let hmal_id = $("#hmal_id");
+			let hmal_pw = $("#hmal_pw");
+			let hmal_repw = $("#hmal_repw");
+			let hmal_name = $("#hmal_name");			
+			let hmal_email = $("#hmal_email");			
+			let hmal_phone = $("#hmal_phone");
+			let hmal_zipcode = $("input[name='hmal_zipcode']");
+			let hmal_addr = $("input[name='hmal_addr']");
+			let hmal_deaddr = $("input[name='hmal_deaddr']");
+			
+			/* 유효성 검사 */
+			
+			 if(hmal_pw.val()==null || hmal_pw.val()==""){
+				alert("현재 비밀번호를 입력해주세요.");
+				hmal_pw.focus();
+				return;			
+			
+			} else if(hmal_email.val()==null || hmal_email.val()==""){
+				alert("이메일을 입력해주세요.");
+				hmal_email.focus();
+				return;			
+			
+			} else if(hmal_phone.val()==null || hmal_phone.val()==""){
+				alert("휴대폰 번호를 입력해주세요.");
+				hmal_phone.focus();
+				return;
+
+			} else if(hmal_zipcode.val()==null || hmal_zipcode.val()==""){
+				alert("우편번호를 입력해주세요.");
+				$("#btnPostCode").focus();
+				return;
+				
+			} else if(hmal_addr.val()==null || hmal_addr.val()==""){
+				alert("주소를 입력해주세요.");
+				$("#btnPostCode").focus();
+				return;
+				
+			} else if(hmal_deaddr.val()==null || hmal_deaddr.val()==""){
+				alert("상세 주소를 입력해주세요.");
+				hmal_deaddr.focus();
+				return;
+			} 
+			 
+			// 현재 비밀번호 확인 검사
+			
+		});
+		
+		/* 취소 버튼 클릭 시 */
+		$("#btn_cancle").on("click", function(){
+			
+			let result = confirm("회원 정보 수정을 취소하시겠습니까?");
+			
+			if(result){
+				location.href="/"; 
+			} else{}
+		});
 		
 		
 		//폼에서 일반버튼<input type="button">을 클릭하면 호출되는 이벤트설정
+		
 		$("#btnAlterUser").on("click", function(){
 			
 			let hmal_pw = $("#hmal_pw");
 			let hmal_repw = $("#hmal_repw");
 			
 			if(hmal_pw.val() == "" && hmal_repw.val() == ""){
-				alert("비밀번호를 입력하세요.");
+				//alert("비밀번호를 입력하세요.");
 				return;
 			}
 			
@@ -141,7 +176,7 @@
 			
 			$("#alterUserForm").submit();
 			
-		});			
+				
 		
 	
 	});

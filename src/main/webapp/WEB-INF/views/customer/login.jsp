@@ -19,8 +19,12 @@
   </head>
   <body>
     
+<!-- 헤더정보 -->
 <%@include file="/WEB-INF/views/include/header.jsp" %>
-
+<br>
+<!-- 카테고리정보 -->
+<%@include file="/WEB-INF/views/include/category.jsp" %>
+<br>
 
 <div class="container">
   

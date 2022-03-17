@@ -3,11 +3,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.88.1">
+    <meta charset="utf-8">    
     <title>Hmarket</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">
@@ -32,6 +28,7 @@
   
 <!-- 헤더정보 -->
 <%@include file="/WEB-INF/views/include/header.jsp" %>
+<br>
 <!-- 카테고리정보 -->
 <%@include file="/WEB-INF/views/include/category.jsp" %>
 <br>
@@ -43,63 +40,14 @@
   		<form class="insertForm" action="/customer/product/productInsert" method="post" id="insertForm" enctype="multipart/form-data">
 		  <div class="container" style="width: 900px; padding: 3% 2px;">
 		  	<h4>상품 등록</h4>
-		  	<br><br>                 		  	
-		  	<div class="form-row">			    
-				<div class="col-md-2">
-				    <label for="pro_name">상품명</label>									    
-				</div>				
-				<div class="col-md-9">
-					<input type="text" class="form-control" id="pro_name" name="pro_name" placeholder="상품명을 입력해주세요."
-						style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">
-				</div>
-			  </div>
-			  <br><br>
-			  <div class="form-row">
+		  	<br><br>
+		  	<div class="form-row">
 			    <div class="col-md-2">
-				    <label for="cate_prt_code">카테고리</label>
-				</div>
-				<div class="col-md-3">
-				    <select class="form-control" id="mainCategory" name="cate_prt_code" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">
-				      <option value="" hidden="">카테고리</option>				      
-				      <c:forEach items="${mainCategory}" var="categoryVO">
-				      	<option value="${categoryVO.cate_code }">${categoryVO.cate_name }</option>
-				      </c:forEach>					   
-				    </select>
-				</div>
-				<div class="col-md-3">
-					<select class="form-control" id="subCategory" name="cate_code" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">				      
-						<option value="" hidden="">하위 카테고리</option>										  
-				    </select>
-				</div>
-			  </div>
-			  <br><br>
-			  <div class="form-row">
-			    <div class="col-md-2">
-					<label for="pro_price">상품가격</label>
-				</div>
-				<div class="col-md-4">
-				    <input type="text" class="form-control" id="pro_price" name="pro_price" placeholder="가격을 입력해주세요."
-				    	value="" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">				    
-			    </div>원			    			    
-			  </div>
-			  <br><br>
-			   <!-- 상품설명 : CKeditor -->
-			   <div class="form-row">
-			    <div class="col-md-2">
-			      <label for="pro_content">상품설명</label>
-				</div>
-				<div class="col-md-10">
-			      <textarea id="pro_content" name="pro_content" rows="10" cols="100" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;" placeholder="상품 설명을 입력해주세요."></textarea>
-			    </div>
-			  </div>
-			  <br><br>
-			  <div class="form-row">
-			    <div class="col-md-2">
-			      <label for="pro_img" style="color: rgb(0,0,0);">상품이미지</label>
+			      <label for="pro_img" style="font-weight: 800;">상품이미지</label>
 			    </div>
 			    <div class="col-md-5">
-			      <label for="pro_img">
-			      	<img alt="이미지 업로드" src="/resources/img/camera.png" height="230" width="230" id="previewImage">			      	
+			      <label for="upload">
+			      	<img alt="이미지 업로드" src="/resources/img/camera.png" height="230" width="230" id="previewImage" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">			      	
 			      </label>
 			      <br>			      
 			      <b>* 상품 이미지는 640x640에 최적화 되어 있습니다.</b>
@@ -108,17 +56,66 @@
 			    	<br>- 이미지를 클릭 후 이동하여 등록순서를 변경할 수 있습니다.
 			    	<br>- 큰 이미지일경우 이미지가 깨지는 경우가 발생할 수 있습니다.
 			    	<br>최대 지원 사이즈인 640 X 640 으로 리사이즈 해서 올려주세요.(개당 이미지 최대 10M)
-			      <input type="file" style="display: none;" class="multiple" id="pro_img" name="pro_img" multiple>
+			      <input type="file" style="display: none;" id="upload" name="upload" multiple="multiple">
 			    </div>			  
 			    <div class="col-md-5">
 			      <label for="pro_img"></label>
-			      <img alt="" src="" id="previewImage">			      
-			    </div>	
+			      <img alt="" src="" id="previewImage">			      		      
+			    </div>			    	
+			</div>
+			<br><br>                 		  	
+		  	<div class="form-row">			    
+				<div class="col-md-2">
+				    <label for="pro_name" style="font-weight: 800;">상품제목</label>									    
+				</div>				
+				<div class="col-md-9">
+					<input type="text" class="form-control" id="pro_name" name="pro_name" placeholder="상품제목을 입력해주세요."
+						style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">
+				</div>
 			  </div>
 			  <br><br>
+			  <div class="form-row">
+			    <div class="col-md-2">
+				    <label for="cate_prt_code" style="font-weight: 800;">카테고리</label>
+				</div>
+				<div class="col-md-3">
+				    <select class="form-control" id="mainCategory" name="cate_prt_code" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">
+				      <option value="">카테고리</option>				      
+				      <c:forEach items="${mainCategory}" var="categoryVO">
+				      	<option value="${categoryVO.cate_code }">${categoryVO.cate_name }</option>
+				      </c:forEach>					   
+				    </select>
+				</div>
+				<div class="col-md-3">
+					<select class="form-control" id="subCategory" name="cate_code" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">				      
+						<option value="">하위 카테고리</option>										  
+				    </select>
+				</div>
+			  </div>
+			  <br><br>
+			  <div class="form-row">
+			    <div class="col-md-2">
+					<label for="pro_price" style="font-weight: 800;">상품가격</label>
+				</div>
+				<div class="col-md-4">
+				    <input type="text" class="form-control" id="pro_price" name="pro_price" placeholder="가격을 입력해주세요."
+				    	value="" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse; ime-mode:disabled">				    
+			    </div><p style="text-align: justify;">원</p>			    			    
+			  </div>
+			  <br><br>
+			   <!-- 상품설명 : CKeditor -->
 			   <div class="form-row">
 			    <div class="col-md-2">
-			      <label for="pro_amount">재고수량</label>
+			      <label for="pro_content" style="font-weight: 800;">상품설명</label>
+				</div>
+				<div class="col-md-10">
+			      <textarea id="pro_content" name="pro_content" rows="10" cols="100" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;" placeholder="상품 설명을 입력해주세요."></textarea>
+			    </div>
+			  </div>
+			  <br><br>			 
+			   <div class="form-row">
+			    <div class="col-md-2">
+			      <label for="pro_amount" style="font-weight: 800;">재고수량</label>
 			    </div>
 			    <div class="col-md-4">
 			      <input value="1" type="text" class="form-control" id="pro_amount" name="pro_amount">			      
@@ -128,20 +125,20 @@
 				<br><br>
 				<div class="form-row">
 				    <div class="col-md-2">
-				      <label for="pro_buy">상품상태</label>
+				      <label for="pro_con" style="font-weight: 800;">상품상태</label>
 				    </div>
 			    	<div class="col-md-5">
-				      <select class="form-control" id="pro_buy" name="pro_buy">
+				      <select class="form-control" id="pro_con" name="pro_con">				      	  
 				      	  <option value="" hidden=""></option>
-					      <option value="N">새상품</option>
-					      <option value="AN">거의새것</option>
-					      <option value="U">중고</option>
-					  </select>
-					</div>
+					      <option value="새상품">새상품</option>
+					      <option value="거의새것">거의새것</option>
+					      <option value="중고">중고</option>
+					  </select>					   
+					</div>					
 			    </div>
 			    <br><br>
 			    <div class="btn-box" style="text-align: center;">
-			      <button type="button" id="btnProductInsert" class="btn btn-warning">상품등록</button>
+			      <button type="button" id="btnProductInsert" class="btn btn-warning" style="font-size: 20px;">상품등록</button>
 			    </div>
 			    <br>	    
 	  	   </div> 
@@ -159,7 +156,7 @@
       if (input.files && input.files[0]) {
           
         //let imgPath = input.files[0].value;
-        let imgPath = $("#pro_img").val();
+        let imgPath = $("#upload").val();
         alert(imgPath);
         //return;
         let ext = imgPath.substring(imgPath.lastIndexOf(".")+1).toLowerCase();
@@ -184,13 +181,13 @@
           // reader객체가 파일을 읽어들이는 작업
           reader.readAsDataURL(input.files[0]);
         }else{
-          $("#pro_img").val("");
+          $("#upload").val("");
           alert("이미지 파일을 선택하세요.");
         }
       }
     }
     // 이벤트 리스너
-    document.getElementById('pro_img').addEventListener('change', (e) => {
+    document.getElementById('upload').addEventListener('change', (e) => {
         readImage(e.target);
     })
 
@@ -222,7 +219,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script id="subCategoryTemplate" type="text/x-handlebars-template">
   
-  <option>2차카테고리 선택</option>
+  <option value="">하위 카테고리</option>
+  
   {{#each .}}
   
 	<option value="{{cate_code}}">{{cate_name}}</option>
@@ -270,6 +268,19 @@
 
 </script>
 
+<!-- 가격 3자리단위마다 쉼표 -->
+<script>
+
+	function addCommas(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	
+	$("#pro_price").on("keyup", function(e){
+		$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));
+	});
+	
+</script>
+
 <script>
 	
 	$(document).ready(function(){
@@ -284,17 +295,22 @@
 			
 			if(result){
 				// 유효성검사
+				let upload = $("#upload");
 				let pro_name = $("#pro_name");
 				let mainCategory = $("#mainCategory");
 				let subCategory = $("#subCategory");
 				let pro_price = $("#pro_price");
-				let pro_content = $("#pro_content");
-				let pro_img = $("#pro_img");
+				let pro_content = $("#pro_content");				
 				let pro_amount = $("#pro_amount");
-				let pro_buy = $("#pro_buy");		
-				
-				if(pro_name.val() == "" || pro_name.val() == null) {
-					alert("상품명을 입력해주세요.");
+				let pro_con = $("#pro_con");		
+			
+				if(upload.val() == "" || upload.val() == null){
+					alert("사진을 1장이라도 넣어주세요.");
+					upload.focus();
+					return;
+					
+				} else if(pro_name.val() == "" || pro_name.val() == null) {
+					alert("상품제목을 입력해주세요.");
 					pro_name.focus();
 					return;
 					
@@ -318,19 +334,14 @@
 					pro_content.focus();
 					return;
 					
-				} else if(pro_img.val() == "" || pro_img.val() == null) {
-					alert("사진을 1장이라도 넣어주세요.");
-					pro_img.focus();
-					return;
-					
 				} else if(pro_amount.val() == "" || pro_amount.val() == null) {
 					alert("재고수량을 입력해주세요.");
 					pro_amount.focus();
 					return;
 					
-				} else if(pro_buy.val() == "" || pro_buy.val() == null) {
+				} else if(pro_con.val() == "" || pro_con.val() == null) {
 					alert("상품상태를 입력해주세요.");
-					pro_buy.focus();				
+					pro_con.focus();				
 					return;
 					
 				} else {

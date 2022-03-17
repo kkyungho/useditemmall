@@ -5,32 +5,50 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.88.1">
+    <meta charset="utf-8">    
     <title>Hmarket</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">
-
-    
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">    
 
     <!-- Bootstrap core CSS -->
         
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-    
-    
-    
+           
   </head>
   <body>
   
     
 <!-- 헤더정보 -->
 <%@include file="/WEB-INF/views/include/header.jsp" %>
+<br>
 <!-- 카테고리정보 -->
 <%@include file="/WEB-INF/views/include/category.jsp" %>
 <br>
+<!-- carousel 사용 -->
+<div class="container">
+	<div id="carouselExampleControlsNoTouching" class="carousel slide" data-ride="carousel" >
+	  <div class="carousel-inner">
+	    <div class="carousel-item active">
+	      <img src="/resources/img/vans.jpg" class="d-block w-100" alt="반스">
+	    </div>
+	    <div class="carousel-item">
+	      <img src="/resources/img/nike.jpg" class="d-block w-100" alt="나이키">
+	    </div>
+	    <div class="carousel-item">
+	      <img src="/resources/img/payment.jpg" class="d-block w-100" alt="페이백이벤트">
+	    </div>
+	  </div>
+	  <button class="carousel-control-prev" type="button" data-target="#carouselExampleControlsNoTouching" data-slide="prev">
+	    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	    <span class="sr-only">Previous</span>
+	  </button>
+	  <button class="carousel-control-next" type="button" data-target="#carouselExampleControlsNoTouching" data-slide="next">
+	    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	    <span class="sr-only">Next</span>
+	  </button>
+	</div>
+</div>
+<br><br>
 <div class="container">
 	<!-- 핸드폰(phone(1)) -->
 	<div class="row">
@@ -43,16 +61,13 @@
 			<input type="hidden" name="cate_code" value="${phoneProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${phoneProductVO.pro_num}" class="proDetail">
+                <a href="${phoneProductVO.pro_num}" class="proDetail" style="color: black;">
                   <c:out value="${phoneProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
-              	<fmt:formatNumber type="currency" currencyCode="KRW" value="${phoneProductVO.pro_price }"/>
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${phoneProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${phoneProductVO.pro_num }">
-              </p>
-              <div class="d-flex justify-content-between align-items-center">              
-                <small class="text-muted">${phoneProductVO.pro_uploadpath }</small>
-              </div>
+              </p>              
             </div>
           </div>
         </div>
@@ -69,16 +84,13 @@
 			<input type="hidden" name="cate_code" value="${furnitureProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${furnitureProductVO.pro_num}" class="proDetail">
+                <a href="${furnitureProductVO.pro_num}" class="proDetail" style="color: black;">
                   <c:out value="${furnitureProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
-              	<fmt:formatNumber type="currency" value="${furnitureProductVO.pro_price }" />
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${furnitureProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${furnitureProductVO.pro_num }">
-              </p>
-              <div class="d-flex justify-content-between align-items-center">              
-                <small class="text-muted">${furnitureProductVO.pro_uploadpath }</small>
-              </div>
+              </p>              
             </div>
           </div>
         </div>
@@ -95,16 +107,13 @@
 			<input type="hidden" name="cate_code" value="${stationeryProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${stationeryProductVO.pro_num}" class="proDetail">
+                <a href="${stationeryProductVO.pro_num}" class="proDetail" style="color: black;">
                   <c:out value="${stationeryProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
-              	<fmt:formatNumber type="currency" value="${stationeryProductVO.pro_price }" />
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${stationeryProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${stationeryProductVO.pro_num }">
-              </p>
-              <div class="d-flex justify-content-between align-items-center">              
-                <small class="text-muted">${stationeryProductVO.pro_uploadpath }</small>
-              </div>
+              </p>              
             </div>
           </div>
         </div>
@@ -121,16 +130,13 @@
 			<input type="hidden" name="cate_code" value="${computerProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${computerProductVO.pro_num}" class="proDetail">
+                <a href="${computerProductVO.pro_num}" class="proDetail" style="color: black;">
                   <c:out value="${computerProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
-              	<fmt:formatNumber type="currency" value="${computerProductVO.pro_price }" />
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${computerProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${computerProductVO.pro_num }">
-              </p>
-              <div class="d-flex justify-content-between align-items-center">              
-                <small class="text-muted">${computerProductVO.pro_uploadpath }</small>
-              </div>
+              </p>              
             </div>
           </div>
         </div>
@@ -147,16 +153,13 @@
 			<input type="hidden" name="cate_code" value="${lifeProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${lifeProductVO.pro_num}" class="proDetail">
+                <a href="${lifeProductVO.pro_num}" class="proDetail" style="color: black;">
                   <c:out value="${lifeProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
-              	<fmt:formatNumber type="currency" value="${lifeProductVO.pro_price }" />
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${lifeProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${lifeProductVO.pro_num }">
-              </p>
-              <div class="d-flex justify-content-between align-items-center">              
-                <small class="text-muted">${lifeProductVO.pro_uploadpath }</small>
-              </div>
+              </p>              
             </div>
           </div>
         </div>
@@ -173,16 +176,13 @@
 			<input type="hidden" name="cate_code" value="${figureProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${figureProductVO.pro_num}" class="proDetail">
+                <a href="${figureProductVO.pro_num}" class="proDetail" style="color: black;">
                   <c:out value="${figureProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
-              	<fmt:formatNumber type="currency" value="${figureProductVO.pro_price }" />
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${figureProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${figureProductVO.pro_num }">
-              </p>
-              <div class="d-flex justify-content-between align-items-center">              
-                <small class="text-muted">${figureProductVO.pro_uploadpath }</small>
-              </div>
+              </p>              
             </div>
           </div>
         </div>
@@ -199,16 +199,13 @@
 			<input type="hidden" name="cate_code" value="${cameraProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${phoneProductVO.pro_num}" class="proDetail">
+                <a href="${phoneProductVO.pro_num}" class="proDetail" style="color: black;">
                   <c:out value="${cameraProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
-              	<fmt:formatNumber type="currency" value="${cameraProductVO.pro_price }" />
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${cameraProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${cameraProductVO.pro_num }">
-              </p>
-              <div class="d-flex justify-content-between align-items-center">              
-                <small class="text-muted">${cameraProductVO.pro_uploadpath }</small>
-              </div>
+              </p>              
             </div>
           </div>
         </div>
@@ -225,16 +222,13 @@
 			<input type="hidden" name="cate_code" value="${gameProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${gameProductVO.pro_num}" class="proDetail">
+                <a href="${gameProductVO.pro_num}" class="proDetail" style="color: black;">
                   <c:out value="${gameProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
-              	<fmt:formatNumber type="currency" value="${gameProductVO.pro_price }" />
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${gameProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${gameProductVO.pro_num }">
-              </p>
-              <div class="d-flex justify-content-between align-items-center">              
-                <small class="text-muted">${gameProductVO.pro_uploadpath }</small>
-              </div>
+              </p>              
             </div>
           </div>
         </div>
@@ -251,16 +245,13 @@
 			<input type="hidden" name="cate_code" value="${homeappProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${homeappProductVO.pro_num}" class="proDetail">
+                <a href="${homeappProductVO.pro_num}" class="proDetail" style="color: black;">
                   <c:out value="${homeappProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
-              	<fmt:formatNumber type="currency" value="${homeappProductVO.pro_price }" />
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${homeappProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${homeappProductVO.pro_num }">
-              </p>
-              <div class="d-flex justify-content-between align-items-center">              
-                <small class="text-muted">${homeappProductVO.pro_uploadpath }</small>
-              </div>
+              </p>              
             </div>
           </div>
         </div>
@@ -277,16 +268,13 @@
 			<input type="hidden" name="cate_code" value="${womenswProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${womenswProductVO.pro_num}" class="proDetail">
+                <a href="${womenswProductVO.pro_num}" class="proDetail" style="color: black;">
                   <c:out value="${womenswProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
-              	<fmt:formatNumber type="currency" value="${womenswProductVO.pro_price }" />
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${womenswProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${womenswProductVO.pro_num }">
-              </p>
-              <div class="d-flex justify-content-between align-items-center">              
-                <small class="text-muted">${womenswProductVO.pro_uploadpath }</small>
-              </div>
+              </p>              
             </div>
           </div>
         </div>
@@ -297,22 +285,19 @@
       	<c:forEach items="${menswProductList}" var="menswProductVO">
         <div class="col-md-3 parentDetail">
           <div class="card mb-4">
-            <a href="${phoneProductVO.pro_num}" class="proDetail">
+            <a href="${menswProductVO.pro_num}" class="proDetail">
 				<img name="productImage" width="100%" height="180" src="/customer/product/displayFile?fileName=s_<c:out value="${menswProductVO.pro_img }"></c:out>&uploadPath=<c:out value="${menswProductVO.pro_uploadpath }"></c:out>">
 			</a>
 			<input type="hidden" name="cate_code" value="${menswProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${menswProductVO.pro_num}" class="proDetail">
+                <a href="${menswProductVO.pro_num}" class="proDetail" style="color: black;">
                   <c:out value="${menswProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
-              	<fmt:formatNumber type="currency" value="${menswProductVO.pro_price }" />
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${menswProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${menswProductVO.pro_num }">
-              </p>
-              <div class="d-flex justify-content-between align-items-center">              
-                <small class="text-muted">${menswProductVO.pro_uploadpath }</small>
-              </div>
+              </p>              
             </div>
           </div>
         </div>
@@ -329,16 +314,13 @@
 			<input type="hidden" name="cate_code" value="${shoesbagProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${shoesbagProductVO.pro_num}" class="proDetail">
+                <a href="${shoesbagProductVO.pro_num}" class="proDetail" style="color: black;">
                   <c:out value="${shoesbagProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
-              	<fmt:formatNumber type="currency" value="${shoesbagProductVO.pro_price }" />
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${shoesbagProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${shoesbagProductVO.pro_num }">
-              </p>
-              <div class="d-flex justify-content-between align-items-center">              
-                <small class="text-muted">${shoesbagProductVO.pro_uploadpath }</small>
-              </div>
+              </p>              
             </div>
           </div>
         </div>
@@ -355,16 +337,13 @@
 			<input type="hidden" name="cate_code" value="${bookProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${bookProductVO.pro_num}" class="proDetail">
+                <a href="${bookProductVO.pro_num}" class="proDetail" style="color: black;">
                   <c:out value="${bookProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
-              	<fmt:formatNumber type="currency" value="${bookProductVO.pro_price }" />
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${bookProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${bookProductVO.pro_num }">
-              </p>
-              <div class="d-flex justify-content-between align-items-center">              
-                <small class="text-muted">${bookProductVO.pro_uploadpath }</small>
-              </div>
+              </p>              
             </div>
           </div>
         </div>
@@ -381,16 +360,13 @@
 			<input type="hidden" name="cate_code" value="${sportsProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${sportsProductVO.pro_num}" class="proDetail">
+                <a href="${sportsProductVO.pro_num}" class="proDetail" style="color: black;">
                   <c:out value="${sportsProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
-              	<fmt:formatNumber type="currency" value="${sportsProductVO.pro_price }" />
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${sportsProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${sportsProductVO.pro_num }">
-              </p>
-              <div class="d-flex justify-content-between align-items-center">              
-                <small class="text-muted">${sportsProductVO.pro_uploadpath }</small>
-              </div>
+              </p>           
             </div>
           </div>
         </div>

@@ -11,14 +11,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">   
     
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-    
-    <style>
-    	
-    	
-    	
-    	
-    
-    </style>       
+           
     
   </head>
 
@@ -33,7 +26,7 @@
 <div class="container">
 
       <div class="row">
-      <c:forEach items="${productList }" var="productVO" varStatus="status">
+      <c:forEach items="${mystore }" var="productVO" varStatus="status">
         <div class="col-md-3">
           <div class="card mb-4">
           	<a href="${productVO.pro_num}" class="proDetail">                  
@@ -44,10 +37,13 @@
               	<a href="${productVO.pro_num}" class="proDetail" style="color: black;"> 
               		<c:out value="${productVO.pro_name }"></c:out><br>
               	</a>
-              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${productVO.pro_price }" />원</label>
+              	<fmt:formatNumber type="currency" value="${productVO.pro_price }" />
               	<input type="hidden" name="pro_num" value="${productVO.pro_num }">
-              </p>              
+              </p>
               
+              <div class="d-flex justify-content-between align-items-center">              
+                <small class="text-muted">${productVO.pro_uploadpath }</small>
+              </div>
             </div>
           </div>
         </div>
@@ -77,16 +73,18 @@
 		  </ul>
 		</nav>
 	 </div>
-	 <!--prev,page number, next 를 클릭하면 아래 form이 작동된다.-->
-	 <form id="actionForm" action="/customer/product/productList" method="get">
-		<!--list.jsp 가 처음 실행되었을 때 pageNum의 값을 사용자가 선택한 번호의 값으로 변경-->
-		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-		<input type="hidden" name="cate_code" value="${cate_code}">
-		<!-- 검색파라미터 -->
-		<!-- <input type="hidden" name="keyword" value="${pageMaker.cri.keyword}"> -->
-     <!--글번호추가-->			
-	 </form>   
+		<!--prev,page number, next 를 클릭하면 아래 form이 작동된다.-->
+		<%--  
+		<form id="actionForm" action="/customer/product/productList" method="get">
+			<!--list.jsp 가 처음 실행되었을 때 pageNum의 값을 사용자가 선택한 번호의 값으로 변경-->
+			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+			<input type="hidden" name="cate_code" value="${cate_code}">
+			<!-- 검색파라미터 -->
+			<!-- <input type="hidden" name="keyword" value="${pageMaker.cri.keyword}"> -->
+      <!--글번호추가-->			
+		</form>
+		 --%>   
 		
 <%@include file="/WEB-INF/views/include/footer.jsp" %>
 </div>
@@ -119,7 +117,7 @@
         
         let actionForm = $("#actionForm");
 		//페이지번호 클릭시 : 선택한 페이지번호, 페이징정보, 검색정보
-		$(".page-item a").on("click", function(e){
+		$(".paginate_button a").on("click", function(e){
 			e.preventDefault(); // <a href="">기능취소
 			//기존 페이지번호를 사용자가 선택한 페이지번호로 변경
 			actionForm.find("input[name='pageNum']").val($(this).attr("href"));

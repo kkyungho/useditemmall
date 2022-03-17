@@ -60,6 +60,18 @@ public class UserProductServiceImpl implements UserProductService {
 		return mapper.productListByCategory(cate_code);
 	}
 
+	@Override
+	public List<ProductVO> getMystoreList(String hmal_id, Criteria cri) {
+		
+		return mapper.getMystoreList(hmal_id, cri);
+	}
+
+	@Override
+	public String getMystoreCount(String hmal_id) {
+		
+		return mapper.getMystoreCount(hmal_id);
+	}
+
 	
 
 }

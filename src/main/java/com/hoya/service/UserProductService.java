@@ -23,5 +23,11 @@ public interface UserProductService {
 	public ProductVO productDetail(Integer pro_num);
 	
 	public List<ProductVO> productListByCategory(Integer cate_code);
+	
+	// 내 로그인 아이디에 따른 업로드한 상품 리스트 가져오기
+	public List<ProductVO> getMystoreList(@Param("hmal_id") String hmal_id, @Param("cri") Criteria cri);
+	
+	// 내 로그인 아이디에 따른 업로드한 상품 리스트 가져오기
+	public String getMystoreCount(@Param("hmal_id") String hmal_id);
 
 }

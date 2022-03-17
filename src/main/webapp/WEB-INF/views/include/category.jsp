@@ -7,12 +7,16 @@
 <head>
 <meta charset="UTF-8">
 <title>category</title>
+
+<style>
+	
+</style>
 </head>
 <body>
 
-<div class="container">
+<div class="container border-bottom" style="padding-top: 45px; padding-bottom: 20px;">
 	<div class="dropdown drop-tabs">	
-	<button type="button" class="btn btn-light dropdown" data-toggle="dropdown">카테고리</button>
+	<button type="button" class="btn btn-warning dropdown" style="font-size: 20px; color: white;" data-toggle="dropdown">카테고리</button>
 		<div class="dropdown-menu">
 		  <c:forEach items="${userCategory}" var="categoryVO">
 			  <div class="dropdown-item">
@@ -21,18 +25,24 @@
 			    </div>
 			  </div>
 		  </c:forEach>
-		 </div>		 	
+		 </div>		
+		 <!-- 로그인 상태가 아님 --> 	
 		 <c:if test="${sessionScope.loginStatus == null }">
-			 <a href="/customer/login">
-	    		<img alt="판매하기" src="/resources/img/sell.png" width="26" height="26" style="float: right;">  	
-	    	 </a>
+		 	 <a href="/customer/login" >
+	    		<img alt="내상점" src="/resources/img/mypage.png" width="95" height="29" style="float: right; margin-left: 30px;">
+	    	 </a>	    	    	 	    	 
+	    	 <a href="/customer/login">
+	    		<img alt="판매하기" src="/resources/img/selling.png" width="95" height="32" style="float: right;">  	
+	    	 </a>	    	 
     	 </c:if> 	
-   	 
+   	 	 <!-- 로그인 상태 -->
     	 <c:if test="${sessionScope.loginStatus != null }">
-			 <a href="/customer/product/productInsert">
-			 	<img alt="판매하기" src="/resources/img/sell.png" width="26" height="26" style="float: right;">				 	
-	    		<!-- <button type="button" class="btn btn-default" style="float: right;">판매하기</button> -->    	
+    	 	 <a href="/customer/product/mystore" >
+	    		<img alt="내상점" src="/resources/img/mypage.png" width="95" height="30" style="float: right; margin-left: 30px;">
 	    	 </a>
+			 <a href="/customer/product/productInsert">
+			 	<img alt="판매하기" src="/resources/img/selling.png" width="95" height="32" style="float: right;">	    		  	
+	    	 </a>	    	 
     	 </c:if>
     	 
 	 </div>

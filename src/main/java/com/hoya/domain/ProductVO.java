@@ -10,6 +10,7 @@ import lombok.Data;
 public class ProductVO {
 		
 	private Integer pro_num;
+	private String hmal_id;
 	private Integer cate_prt_code;
 	private Integer cate_code;	
 	private String pro_name;		
@@ -18,7 +19,7 @@ public class ProductVO {
 	private String pro_img;
 	private String pro_uploadpath;
 	private int pro_amount;
-	private String pro_buy;
+	private String pro_con;
 	private Date pro_date;
 	private Date pro_updatedate;
 	

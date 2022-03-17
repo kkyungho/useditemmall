@@ -8,6 +8,7 @@
 			product_tbl
 			(
 				pro_num,
+				hmal_id,
 				cate_prt_code,
 				cate_code,				
 				pro_name,
@@ -16,11 +17,12 @@
 				pro_img,
 				pro_uploadpath,
 				pro_amount,
-				pro_buy				
+				pro_con				
 			)
 		VALUES
 			(
 				seq_product_num.nextval,
+				#{hmal_id},
 				#{cate_prt_code},
 				#{cate_code},				
 				#{pro_name},
@@ -29,7 +31,7 @@
 				#{pro_img},
 				#{pro_uploadpath},
 				#{pro_amount},
-				#{pro_buy}
+				#{pro_con}
 			)
 			
 	</insert>
@@ -82,6 +84,7 @@
 		<![CDATA[ 
 		SELECT 
 			pro_num, 
+			hmal_id,
 			cate_prt_code, 
 			cate_code, 
 			pro_name, 
@@ -90,7 +93,7 @@
 			pro_img,
 			pro_uploadpath, 
 			pro_amount, 
-			pro_buy, 
+			pro_con, 
 			pro_date, 
 			pro_updatedate 
 			
@@ -99,6 +102,7 @@
 		        	/*+ index_desc(product_tbl pk_product_tbl) */ 
 		        	rownum rn, 
 		        	pro_num, 
+		        	hmal_id,
 		        	cate_prt_code, 
 		        	cate_code, 
 		        	pro_name, 
@@ -107,7 +111,7 @@
 		        	pro_img, 
 		        	pro_uploadpath,		        	
 		        	pro_amount, 
-		        	pro_buy, 
+		        	pro_con, 
 		        	pro_date, 
 		        	pro_updatedate
 				FROM 
@@ -139,6 +143,7 @@
 	
 		SELECT
 			pro_num, 
+			hmal_id,
 			cate_prt_code, 
 			cate_code, 
 			pro_name, 
@@ -147,7 +152,7 @@
 			pro_img,
 			pro_uploadpath, 
 			pro_amount, 
-			pro_buy, 
+			pro_con, 
 			pro_date, 
 			pro_updatedate
 		FROM
@@ -161,7 +166,8 @@
 	
 		<![CDATA[
 		SELECT 
-			pro_num, 
+			pro_num,
+			hmal_id, 
 			cate_prt_code, 
 			cate_code, 
 			pro_name, 
@@ -170,7 +176,7 @@
 			pro_img,
 			pro_uploadpath, 
 			pro_amount, 
-			pro_buy, 
+			pro_con, 
 			pro_date, 
 			pro_updatedate					
 		FROM 
@@ -181,6 +187,66 @@
 			rownum < 5
 		]]>
 		
+	</select>
+	
+	<select id="getMystoreList" resultType="com.hoya.domain.ProductVO">
+	
+		<![CDATA[ 
+		SELECT 
+			pro_num, 
+			hmal_id,
+			cate_prt_code, 
+			cate_code, 
+			pro_name, 
+			pro_price, 			 
+			pro_content, 
+			pro_img,
+			pro_uploadpath, 
+			pro_amount, 
+			pro_con, 
+			pro_date, 
+			pro_updatedate 
+			
+		FROM (
+		        SELECT 
+		        	/*+ index_desc(product_tbl pk_product_tbl) */ 
+		        	rownum rn, 
+		        	pro_num, 
+		        	hmal_id,
+		        	cate_prt_code, 
+		        	cate_code, 
+		        	pro_name, 
+		        	pro_price, 		        	
+		        	pro_content,
+		        	pro_img, 
+		        	pro_uploadpath,		        	
+		        	pro_amount, 
+		        	pro_con, 
+		        	pro_date, 
+		        	pro_updatedate
+				FROM 
+					product_tbl
+				WHERE 
+					hmal_id = #{hmal_id}
+				AND
+		 rownum <= (#{cri.pageNum} * #{cri.amount}) 
+				)
+		
+		WHERE 
+			rn > ((#{cri.pageNum} - 1) * #{cri.amount} )
+		]]>
+	
+	</select>
+	
+	<select id="getMystoreCount" resultType="string">
+		
+		SELECT
+			count(*)
+		FROM
+			product_tbl
+		WHERE
+			hmal_id = #{hmal_id}
+			
 	</select>
 	
 </mapper>

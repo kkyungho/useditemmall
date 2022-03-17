@@ -17,9 +17,12 @@
   </head>
   <body>
     
+<!-- 헤더정보 -->
 <%@include file="/WEB-INF/views/include/header.jsp" %>
-
-
+<br>
+<!-- 카테고리정보 -->
+<%@include file="/WEB-INF/views/include/category.jsp" %>
+<br>
 <div class="container">
   
   <!-- 회원가입 작업 -->
@@ -77,7 +80,7 @@
 			 <div>
 		  	 	<label for="hmal_phone">✔  전화번호</label>
       		 	<input type="tel" class="form-control" id="hmal_phone" name="hmal_phone"
-      		 		placeholder="휴대폰  번호를 입력해주세요." style="max-width: 630px;">
+      		 		placeholder="휴대폰번호를 입력해주세요." style="max-width: 630px;">
       		 </div><br><br>      		  
 	  		 <div class="form-group text-center">
 	  		 	<button type="submit" id="btnJoin" class="btn btn-light">회원가입</button>
@@ -210,76 +213,79 @@
   	
     // 회원가입 버튼 클릭 시 
 	$("#btnJoin").on("click", function(){
+		let result = confirm("회원가입을 하시겠습니까?");
 		
-		let hmal_id = $("#hmal_id");
-		let hmal_pw = $("#hmal_pw");
-		let hmal_pw_check = $("#hmal_pw_check");
-		let hmal_name = $("#hmal_name");		
-		let hmal_email = $("#hmal_email");		
-		let hmal_phone = $("#hmal_phone");
-		let hmal_zipcode = $("input[name='hmal_zipcode']");
-		let hmal_addr = $("input[name='hmal_addr']");
-		let hmal_deaddr = $("input[name='hmal_deaddr']");
+		if(result) {		
+			// 유효성 검사 
+			let hmal_id = $("#hmal_id");
+			let hmal_pw = $("#hmal_pw");
+			let hmal_pw_check = $("#hmal_pw_check");
+			let hmal_name = $("#hmal_name");		
+			let hmal_email = $("#hmal_email");		
+			let hmal_phone = $("#hmal_phone");
+			let hmal_zipcode = $("input[name='hmal_zipcode']");
+			let hmal_addr = $("input[name='hmal_addr']");
+			let hmal_deaddr = $("input[name='hmal_deaddr']");			
+			
+			if(hmal_id.val() == "" || hmal_id.val() == null){
+				alert("아이디를 입력해주세요");
+				hmal_id.focus();
+				return false;
+				
+			} else if(isReID ==false){
+				alert("아이디 중복 체크를 해주세요.");
+				$("#btnUseIDChk").focus();
+				return false;
+				
+			} else if(hmal_pw.val() == "" || hmal_pw.val() == null){
+				alert("비밀번호를 입력해주세요.");
+				hmal_pw.focus();
+				return false;
+				
+			} else if(hmal_pw_check.val() == "" || hmal_pw_check.val() == null){
+				alert("비밀번호 확인 란을 입력해주세요.");
+				hmal_pw_check.focus();
+				return false;
+				
+			} else if(hmal_pw.val() != hmal_pw_check.val()){
+				alert("입력하신 비밀번호가 다릅니다.\n비밀번호를 다시 확인해주세요.");
+				hmal_pw_check.focus();
+				return false;
+	
+			} else if(hmal_name.val()== "" || hmal_name.val() == null){
+				alert("이름을 입력해주세요.");
+				hmal_name.focus();
+				return false;
+			
+			} else if(hmal_email.val()== "" || hmal_email.val() == null){
+				alert("이메일을 입력해주세요.");
+				hmal_email.focus();
+				return false;
+	
+			} else if(hmal_phone.val() == "" || hmal_phone.val() == null){
+				alert("휴대폰 번호를 입력해주세요.");
+				hmal_phone.focus();
+				return false;
+	
+			} else if(hmal_zipcode.val() == "" || hmal_zipcode.val() == null){
+				alert("우편번호를 입력해주세요.");
+				$("#btnPostCode").focus();
+				return false;
+				
+			} else if(hmal_addr.val() == "" || hmal_addr.val() == null){
+				alert("주소를 입력해주세요.");
+				$("#btnPostCode").focus();
+				return false;
+				
+			} else if(hmal_deaddr.val() == "" || hmal_deaddr.val() == null){
+				alert("상세 주소를 입력해주세요.");
+				hmal_deaddr.focus();
+				return false;
+	
+			} else {
+				form.submit();
+			}
 		
-		// 유효성 검사 
-		
-		if(hmal_id.val() == "" || hmal_id.val() == null){
-			alert("아이디를 입력해주세요");
-			hmal_id.focus();
-			return false;
-			
-		} else if(isReID ==false){
-			alert("아이디 중복 체크를 해주세요.");
-			$("#btnUseIDChk").focus();
-			return false;
-			
-		} else if(hmal_pw.val() == "" || hmal_pw.val() == null){
-			alert("비밀번호를 입력해주세요.");
-			hmal_pw.focus();
-			return false;
-			
-		} else if(hmal_pw_check.val() == "" || hmal_pw_check.val() == null){
-			alert("비밀번호 확인 란을 입력해주세요.");
-			hmal_pw_check.focus();
-			return false;
-			
-		} else if(hmal_pw.val() != hmal_pw_check.val()){
-			alert("입력하신 비밀번호가 다릅니다.\n비밀번호를 다시 확인해주세요.");
-			hmal_pw_check.focus();
-			return false;
-
-		} else if(hmal_name.val()== "" || hmal_name.val() == null){
-			alert("이름을 입력해주세요.");
-			hmal_name.focus();
-			return false;
-		
-		} else if(hmal_email.val()== "" || hmal_email.val() == null){
-			alert("이메일을 입력해주세요.");
-			hmal_email.focus();
-			return false;
-
-		} else if(hmal_phone.val() == "" || hmal_phone.val() == null){
-			alert("휴대폰 번호를 입력해주세요.");
-			hmal_phone.focus();
-			return false;
-
-		} else if(hmal_zipcode.val() == "" || hmal_zipcode.val() == null){
-			alert("우편번호를 입력해주세요.");
-			$("#btnPostCode").focus();
-			return false;
-			
-		} else if(hmal_addr.val() == "" || hmal_addr.val() == null){
-			alert("주소를 입력해주세요.");
-			$("#btnPostCode").focus();
-			return false;
-			
-		} else if(hmal_deaddr.val() == "" || hmal_deaddr.val() == null){
-			alert("상세 주소를 입력해주세요.");
-			hmal_deaddr.focus();
-			return false;
-
-		} else {
-			form.submit();
 		}
 	});
 	

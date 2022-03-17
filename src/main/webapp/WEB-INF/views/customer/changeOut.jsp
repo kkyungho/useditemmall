@@ -25,8 +25,12 @@
   </head>
   <body>
     
+<!-- 헤더정보 -->
 <%@include file="/WEB-INF/views/include/header.jsp" %>
-
+<br>
+<!-- 카테고리정보 -->
+<%@include file="/WEB-INF/views/include/category.jsp" %>
+<br>
 <div class="container">
   
   <!-- 비밀번호변경/회원탈퇴 -->
@@ -37,19 +41,19 @@
 		  	<h4>비밀번호 변경/회원탈퇴</h4>
 		  	<br>		    
 			<div class="form-group">
-	    		<label for="ori_hmal_pw">✔ 현재 비밀번호</label>
+	    		<label for="ori_hmal_pw">❕  현재 비밀번호</label>
 	    		<input type="password" class="form-control" id="ori_hmal_pw" name="ori_hmal_pw"
 	    			placeholder="현재 비밀번호를 입력해주세요." style="max-width: 630px;">
 	    	</div>
 	    	<div class="form-group">
-			    <label for="alter_hmal_pw">✔ 변경 비밀번호</label>
+			    <label for="alter_hmal_pw">❕  변경 비밀번호</label>
 			    <input type="password" class="form-control" id="alter_hmal_pw" name="alter_hmal_pw"
 			    	placeholder="변경할 비밀번호를 입력해주세요." style="width: 630px;"><br>
 			    <label for="ori_hmal_pw">&nbsp;</label>
 			    <button type="button" id="btnAlterPw" class="btn btn-warning">비밀번호변경</button>
 			</div>
 			<div class="form-group">
-				<label for="hmal_pw">✔ 현재비밀번호(회원탈퇴)</label>
+				<label for="hmal_pw">❗ 현재비밀번호(회원탈퇴)</label>
 	   			<input type="password" class="form-control" id="hmal_pw" name="hmal_pw" 
 	   				placeholder="현재 비밀번호를 입력해주세요." style="max-width: 630px;"><br>
 	   			<label for="hmal_pw">&nbsp;</label>

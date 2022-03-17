@@ -335,17 +335,5 @@ public class CustomerController {
 		return entity;
 	}
 		
-	// 마이페이지
-	@GetMapping("/mypage")
-	public void mypage() {
-			
-	}
-		
-		
-		
-	// 7)아이디 및 비밀번호 찾기
-	@GetMapping("/searchIDPW")
-	public void searchIDPW() {
-			
-	}
+	
 }

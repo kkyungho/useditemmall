@@ -11,22 +11,17 @@
     <title>Hmarket</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">
-    
-    <script>
-  	
-	  	let msg = '${msg}'; 
-	  	if(msg == 'alterUserFail'){
-	  		alert("비밀번호를 확인바랍니다.");
-	  	}
-  
-  	</script>
-    
+            
     
   </head>
   <body>
     
+<!-- 헤더정보 -->
 <%@include file="/WEB-INF/views/include/header.jsp" %>
-
+<br>
+<!-- 카테고리정보 -->
+<%@include file="/WEB-INF/views/include/category.jsp" %>
+<br>
 <div class="container">
   
   <!-- 회원수정 -->
@@ -37,22 +32,17 @@
 		  	<h4>회원수정</h4><br>
 		  	✔ 아래 항목을 수정해주세요.<br><br><br>
 		    <div class="form-group" style="width: 100%;">
-			    <label for="hmal_id">  아이디</label><br />
+			    <label for="hmal_id">아이디</label><br />
 			    <input type="text" class="form-control" id="hmal_id" name="hmal_id" 
 			    	 style="max-width:630px;" value='<c:out value="${customerVO.hmal_id }" />'  readonly>				
 			</div>
 			<div class="form-group">
-	    		<label for="hmal_pw">✔ 비밀번호</label>
+	    		<label for="hmal_pw">비밀번호</label>
 	    		<input type="password" class="form-control" id="hmal_pw" name="hmal_pw"
-	    			style="max-width: 630px;">
-	    	</div>
-	    	<div class="form-group">
-			    <label for="hmal_repw">✔ 비밀번호 확인</label>
-			    <input type="password" class="form-control" id="hmal_repw" name="hmal_repw"
-			    	style="width: 630px;">
-			</div>
+	    			style="max-width: 630px;" value='<c:out value="${customerVO.hmal_pw }" />' readonly>
+	    	</div>	    	
 			<div class="form-group">
-			    <label for="hmal_name">  이름</label>
+			    <label for="hmal_name">이름</label>
 			    <input type="text" class="form-control" id="hmal_name" name="hmal_name"
 			    	style="max-width: 630px;" value='<c:out value="${customerVO.hmal_name }" />' readonly>
 			</div>

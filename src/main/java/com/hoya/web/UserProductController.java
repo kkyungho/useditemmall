@@ -145,13 +145,16 @@ public class UserProductController {
 	
 	// 상품등록 저장	
 	@PostMapping("/productInsert")
-	public String productInsert(ProductVO vo, RedirectAttributes rttr) {
+	public String productInsert(ProductVO vo, RedirectAttributes rttr, HttpSession session) {
 		
 		log.info("상품정보" + vo);
 		
 		// 1)파일업로드
 		vo.setPro_img(UploadFileUtils.uploadFile(uploadFolder, vo.getUpload()));
 		vo.setPro_uploadpath(UploadFileUtils.getFolder());
+		
+		// 아이디 가져오기
+		vo.setHmal_id(((CustomerVO) session.getAttribute("loginStatus")).getHmal_id());
 		
 		// 2)상품정보 저장
 		service.productInsert(vo);
@@ -167,8 +170,8 @@ public class UserProductController {
 	// 2차카테고리에 해당하는 상품리스트
 	@GetMapping("/productList")
 	public void productList(@ModelAttribute("cri")Criteria cri, @ModelAttribute("cate_code") Integer cate_code, Model model) {
-		
-		cri.setAmount(5);
+				
+		cri.setAmount(4);
 		
 		List<ProductVO> list = service.getListWithPaging(cate_code, cri);
 		
@@ -324,6 +327,14 @@ public class UserProductController {
 		
 		return entity;
 	}
+	
+	// 회원아이디 정보에 따른 상품리스트 가져오기
+	@GetMapping("/mystore")
+	public void mystore(@ModelAttribute("cri") Criteria cri, @ModelAttribute("hmal_id") String hmal_id, Model model, HttpSession session) {		
+		
+		
+	}
+	
 	
 	
 	

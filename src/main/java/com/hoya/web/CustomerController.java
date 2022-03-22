@@ -173,25 +173,13 @@ public class CustomerController {
 	@PostMapping("/alterUser")
 	public String alterUser(CustomerVO vo, HttpSession session, RedirectAttributes rttr) {
 		
-		String redirectURL = "";
-		
 		log.info("회원수정정보: " + vo);  // "ori_hmal_pw"
 		
 		CustomerVO session_vo = (CustomerVO) session.getAttribute("loginStatus");
-				
-		if(cryptPassEnc.matches(vo.getHmal_pw(), session_vo.getHmal_pw())) {
-			
-			service.alterUser(vo);
-			
-			redirectURL = "/";
-			rttr.addFlashAttribute("msg", "alterUserOk");
-			
-		}else {
-			redirectURL = "/customer/alterUser";
-			rttr.addFlashAttribute("msg", "alterUserFail");
-		}
 		
-		return "redirect: " + redirectURL;
+		service.alterUser(vo);
+		
+		return "redirect:/";
 	}
 	
 	// 2월15일 작업

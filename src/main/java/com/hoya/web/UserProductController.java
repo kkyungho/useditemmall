@@ -330,12 +330,52 @@ public class UserProductController {
 	
 	// 회원아이디 정보에 따른 상품리스트 가져오기
 	@GetMapping("/mystore")
-	public void mystore(@ModelAttribute("cri") Criteria cri, @ModelAttribute("hmal_id") String hmal_id, Model model, HttpSession session) {		
+	public void mystore(@ModelAttribute("cri")Criteria cri, HttpSession session, Model model) {		
 		
+		cri.setAmount(4);
+		
+		String hmal_id = ((CustomerVO) session.getAttribute("loginStatus")).getHmal_id();
+		
+		List<ProductVO> list = service.mystore(hmal_id, cri);
+		
+		// 슬래시로 바꾸는 구문.
+		for(int i=0; i<list.size(); i++) {
+			ProductVO vo = list.get(i);
+			vo.setPro_uploadpath(vo.getPro_uploadpath().replace("\\", "/"));
+		}
+								
+		model.addAttribute("myproduct", list);
 		
 	}
 	
+	// 상품수정
+	@GetMapping("/productModify")
+	public void productModify(@RequestParam(value="pro_num", required=false) Integer pro_num, @ModelAttribute("cri") Criteria cri, Model model) {
+		
+		ProductVO vo = service.productModify(pro_num);
+		vo.setPro_uploadpath(vo.getPro_uploadpath().replace("\\", "/"));
+		model.addAttribute("productVO", vo);
+		
+		model.addAttribute("mainCategory", service.mainCategory());
+		model.addAttribute("subCategory", service.subCategory(vo.getCate_prt_code()));
+	}
 	
+	// 상품수정 저장
+	@PostMapping("/productModify")
+	public String productModifyOk(Criteria cri, ProductVO vo, RedirectAttributes rttr) {
+		
+		if(vo.getUpload().getSize() > 0) {
+			
+			UploadFileUtils.deleteFile(uploadFolder, vo.getPro_uploadpath(), vo.getPro_img());
+			
+			vo.setPro_img(UploadFileUtils.uploadFile(uploadFolder, vo.getUpload()));
+			vo.setPro_uploadpath(UploadFileUtils.getFolder());
+		}
+		
+		service.productModifyOk(vo);		
+				
+		return "redirect:/customer/product/mystore";
+	}
 	
 	
 }

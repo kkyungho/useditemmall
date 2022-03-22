@@ -94,28 +94,6 @@
     <script>
 	
       $(function(){
-
-        //장바구니 담기
-        $("button[name='btnCartAdd']").on("click", function(){
-          
-          let pro_num = $(this).parents("div.card-body").find("input[name='pro_num']").val();
-          
-          //console.log("상품코드" + pro_num);
-
-          $.ajax({
-            url:'/cart/cartAdd',
-            type: 'post',
-            dataType: 'text',
-            data: {pro_num: pro_num, cart_amount: 1},
-            success: function(data) {
-              if(data == "success") {
-                if(confirm("장바구니에 추가되었습니다.\n 지금 확인하겠습니까?")){
-                  location.href = "/cart/cartList";
-                }
-              }
-            }
-          });
-        });
         
         let actionForm = $("#actionForm");
 		//페이지번호 클릭시 : 선택한 페이지번호, 페이징정보, 검색정보

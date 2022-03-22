@@ -40,7 +40,7 @@
 	    		<label for="hmal_pw">비밀번호</label>
 	    		<input type="password" class="form-control" id="hmal_pw" name="hmal_pw"
 	    			style="max-width: 630px;" value='<c:out value="${customerVO.hmal_pw }" />' readonly>
-	    	</div>	    	
+	    	</div>	    		    	
 			<div class="form-group">
 			    <label for="hmal_name">이름</label>
 			    <input type="text" class="form-control" id="hmal_name" name="hmal_name"
@@ -60,15 +60,15 @@
 			    	style="max-width: 630px; margin: 3px 0px;" readonly>
 			    <input type="text" class="form-control" id="hmal_deaddr" name="hmal_deaddr" value='<c:out value="${customerVO.hmal_deaddr }" />'
 			    	style="max-width: 630px;">
-			    <input type="hidden" id="sample2_extraAddress" placeholder="참고항목">			        
+			    <input type="hidden" id="sample2_extraAddress" >			        
 			 </div>
 			 <div>
 		  	 	<label for="hmal_phone">✔  전화번호</label>
       		 	<input type="tel" class="form-control" id="hmal_phone" name="hmal_phone" value='<c:out value="${customerVO.hmal_phone }" />'
-      		 		placeholder="휴대폰  번호를 입력해주세요." style="max-width: 630px;">
+      		 		 style="max-width: 630px;">
       		 </div><br><br>      		  
 	  		 <div class="form-group text-center">
-	  		 	<button type="submit" id="btnAlterUser" class="btn btn-light">회원수정</button>
+	  		 	<button type="button" id="btnAlterUser" class="btn btn-light">회원수정</button>
 	  			<button type="reset" id="btnCancle" class="btn btn-danger">취소</button>
 	  		 </div> 
 	  	   </div> 
@@ -86,58 +86,53 @@
 
 	$(document).ready(function(){	
 		
+		let form = $("#alterUserForm");
+		
 		/* 회원수정 버튼 클릭 시 */ 
-		$("#btnAlterUser").on("click", function(){
-			
-			let hmal_id = $("#hmal_id");
-			let hmal_pw = $("#hmal_pw");
-			let hmal_repw = $("#hmal_repw");
-			let hmal_name = $("#hmal_name");			
-			let hmal_email = $("#hmal_email");			
-			let hmal_phone = $("#hmal_phone");
-			let hmal_zipcode = $("input[name='hmal_zipcode']");
-			let hmal_addr = $("input[name='hmal_addr']");
-			let hmal_deaddr = $("input[name='hmal_deaddr']");
-			
-			/* 유효성 검사 */
-			
-			 if(hmal_pw.val()==null || hmal_pw.val()==""){
-				alert("현재 비밀번호를 입력해주세요.");
-				hmal_pw.focus();
-				return;			
-			
-			} else if(hmal_email.val()==null || hmal_email.val()==""){
-				alert("이메일을 입력해주세요.");
-				hmal_email.focus();
-				return;			
-			
-			} else if(hmal_phone.val()==null || hmal_phone.val()==""){
-				alert("휴대폰 번호를 입력해주세요.");
-				hmal_phone.focus();
-				return;
+		$("#btnAlterUser").on("click", function(){			
+			let result = confirm("회원수정을 하시겠습니까?");
 
-			} else if(hmal_zipcode.val()==null || hmal_zipcode.val()==""){
-				alert("우편번호를 입력해주세요.");
-				$("#btnPostCode").focus();
-				return;
-				
-			} else if(hmal_addr.val()==null || hmal_addr.val()==""){
-				alert("주소를 입력해주세요.");
-				$("#btnPostCode").focus();
-				return;
-				
-			} else if(hmal_deaddr.val()==null || hmal_deaddr.val()==""){
-				alert("상세 주소를 입력해주세요.");
-				hmal_deaddr.focus();
-				return;
-			} 
-			 
-			// 현재 비밀번호 확인 검사
+            if(result){
+                let hmal_email = $("#hmal_email");			
+                let hmal_zipcode = $("input[name='hmal_zipcode']");
+                let hmal_addr = $("input[name='hmal_addr']");
+                let hmal_deaddr = $("input[name='hmal_deaddr']");
+                let hmal_phone = $("#hmal_phone");
+                
+                /* 유효성 검사 */
+                
+                if(hmal_email.val() == "" || hmal_email.val() == null){
+                    alert("이메일을 입력해주세요.");
+                    hmal_email.focus();
+                    return;			
+                
+                } else if(hmal_zipcode.val() == "" || hmal_zipcode.val() == null){
+                    alert("우편번호를 입력해주세요.");
+                    $("#btnPostCode").focus();
+                    return;
+                    
+                } else if(hmal_addr.val() == "" || hmal_addr.val() == null){
+                    alert("주소를 입력해주세요.");
+                    $("#btnPostCode").focus();
+                    return;
+                    
+                } else if(hmal_deaddr.val() == "" || hmal_deaddr.val() == null){
+                    alert("상세주소를 입력해주세요.");
+                    hmal_deaddr.focus();
+                    return;
+                    
+                } else {
+                    form.submit();
+                }
+            } 
+			
 			
 		});
 		
 		/* 취소 버튼 클릭 시 */
-		$("#btn_cancle").on("click", function(){
+		$("#btnCancle").on("click", function(){
+			
+			console.log("취소버튼");
 			
 			let result = confirm("회원 정보 수정을 취소하시겠습니까?");
 			
@@ -149,23 +144,6 @@
 		
 		//폼에서 일반버튼<input type="button">을 클릭하면 호출되는 이벤트설정
 		
-		$("#btnAlterUser").on("click", function(){
-			
-			let hmal_pw = $("#hmal_pw");
-			let hmal_repw = $("#hmal_repw");
-			
-			if(hmal_pw.val() == "" && hmal_repw.val() == ""){
-				//alert("비밀번호를 입력하세요.");
-				return;
-			}
-			
-			if(hmal_pw.val() != hmal_repw.val()){
-				alert("비밀번호가 일치하지 않습니다.");
-				return;
-			}
-			
-			$("#alterUserForm").submit();
-			
 				
 		
 	

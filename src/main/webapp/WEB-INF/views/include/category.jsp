@@ -29,7 +29,7 @@
 		 <!-- 로그인 상태가 아님 --> 	
 		 <c:if test="${sessionScope.loginStatus == null }">
 		 	 <a href="/customer/login" >
-	    		<img alt="내상점" src="/resources/img/mypage.png" width="95" height="29" style="float: right; margin-left: 30px;">
+	    		<img alt="내상점" src="/resources/img/mypage.png" width="95" height="27" style="float: right; margin-left: 30px;">
 	    	 </a>	    	    	 	    	 
 	    	 <a href="/customer/login">
 	    		<img alt="판매하기" src="/resources/img/selling.png" width="95" height="32" style="float: right;">  	
@@ -38,7 +38,7 @@
    	 	 <!-- 로그인 상태 -->
     	 <c:if test="${sessionScope.loginStatus != null }">
     	 	 <a href="/customer/product/mystore" >
-	    		<img alt="내상점" src="/resources/img/mypage.png" width="95" height="30" style="float: right; margin-left: 30px;">
+	    		<img alt="내상점" src="/resources/img/mypage.png" width="95" height="27" style="float: right; margin-left: 30px;">
 	    	 </a>
 			 <a href="/customer/product/productInsert">
 			 	<img alt="판매하기" src="/resources/img/selling.png" width="95" height="32" style="float: right;">	    		  	

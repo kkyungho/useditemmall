@@ -30,8 +30,8 @@
   
   <!-- 로그인 -->  
   <section class="content container-fluid">
-     <div class="container" style="width: 450px; height: 620px; background-color: white; margin-top: 30px;">
-         <form id="loginForm" class="form-login" action="/customer/login" method="post" style="padding: 50px 30px;">
+     <div class="container" style="width: 450px; height: 420px; background-color: white; margin-top: 30px;">
+         <form id="loginForm" class="form-login" action="/customer/login" method="post" style="padding: 50px 10px;">
              <h2 class="form-login-heading">로그인</h2>
              <br><br>
              <label for="hmal_id" class="sr-only">아이디</label>
@@ -87,10 +87,13 @@
             }else if(data == "idFail"){
               alert("아이디를 확인해주세요.");
               hmal_id.focus();
+              return;
               
             }else if(data == "pwFail"){
               alert("비밀번호를 확인해주세요.");
               hmal_pw.focus();
+              return;
+              
             }
           } 
         });

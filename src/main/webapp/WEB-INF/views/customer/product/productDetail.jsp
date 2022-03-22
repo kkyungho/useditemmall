@@ -25,7 +25,7 @@
 <br>
 <div class="container">	
 	<div class="row">
-		<div class="swiper-wrapper"
+		<div class="swiper-wrapper parentDetail"
       	style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
       	<div class="swiper-slide thumbnail_wrapper swiper-slide-active"
 			style="width: 418px;">
@@ -48,14 +48,14 @@
       	</div>  
       	    	
       	<div class="col-sm-5">
+      		<input type="hidden" name="pro_num" value="${productVO.pro_num }">
       		<label style="font-size: 1.375em;">${productVO.pro_name }</label><br>
       		<label style="font-size: 2.375em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${productVO.pro_price }"/>원</label><br><br>      		
       		<label style="font-size: 1.275em;">상품상태 : ${productVO.pro_con }</label><br><br>
           <div class="form-row">
             <div class="btn-group">              
-              <button type="button" name="btnCartAdd" class="btn btn-light">찜하기</button>&nbsp;
-              <button type="button" name="btnCartList" class="btn btn-secondary">상품목록</button>&nbsp;
-              <button type="button" name="btnBuyAdd" class="btn btn-warning">바로구매</button>&nbsp;
+              <button type="button" name="btnCartAdd" class="btn btn-light" style="font-size: 20px;">찜하기</button>&nbsp;              
+              <button type="button" name="btnBuy" class="btn btn-warning" style="font-size: 20px;">바로구매</button>&nbsp;
             </div>                        
           </div>
       	</div> 
@@ -65,17 +65,22 @@
       	<h4 style="font-size: 1.875em;">상품정보</h4>      	
       </div>
       <br>
-      <div>${productVO.pro_content }</div>
-	  <form id="actionForm" action="" method="get">	  
-	  
-	  	<c:if test="${type == 'Y' }">
-		   	<input type="hidden" name="pageNum" value="${cri.pageNum}">
-			<input type="hidden" name="amount" value="${cri.amount}">			
-		</c:if>
-		
-			<input type="hidden" name="cate_code" value="${cate_code}">
-		<!-- 상품코드 동적 추가작업 -->
-	  </form>	
+      <div>${productVO.pro_content }</div>	 
+      
+      <form id="actionForm" action="" method="get">
+        <!--list.jsp 가 처음 실행되었을 때 pageNum의 값을 사용자가 선택한 번호의 값으로 변경-->
+        
+        <!-- Criteria클래스가 기본생성자에 의하여 기본값으로 파라미터가 사용 -->
+        
+        <c:if test="${type == 'Y' }">
+        <input type="hidden" name="pageNum" value="${cri.pageNum}">
+        <input type="hidden" name="amount" value="${cri.amount}">
+        </c:if>
+        
+        <input type="hidden" name="cate_code" value="${cate_code}">
+			  <!-- 상품코드 동적추가작업 -->
+   	 </form>
+       	
       
 <%@include file="/WEB-INF/views/include/footer.jsp" %>
 </div>
@@ -83,30 +88,52 @@
     <script>
 	
       $(function(){
+    	  
+    	  let actionForm = $("#actionForm");
+    	  
+    	  //장바구니 담기
+          $("button[name='btnCartAdd']").on("click", function(){
+              
+              let pro_num = $(this).parents("div.row").find("input[name='pro_num']").val();
+              
+              console.log("상품코드" + pro_num);
 
-    	let actionForm = $("#actionForm");
+              $.ajax({
+                 url: '/product/mystore/cartAdd',
+                 type: 'post',
+                 dataType: 'text',
+                 data: {pro_num: ${productVO.pro_num } },
+                 success: function(data) {
+                   if(data == "success") {                	   
+                     location.href = "/product/mystore?pro_num=" + pro_num;                     
+                   }
+                 }
+              });
+          });         
     	
-        //장바구니 담기
-        $("button[name='btnCartAdd']").on("click", function(){
+          //주문하기
+          $("button[name='btnBuy']").on("click", function(){
           
-          let pro_num = $(this).parents("div.card-body").find("input[name='pro_num']").val();
+            let pro_num = $(this).parents("div.row").find("input[name='pro_num']").val();
           
-          //console.log("상품코드" + pro_num);
-
-          $.ajax({
-            url:'/cart/cartAdd',
-            type: 'post',
-            dataType: 'text',
-            data: {pro_num: ${productVO.pro_num}, cart_amount: $("#pro_amount").val()},
-            success: function(data) {
-              if(data == "success") {
-                if(confirm("장바구니에 추가되었습니다.\n 지금 확인하겠습니까?")){
-                  location.href = "/cart/cartList";
+            console.log("상품코드" + pro_num);
+          
+		  
+            $.ajax({
+              url:'/order/buy',
+              type: 'post',
+              dataType: 'text',
+              data: {pro_num: ${productVO.pro_num}, cart_amount: $("#pro_amount").val()},
+              success: function(data) {
+                if(data == "success") {
+                  if(confirm("장바구니에 추가되었습니다.\n 지금 확인하겠습니까?")){
+                    location.href = "/cart/cartList";
+                  }
                 }
               }
-            }
+            });
+		  
           });
-        });
 
       });
 	

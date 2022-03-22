@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoya.mapper.CartMapper">
+
+	<!-- 찜하기 기능 -->
+	<insert id="cartAdd">
+		
+		<!-- 
+		INSERT INTO CART_TBL
+			(cart_code, pro_num, mbsp_id, cart_amount)
+		VALUES
+			(seq_cart_code.nextval, #{pro_num}, #{mbsp_id}, #{cart_amount})
+		 -->
+		 
+		 MERGE INTO
+		 	cart_tbl c
+		 USING
+		 	dual
+		 ON 
+		 	(c.hmal_id = #{hmal_id} and c.pro_num = #{pro_num})		 	
+		 WHEN NOT MATCHED THEN	 
+		 	INSERT 
+				(cart_code, pro_num, hmal_id)
+			VALUES
+				(seq_cart_code.nextval, #{pro_num}, #{hmal_id})		
+		 		
+	</insert>
+	
+</mapper>

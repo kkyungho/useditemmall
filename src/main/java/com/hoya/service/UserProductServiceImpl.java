@@ -61,16 +61,24 @@ public class UserProductServiceImpl implements UserProductService {
 	}
 
 	@Override
-	public List<ProductVO> getMystoreList(String hmal_id, Criteria cri) {
+	public List<ProductVO> mystore(String hmal_id, Criteria cri) {
 		
-		return mapper.getMystoreList(hmal_id, cri);
+		return mapper.mystore(hmal_id, cri);
 	}
 
 	@Override
-	public String getMystoreCount(String hmal_id) {
-		
-		return mapper.getMystoreCount(hmal_id);
+	public ProductVO productModify(Integer pro_num) {
+		// TODO Auto-generated method stub
+		return mapper.productModify(pro_num);
 	}
+
+	@Override
+	public int productModifyOk(ProductVO vo) {
+		
+		return mapper.productModifyOk(vo);
+	}
+
+	
 
 	
 

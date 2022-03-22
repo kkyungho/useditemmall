@@ -37,17 +37,17 @@
 	  
   <!-- 판매하기 -->  
   	<div class="container" style="width: 100%; background-color: white; font-size: 16px;">
-  		<form class="insertForm" action="/customer/product/productInsert" method="post" id="insertForm" enctype="multipart/form-data">
+  		<form class="modifyForm" action="/customer/product/productModify" method="post" id="modifyForm" enctype="multipart/form-data">
 		  <div class="container" style="width: 900px; padding: 3% 2px;">
-		  	<h4>상품 등록</h4>
-		  	<br><br>
+		  	<h4>상품 수정</h4>
+		  	<br><br>		  	
 		  	<div class="form-row">
 			    <div class="col-md-2">
 			      <label for="pro_img" style="font-weight: 800;">상품이미지</label>
-			    </div>
+			    </div>			    
 			    <div class="col-md-5">
 			      <label for="upload">
-			      	<img alt="이미지 업로드" src="/resources/img/camera.png" height="230" width="230" id="previewImage" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">			      	
+			      	<img alt="이미지 업로드" src="/customer/product/displayFile?fileName=<c:out value="${productVO.pro_img }"></c:out>&uploadPath=<c:out value="${productVO.pro_uploadpath }"></c:out>" height="230" width="230" id="previewImage" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">			      	
 			      </label>
 			      <br>			      
 			      <b>* 상품 이미지는 640x640에 최적화 되어 있습니다.</b>
@@ -57,11 +57,14 @@
 			    	<br>- 큰 이미지일경우 이미지가 깨지는 경우가 발생할 수 있습니다.
 			    	<br>최대 지원 사이즈인 640 X 640 으로 리사이즈 해서 올려주세요.(개당 이미지 최대 10M)
 			      <input type="file" style="display: none;" id="upload" name="upload" multiple="multiple">
-			    </div>			  
+			      <!-- 이미지 변경시 기존이미지정보를 이용하여 기존이미지 삭제, 이미지 변경 안하면, 기존이미지 정보를 수정데이타로 사용 -->
+			      <input type="hidden" name="pro_uploadpath" value="<c:out value="${productVO.pro_uploadpath}" />">
+			      <input type="hidden" name="pro_img" value="<c:out value="${productVO.pro_img}" />">
 			    <div class="col-md-5">
 			      <label for="previewImage"></label>
-			      <img alt="" src="" id="previewImage">			      		      
-			    </div>			    	
+			      <img alt="" src="" id="previewImage">			      		      		      
+			    </div>
+			    </div> 			    			    	
 			</div>
 			<br><br>                 		  	
 		  	<div class="form-row">			    
@@ -69,8 +72,8 @@
 				    <label for="pro_name" style="font-weight: 800;">상품제목</label>									    
 				</div>				
 				<div class="col-md-9">
-					<input type="text" class="form-control" id="pro_name" name="pro_name" placeholder="상품제목을 입력해주세요."
-						style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">
+					<input type="text" class="form-control" id="pro_name" name="pro_name" 
+						style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;" value='<c:out value="${productVO.pro_name }" />'>
 				</div>
 			  </div>
 			  <br><br>
@@ -82,13 +85,19 @@
 				    <select class="form-control" id="mainCategory" name="cate_prt_code" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">
 				      <option value="">카테고리</option>				      
 				      <c:forEach items="${mainCategory}" var="categoryVO">
-				      	<option value="${categoryVO.cate_code }">${categoryVO.cate_name }</option>
+				      	<option value="${categoryVO.cate_code }" ${categoryVO.cate_code==productVO.cate_prt_code ? 'selected':''}>
+				      		${categoryVO.cate_name }</option>
 				      </c:forEach>					   
 				    </select>
 				</div>
 				<div class="col-md-3">
 					<select class="form-control" id="subCategory" name="cate_code" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">				      
-						<option value="">하위 카테고리</option>										  
+						<option value="">하위 카테고리</option>	
+						<c:forEach items="${subCategory}" var="categoryVO">
+					      	<option value="${categoryVO.cate_code }" ${categoryVO.cate_code==productVO.cate_code ? 'selected':''} >
+					      		${categoryVO.cate_name }
+					      	</option>
+					    </c:forEach>									  
 				    </select>
 				</div>
 			  </div>
@@ -98,8 +107,8 @@
 					<label for="pro_price" style="font-weight: 800;">상품가격</label>
 				</div>
 				<div class="col-md-4">
-				    <input type="text" class="form-control" id="pro_price" name="pro_price" placeholder="가격을 입력해주세요."
-				    	value="" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse; ime-mode:disabled">				    
+				    <input type="text" class="form-control" id="pro_price" name="pro_price" value='<c:out value="${productVO.pro_price}" />'
+				    	style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse; ime-mode:disabled">				    
 			    </div><p style="text-align: justify;">원</p>			    			    
 			  </div>
 			  <br><br>
@@ -109,7 +118,7 @@
 			      <label for="pro_content" style="font-weight: 800;">상품설명</label>
 				</div>
 				<div class="col-md-10">
-			      <textarea id="pro_content" name="pro_content" rows="10" cols="100" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;" placeholder="상품 설명을 입력해주세요."></textarea>
+			      <textarea id="pro_content" name="pro_content" rows="10" cols="100" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;"><c:out value="${productVO.pro_content}" /></textarea>
 			    </div>
 			  </div>
 			  <br><br>			 
@@ -118,7 +127,7 @@
 			      <label for="pro_amount" style="font-weight: 800;">재고수량</label>
 			    </div>
 			    <div class="col-md-4">
-			      <input value="1" type="text" class="form-control" id="pro_amount" name="pro_amount">			      
+			      <input type="text" class="form-control" id="pro_amount" name="pro_amount" value='<c:out value="${productVO.pro_amount}" />'>			      
 			    </div>
 			   	  개
 			   </div>		   		 
@@ -130,15 +139,15 @@
 			    	<div class="col-md-5">
 				      <select class="form-control" id="pro_con" name="pro_con">				      	  
 				      	  <option value="" hidden=""></option>
-					      <option value="새상품">새상품</option>
-					      <option value="거의새것">거의새것</option>
-					      <option value="중고">중고</option>
+					      <option value="새상품" <c:out value="${productVO.pro_con == '새상품' ? 'selected' : ''}" />>새상품</option>
+					      <option value="거의새것" <c:out value="${productVO.pro_con == '거의새것' ? 'selected' : ''}" />>거의새것</option>
+					      <option value="중고" <c:out value="${productVO.pro_con == '중고' ? 'selected' : ''}" />>중고</option>
 					  </select>					   
 					</div>					
 			    </div>
 			    <br><br>
-			    <div class="btn-box" style="text-align: center;">
-			      <button type="button" id="btnProductInsert" class="btn btn-warning" style="font-size: 20px;">상품등록</button>
+			    <div class="btn-box" style="text-align: center;">			      
+			      <button type="button" name="btnProductModify" id="btnProductModify" class="btn btn-warning" style="font-size: 20px;" data-pro_num='${productVO.pro_num }'>상품수정</button>
 			    </div>
 			    <br>	    
 	  	   </div> 
@@ -248,6 +257,7 @@
 </script>
 
 <!-- 가격 3자리단위마다 쉼표 -->
+<!-- 
 <script>
 
 	function addCommas(x) {
@@ -259,22 +269,23 @@
 	});
 	
 </script>
-
+ -->
 <script>
 	
-	$(document).ready(function(){
+	$(document).ready(function(){		
 		/*
 		type="button"  : $("#btnProductInsert").on("click"  ~~
 		type="submit"  : $("폼이름").on("submit")
 		*/		
-		let form = $("#insertForm");
+		
+		let form = $("#modifyForm");
+		let pro_num = $(this).data("pro_num");
 
-		$("#btnProductInsert").on("click", function(){		
-			let result = confirm("상품을 등록하시겠습니까?");
+		$("#btnProductModify").on("click", function(){		
+			let result = confirm("상품을 수정하시겠습니까?");			
 			
 			if(result){
-				// 유효성검사
-				let upload = $("#upload");
+				// 유효성검사				
 				let pro_name = $("#pro_name");
 				let mainCategory = $("#mainCategory");
 				let subCategory = $("#subCategory");
@@ -283,12 +294,7 @@
 				let pro_amount = $("#pro_amount");
 				let pro_con = $("#pro_con");		
 			
-				if(upload.val() == "" || upload.val() == null){
-					alert("사진을 1장이라도 넣어주세요.");
-					upload.focus();
-					return;
-					
-				} else if(pro_name.val() == "" || pro_name.val() == null) {
+				if(pro_name.val() == "" || pro_name.val() == null) {
 					alert("상품제목을 입력해주세요.");
 					pro_name.focus();
 					return;
@@ -323,17 +329,18 @@
 					pro_con.focus();				
 					return;
 					
-				} else {
-					form.submit();
-				}
-			} 			
-		});
+				} else {				
+					form.submit();	
+					location.href = "/customer/product/mystore?pro_num=" + pro_num;
+				}				
+			} 				
+			
+		});		
+		
 	});
 	
 	
 </script>
-
-
 
     
   </body>

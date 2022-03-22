@@ -189,10 +189,9 @@
 		
 	</select>
 	
-	<select id="getMystoreList" resultType="com.hoya.domain.ProductVO">
+	<select id="mystore" resultType="com.hoya.domain.ProductVO">
 	
-		<![CDATA[ 
-		SELECT 
+		SELECT
 			pro_num, 
 			hmal_id,
 			cate_prt_code, 
@@ -205,48 +204,55 @@
 			pro_amount, 
 			pro_con, 
 			pro_date, 
-			pro_updatedate 
-			
-		FROM (
-		        SELECT 
-		        	/*+ index_desc(product_tbl pk_product_tbl) */ 
-		        	rownum rn, 
-		        	pro_num, 
-		        	hmal_id,
-		        	cate_prt_code, 
-		        	cate_code, 
-		        	pro_name, 
-		        	pro_price, 		        	
-		        	pro_content,
-		        	pro_img, 
-		        	pro_uploadpath,		        	
-		        	pro_amount, 
-		        	pro_con, 
-		        	pro_date, 
-		        	pro_updatedate
-				FROM 
-					product_tbl
-				WHERE 
-					hmal_id = #{hmal_id}
-				AND
-		 rownum <= (#{cri.pageNum} * #{cri.amount}) 
-				)
-		
-		WHERE 
-			rn > ((#{cri.pageNum} - 1) * #{cri.amount} )
-		]]>
-	
-	</select>
-	
-	<select id="getMystoreCount" resultType="string">
-		
-		SELECT
-			count(*)
+			pro_updatedate	
 		FROM
 			product_tbl
 		WHERE
 			hmal_id = #{hmal_id}
 			
 	</select>
+	
+	<select id="productModify" resultType="com.hoya.domain.ProductVO">
+		
+		SELECT
+			pro_num, 
+			hmal_id,
+			cate_prt_code, 
+			cate_code, 
+			pro_name, 
+			pro_price, 			 
+			pro_content, 
+			pro_img,
+			pro_uploadpath, 
+			pro_amount, 
+			pro_con, 
+			pro_date, 
+			pro_updatedate	
+		FROM
+			product_tbl
+		WHERE
+			pro_num = #{pro_num}
+			
+	</select>
+	
+	<update id="productModifyOk">
+		
+		UPDATE
+			product_tbl
+		SET
+			cate_prt_code = #{cate_prt_code}, 
+	       	cate_code = #{cate_code}, 
+	       	pro_name = #{pro_name}, 
+	       	pro_price = #{pro_price},	       	
+	       	pro_content = #{pro_content},
+	       	pro_img = #{pro_img},
+	       	pro_uploadpath = #{pro_uploadpath}, 	       	 
+	       	pro_amount = #{pro_amount}, 
+	       	pro_con = #{pro_con}, 
+	       	pro_updatedate = sysdate
+		WHERE
+			pro_num = #{pro_num}
+			
+	</update>
 	
 </mapper>

@@ -12,6 +12,17 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">
 	
+	
+	<style>	   	  
+	  
+	  form.joinForm{
+		  border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;
+		  padding: 15px;
+	  }
+	  
+	
+	  
+  	</style>
     
     
   </head>
@@ -27,10 +38,9 @@
   
   <!-- 회원가입 작업 -->
   
-  <section class="content container-fluid">
-  	<div class="container" style="width: 70%; min-width: 900px; background-color: white; font-size: 16px;">
-  		<form action="/customer/join" method="post" id="joinForm">
-		  <div class="container" style="width: 800px; padding: 10% 5%;">
+  	<div class="container" style="width: 100%; min-width: 900px; background-color: white; font-size: 16px;">
+  		<form class="joinForm" action="/customer/join" method="post" id="joinForm">
+		  <div class="container" style="width: 800px; padding: 3% 2px;">
 		  	<h4>회원가입</h4><br>
 		  	✔ 아래 항목을 작성해주세요.<br><br><br>
 		    <div class="form-group" style="width: 100%;">
@@ -88,8 +98,7 @@
 	  		 </div> 
 	  	   </div> 
 		</form>	 
-	  </div> 
-  </section>  
+	  </div>   
 
   <%@include file="/WEB-INF/views/include/footer.jsp" %>
 </div>

@@ -155,7 +155,7 @@ public class UserProductController {
 		
 		// 아이디 가져오기
 		vo.setHmal_id(((CustomerVO) session.getAttribute("loginStatus")).getHmal_id());
-		
+				
 		// 2)상품정보 저장
 		service.productInsert(vo);
 		

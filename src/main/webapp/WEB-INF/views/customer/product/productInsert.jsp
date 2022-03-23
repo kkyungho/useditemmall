@@ -99,7 +99,7 @@
 				</div>
 				<div class="col-md-4">
 				    <input type="text" class="form-control" id="pro_price" name="pro_price" placeholder="가격을 입력해주세요."
-				    	value="" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse; ime-mode:disabled">				    				    
+				    	value="" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;" onkeyup="addCommas(this.val())">				    			    				    
 			    </div><p style="text-align: justify;">원</p>			    			    
 			  </div>
 			  <br><br>
@@ -247,8 +247,7 @@
 
 </script>
 
-<!-- 가격 3자리단위마다 쉼표 -->
-<!-- 
+<!-- 가격 3자리단위마다 쉼표 --> 
 <script>
 
 	function addCommas(x) {
@@ -260,7 +259,7 @@
 	});
 	
 </script>
- -->
+
 
 <script>
 	

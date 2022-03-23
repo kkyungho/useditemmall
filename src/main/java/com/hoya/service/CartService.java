@@ -6,8 +6,6 @@ import org.apache.ibatis.annotations.Param;
 
 import com.hoya.domain.CartListVO;
 import com.hoya.domain.CartVO;
-import com.hoya.domain.Criteria;
-import com.hoya.domain.ProductVO;
 
 public interface CartService {
 	

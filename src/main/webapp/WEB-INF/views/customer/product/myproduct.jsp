@@ -61,6 +61,22 @@
 			
 	  	});
 	  	
+	 	// 상세페이지 이동
+	    $("a.proDetail").on("click", function(e){
+	     	e.preventDefault();
+	     	/*
+	     	let pro_num = $(this).attr("href");
+	     	actionForm.append("<input type='hidden' name='pro_num' value='" + pro_num + "'>");
+	     	actionForm.attr("action", "/customer/product/productDetail");
+	     	actionForm.submit();
+	     	*/
+	     	let cate_code = $(this).parents(".parentDetail").find("input[name='cate_code']").val();
+	        console.log("카테고리: " + cate_code);
+	        
+	        location.href = "/customer/product/productDetail?pro_num=" + $(this).attr("href") + "&cate_code=" + cate_code + "&type=N";
+	     	
+	     }); 
+	  	
   });
 
 </script>

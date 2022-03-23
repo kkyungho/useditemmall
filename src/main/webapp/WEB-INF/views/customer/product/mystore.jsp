@@ -27,8 +27,8 @@
 	<h3>내 상점</h3>
 	<br>
 	<div class="nav" id="storelist">
-		<ul class="nav nav-tabs" id="myproduct" role="tablist">
-		  <li class="nav-item" role="presentation">
+		<ul class="nav nav-tabs" id="storelist" role="tablist">
+		  <li class="nav-item" id="myproduct" role="presentation">
 		    <a class="nav-link active" id="product-tab" data-toggle="tab" href="/customer/product/myproduct" role="tab" aria-controls="product" aria-selected="true">판매상품</a>
 		  </li>
 		  <li class="nav-item" id="mycart" role="presentation">
@@ -95,7 +95,7 @@
   $(function(){ 	
 	  	
 	  	let getMyCart = function(){
-	  		$("#mycart").load("/cart/mycart?pro_num=" + ${productVO.pro_num});
+	  		$("#mycart").load("/cart/mycart?pro_num=" + pro_num);
 	  	}
 	  
 	 	let actionForm = $("#actionForm");
@@ -108,21 +108,7 @@
 	
 		});
 	       
-	    // 상세페이지 이동
-	    $("a.proDetail").on("click", function(e){
-	     	e.preventDefault();
-	     	/*
-	     	let pro_num = $(this).attr("href");
-	     	actionForm.append("<input type='hidden' name='pro_num' value='" + pro_num + "'>");
-	     	actionForm.attr("action", "/customer/product/productDetail");
-	     	actionForm.submit();
-	     	*/
-	     	let cate_code = $(this).parents(".parentDetail").find("input[name='cate_code']").val();
-	        console.log("카테고리: " + cate_code);
-	        
-	        location.href = "/customer/product/productDetail?pro_num=" + $(this).attr("href") + "&cate_code=" + cate_code + "&type=N";
-	     	
-	     });   
+	      
     
 
   });

@@ -39,9 +39,9 @@
              	style="margin-bottom: 15px;" required autofocus>  
              <label for="hmal_pw" class="sr-only">비밀번호</label>
              <input type="password" id="hmal_pw" name="hmal_pw" class="form-control" placeholder="비밀번호" required><br><br>                    
-          <div style="text-align: center">
-             <button type="button"  id="btnlogin" class="btn btn-light center">로그인</button>	                  
-         	<button type="button"  id="btnFindPw" class="btn btn-warning center">비밀번호 찾기</button>                                
+          <div style="text-align: center">          	
+            <button type="button"  id="btnlogin" class="btn btn-warning center">로그인</button>	                  
+         	<button type="button"  id="btnFindPw" class="btn btn-primary center">비밀번호 찾기</button>                                
           </div>
          </form>
      </div>
@@ -87,11 +87,13 @@
             }else if(data == "idFail"){
               alert("아이디를 확인해주세요.");
               hmal_id.focus();
+              hmal_id.val("");
               return;
               
             }else if(data == "pwFail"){
               alert("비밀번호를 확인해주세요.");
               hmal_pw.focus();
+              hmal_pw.val("");
               return;
               
             }

@@ -33,5 +33,8 @@ public interface UserProductMapper {
 	
 	// 상품수정저장
 	public int productModifyOk(ProductVO vo);
+	
+	// 상품삭제
+	public int productDelete(Integer pro_num);
 
 }

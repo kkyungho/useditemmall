@@ -16,20 +16,22 @@
 
 <div class="container border-bottom" style="padding-top: 45px; padding-bottom: 20px;">
 	<div class="dropdown drop-tabs">	
-	<button type="button" class="btn btn-warning dropdown" style="font-size: 20px; color: white;" data-toggle="dropdown">카테고리</button>
+	<button type="button" class="btn btn-outline-light dropdown" style="font-size: 20px; color: black;" data-toggle="dropdown">카테고리</button>
 		<div class="dropdown-menu">
 		  <c:forEach items="${userCategory}" var="categoryVO">
 			  <div class="dropdown-item">
-			    <a class="dropdown-item" data-toggle="dropdown" href="${categoryVO.cate_code }" role="button">${categoryVO.cate_name }</a>
-			    <div class="subCategory" id="subCategory_${categoryVO.cate_code }">
-			    </div>
+			    <a class="dropdown-item" data-toggle="dropdown" href="${categoryVO.cate_code }" role="button">${categoryVO.cate_name }</a>			    
+			  </div>
+			  <div class="hover-menu" style="text-align: center;">
+				  <div class="subCategory" id="subCategory_${categoryVO.cate_code }">
+				  </div>
 			  </div>
 		  </c:forEach>
 		 </div>		
 		 <!-- 로그인 상태가 아님 --> 	
 		 <c:if test="${sessionScope.loginStatus == null }">
 		 	 <a href="/customer/login" >
-	    		<img alt="내상점" src="/resources/img/mypage.png" width="95" height="27" style="float: right; margin-left: 30px;">
+	    		<img alt="내상점" src="/resources/img/mypage.png" width="85" height="30" style="float: right; margin-left: 30px;">
 	    	 </a>	    	    	 	    	 
 	    	 <a href="/customer/login">
 	    		<img alt="판매하기" src="/resources/img/selling.png" width="95" height="32" style="float: right;">  	
@@ -38,7 +40,7 @@
    	 	 <!-- 로그인 상태 -->
     	 <c:if test="${sessionScope.loginStatus != null }">
     	 	 <a href="/customer/product/mystore" >
-	    		<img alt="내상점" src="/resources/img/mypage.png" width="95" height="27" style="float: right; margin-left: 30px;">
+	    		<img alt="내상점" src="/resources/img/mypage.png" width="85" height="30" style="float: right; margin-left: 30px;">
 	    	 </a>
 			 <a href="/customer/product/productInsert">
 			 	<img alt="판매하기" src="/resources/img/selling.png" width="95" height="32" style="float: right;">	    		  	
@@ -57,7 +59,7 @@
 	$(function(){
 	  
 	  //1차카테고리 클릭시
-	  $(".dropdown .dropdown-menu a.dropdown-item").on("click", function(){
+	  $(".dropdown .dropdown-menu a.dropdown-item").hover(function(){
 		console.log("1차카테고리");
 
 		let url = "/customer/product/subCategory/" + $(this).attr("href");

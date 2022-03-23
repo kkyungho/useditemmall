@@ -68,7 +68,7 @@ public class UserProductServiceImpl implements UserProductService {
 
 	@Override
 	public ProductVO productModify(Integer pro_num) {
-		// TODO Auto-generated method stub
+		
 		return mapper.productModify(pro_num);
 	}
 
@@ -76,6 +76,12 @@ public class UserProductServiceImpl implements UserProductService {
 	public int productModifyOk(ProductVO vo) {
 		
 		return mapper.productModifyOk(vo);
+	}
+
+	@Override
+	public int productDelete(Integer pro_num) {
+		
+		return mapper.productDelete(pro_num);
 	}
 
 	

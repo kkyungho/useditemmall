@@ -26,75 +26,28 @@
 <div class="container">
 	<h3>내 상점</h3>
 	<br>
-	<ul class="nav nav-tabs" id="myTab" role="tablist">
-	  <li class="nav-item" role="presentation">
-	    <a class="nav-link active" id="product-tab" data-toggle="tab" href="#product" role="tab" aria-controls="product" aria-selected="true">판매상품</a>
-	  </li>
-	  <li class="nav-item" role="presentation">
-	    <a class="nav-link" id="cart-tab" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="false">찜상품</a>
-	  </li>
-	  <!-- 
-	  <li class="nav-item" role="presentation">
-	    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-	  </li>
-	   -->
-	</ul>
+	<div class="nav" id="storelist">
+		<ul class="nav nav-tabs" id="myproduct" role="tablist">
+		  <li class="nav-item" role="presentation">
+		    <a class="nav-link active" id="product-tab" data-toggle="tab" href="/customer/product/myproduct" role="tab" aria-controls="product" aria-selected="true">판매상품</a>
+		  </li>
+		  <li class="nav-item" id="mycart" role="presentation">
+		    <a class="nav-link" id="cart-tab" data-toggle="tab" href="/cart/mycart" role="tab" aria-controls="cart" aria-selected="false">찜상품</a>
+		  </li>
+		  <!-- 
+		  <li class="nav-item" role="presentation">
+		    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+		  </li>
+		   -->
+		</ul>
+	</div>
 	<!-- 판매상품 -->
 	<br>
 	<div class="tab-content" id="myTabContent">
-	  <div class="tab-pane fade show active" id="product" role="tabpanel" aria-labelledby="product-tab">
-	  	<div class="row">
-	      <c:forEach items="${myproduct }" var="productVO" varStatus="status">
-	        <div class="col-md-3 parentDetail">
-	          <div class="card mb-4">
-	          	<a href="${productVO.pro_num}" class="proDetail">                  
-					<img name="productImage" width="100%" height="180" src="/customer/product/displayFile?fileName=s_<c:out value="${productVO.pro_img }"></c:out>&uploadPath=<c:out value="${productVO.pro_uploadpath }"></c:out>">
-				</a>
-				<input type="hidden" name="cate_code" value="${productVO.cate_code }">
-	            <div class="card-body">
-	              <p class="card-text">
-	              	<a href="${productVO.pro_num}" class="proDetail" style="color: black;"> 
-	              		<c:out value="${productVO.pro_name }"></c:out><br>
-	              	</a>
-	              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${productVO.pro_price }" />원</label>
-	              	<input type="hidden" name="pro_num" value="${productVO.pro_num }">
-	              </p>
-	              <div class="d-flex justify-content-between align-items-center">
-	                <div class="btn-group">
-	                  <button type="button" name="btnModify" class="btn btn-sm btn-outline-secondary" data-pro_num='${productVO.pro_num }'>수정</button>                  
-	                </div>                
-	              </div> 
-	            </div>
-	          </div>
-	        </div>
-	       </c:forEach> 
-	      </div>
-	  </div>
+	  <%@include file="/WEB-INF/views/customer/product/myproduct.jsp" %>
 	  <!-- 찜목록 -->
 	  <br>
-	  <div class="tab-pane fade" id="cart" role="tabpanel" aria-labelledby="cart-tab">
-	  	<div class="row">
-	      <c:forEach items="${mycartList }" var="cartListVO" varStatus="status">
-	        <div class="col-md-3 parentDetail">
-	          <div class="card mb-4">
-	          	<a href="${cartListVO.pro_num}" class="proDetail">                  
-					<img name="productImage" width="100%" height="180" src="/customer/product/displayFile?fileName=s_<c:out value="${cartListVO.pro_img }"></c:out>&uploadPath=<c:out value="${cartListVO.pro_uploadpath }"></c:out>">
-				</a>
-				<input type="hidden" name="cate_code" value="${cartListVO.cate_code }">
-	            <div class="card-body">
-	              <p class="card-text">
-	              	<a href="${cartListVO.pro_num}" class="proDetail" style="color: black;"> 
-	              		<c:out value="${cartListVO.pro_name }"></c:out><br>
-	              	</a>
-	              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${cartListVO.pro_price }" />원</label>
-	              	<input type="hidden" name="pro_num" value="${cartListVO.pro_num }">
-	              </p>	               
-	            </div>
-	          </div>
-	        </div>
-	       </c:forEach> 
-	      </div>
-	  </div>
+	  <%@include file="/WEB-INF/views/cart/mycart.jsp" %>
 	  <!-- <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div> -->
 	</div>
       
@@ -139,17 +92,12 @@
 
 <script>
 
-  $(function(){
+  $(function(){ 	
+	  	
+	  	let getMyCart = function(){
+	  		$("#mycart").load("/cart/mycart?pro_num=" + ${productVO.pro_num});
+	  	}
 	  
-	  	// 수정버튼 클릭시
-	    $("button[name='btnModify']").on("click", function(){ 
-	    	
-	      let pro_num = $(this).data("pro_num");	
-      	  location.href = "/customer/product/productModify?pro_num=" + pro_num;
-        });
-    
-	  	
-	  	
 	 	let actionForm = $("#actionForm");
 		//페이지번호 클릭시 : 선택한 페이지번호, 페이징정보, 검색정보
 		$(".page-item a").on("click", function(e){

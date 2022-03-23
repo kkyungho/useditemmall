@@ -99,7 +99,7 @@
 				</div>
 				<div class="col-md-4">
 				    <input type="text" class="form-control" id="pro_price" name="pro_price" placeholder="가격을 입력해주세요."
-				    	value="" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse; ime-mode:disabled">				    
+				    	value="" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse; ime-mode:disabled">				    				    
 			    </div><p style="text-align: justify;">원</p>			    			    
 			  </div>
 			  <br><br>
@@ -157,10 +157,10 @@
           
         //let imgPath = input.files[0].value;
         let imgPath = $("#upload").val();
-        alert(imgPath);
+        //alert(imgPath);
         //return;
         let ext = imgPath.substring(imgPath.lastIndexOf(".")+1).toLowerCase();
-        alert(ext);
+        //alert(ext);
         if(typeof(FileReader) == "undefined") {
           alert("브라우저가 작업을 지원안합니다.");
           return;
@@ -248,6 +248,7 @@
 </script>
 
 <!-- 가격 3자리단위마다 쉼표 -->
+<!-- 
 <script>
 
 	function addCommas(x) {
@@ -259,6 +260,7 @@
 	});
 	
 </script>
+ -->
 
 <script>
 	

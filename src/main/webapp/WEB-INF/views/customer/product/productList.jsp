@@ -11,14 +11,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">   
     
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-    
-    <style>
-    	
-    	
-    	
-    	
-    
-    </style>       
+              
     
   </head>
 
@@ -31,7 +24,12 @@
 <%@include file="/WEB-INF/views/include/category.jsp" %>
 <br>
 <div class="container">
-
+	  <div class="container">	  	
+  		<a title="홈페이지 이동" id="home" href="/" style="color: black;">
+  			<img alt="Home" src="/resources/img/home.png" width="15" height="15">&nbsp;HOME
+  		</a>  				  	  		  	
+	  </div>
+	  <br><br>	
       <div class="row">
       <c:forEach items="${productList }" var="productVO" varStatus="status">
         <div class="col-md-3">
@@ -41,7 +39,7 @@
 			</a>
             <div class="card-body">
               <p class="card-text">
-              	<a href="${productVO.pro_num}" class="proDetail" style="color: black;"> 
+              	<a href="${productVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;"> 
               		<c:out value="${productVO.pro_name }"></c:out><br>
               	</a>
               	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${productVO.pro_price }" />원</label>

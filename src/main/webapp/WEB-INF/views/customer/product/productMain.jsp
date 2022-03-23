@@ -61,7 +61,7 @@
 			<input type="hidden" name="cate_code" value="${phoneProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${phoneProductVO.pro_num}" class="proDetail" style="color: black;">
+                <a href="${phoneProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
                   <c:out value="${phoneProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
@@ -84,7 +84,7 @@
 			<input type="hidden" name="cate_code" value="${furnitureProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${furnitureProductVO.pro_num}" class="proDetail" style="color: black;">
+                <a href="${furnitureProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
                   <c:out value="${furnitureProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
@@ -107,7 +107,7 @@
 			<input type="hidden" name="cate_code" value="${stationeryProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${stationeryProductVO.pro_num}" class="proDetail" style="color: black;">
+                <a href="${stationeryProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
                   <c:out value="${stationeryProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
@@ -130,7 +130,7 @@
 			<input type="hidden" name="cate_code" value="${computerProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${computerProductVO.pro_num}" class="proDetail" style="color: black;">
+                <a href="${computerProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
                   <c:out value="${computerProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
@@ -153,7 +153,7 @@
 			<input type="hidden" name="cate_code" value="${lifeProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${lifeProductVO.pro_num}" class="proDetail" style="color: black;">
+                <a href="${lifeProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
                   <c:out value="${lifeProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
@@ -176,7 +176,7 @@
 			<input type="hidden" name="cate_code" value="${figureProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${figureProductVO.pro_num}" class="proDetail" style="color: black;">
+                <a href="${figureProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
                   <c:out value="${figureProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
@@ -199,7 +199,7 @@
 			<input type="hidden" name="cate_code" value="${cameraProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${phoneProductVO.pro_num}" class="proDetail" style="color: black;">
+                <a href="${phoneProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
                   <c:out value="${cameraProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
@@ -222,7 +222,7 @@
 			<input type="hidden" name="cate_code" value="${gameProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${gameProductVO.pro_num}" class="proDetail" style="color: black;">
+                <a href="${gameProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
                   <c:out value="${gameProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
@@ -245,7 +245,7 @@
 			<input type="hidden" name="cate_code" value="${homeappProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${homeappProductVO.pro_num}" class="proDetail" style="color: black;">
+                <a href="${homeappProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
                   <c:out value="${homeappProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
@@ -268,7 +268,7 @@
 			<input type="hidden" name="cate_code" value="${womenswProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${womenswProductVO.pro_num}" class="proDetail" style="color: black;">
+                <a href="${womenswProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
                   <c:out value="${womenswProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
@@ -291,7 +291,7 @@
 			<input type="hidden" name="cate_code" value="${menswProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${menswProductVO.pro_num}" class="proDetail" style="color: black;">
+                <a href="${menswProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
                   <c:out value="${menswProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
@@ -314,7 +314,7 @@
 			<input type="hidden" name="cate_code" value="${shoesbagProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${shoesbagProductVO.pro_num}" class="proDetail" style="color: black;">
+                <a href="${shoesbagProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
                   <c:out value="${shoesbagProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
@@ -337,7 +337,7 @@
 			<input type="hidden" name="cate_code" value="${bookProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${bookProductVO.pro_num}" class="proDetail" style="color: black;">
+                <a href="${bookProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
                   <c:out value="${bookProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>
@@ -360,7 +360,7 @@
 			<input type="hidden" name="cate_code" value="${sportsProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${sportsProductVO.pro_num}" class="proDetail" style="color: black;">
+                <a href="${sportsProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
                   <c:out value="${sportsProductVO.pro_name }"></c:out><br>
                 </a>
                 <br>

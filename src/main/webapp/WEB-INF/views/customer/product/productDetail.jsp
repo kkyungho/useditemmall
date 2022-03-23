@@ -23,7 +23,13 @@
 <!-- 카테고리정보 -->
 <%@include file="/WEB-INF/views/include/category.jsp" %>
 <br>
-<div class="container">	
+<div class="container">
+	<div class="container">	  	
+  		<a title="홈페이지 이동" id="home" href="/" style="color: black;">
+  			<img alt="Home" src="/resources/img/home.png" width="15" height="15">&nbsp;HOME
+  		</a>  				  	  		  	
+	  </div>
+	  <br>	
 	<div class="row">
 		<div class="swiper-wrapper parentDetail"
       	style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
@@ -51,10 +57,10 @@
       		<input type="hidden" name="pro_num" value="${productVO.pro_num }">
       		<label style="font-size: 1.375em;">${productVO.pro_name }</label><br>
       		<label style="font-size: 2.375em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${productVO.pro_price }"/>원</label><br><br>      		
-      		<label style="font-size: 1.275em;">상품상태 : ${productVO.pro_con }</label><br><br>
+      		<label style="font-size: 1.1em;"> 상품상태 &nbsp;&nbsp; ${productVO.pro_con }</label><br><br>
           <div class="form-row">
             <div class="btn-group">              
-              <button type="button" name="btnCartAdd" class="btn btn-light" style="font-size: 20px;">찜하기</button>&nbsp;              
+              <button type="button" name="btnCart" class="btn btn-light" style="font-size: 20px;">찜하기</button>&nbsp;              
               <button type="button" name="btnBuy" class="btn btn-warning" style="font-size: 20px;">바로구매</button>&nbsp;
             </div>                        
           </div>
@@ -92,20 +98,20 @@
     	  let actionForm = $("#actionForm");
     	  
     	  //장바구니 담기
-          $("button[name='btnCartAdd']").on("click", function(){
+          $("button[name='btnCart']").on("click", function(){
               
               let pro_num = $(this).parents("div.row").find("input[name='pro_num']").val();
-              
-              console.log("상품코드" + pro_num);
-
+               
               $.ajax({
-                 url: '/product/mystore/cartAdd',
+                 url: '/cart/cartAdd',
                  type: 'post',
                  dataType: 'text',
                  data: {pro_num: ${productVO.pro_num } },
                  success: function(data) {
-                   if(data == "success") {                	   
-                     location.href = "/product/mystore?pro_num=" + pro_num;                     
+                   if(data == "success") {   
+                	   if(confirm("찜상품에 추가되었습니다. \n 지금 확인하시겠습니까?")){
+                		   location.href = "/cart/mycart?pro_num=" + pro_num;                		   
+                	   }                                          
                    }
                  }
               });

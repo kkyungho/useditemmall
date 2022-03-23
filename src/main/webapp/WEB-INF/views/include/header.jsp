@@ -13,10 +13,10 @@
     <!-- 로그인 이전상태 표시 -->
     <c:if test="${sessionScope.loginStatus == null }">
 	  <div class="btn_box">
-      	<a class="btn_login" href="/customer/login">
+      	<a class="btn_login" href="/customer/login" style="text-decoration: none;">
       		<button type="button" class="btn btn-default">로그인</button>
       	</a>     
-      	<a class="btn_join" href="/customer/join">
+      	<a class="btn_join" href="/customer/join" style="text-decoration: none;">
       		<button type="button" class="btn btn-default">회원가입</button>
       	</a>   
 	  	     	
@@ -26,13 +26,13 @@
     <!-- 로그인 이후상태 표시 -->
     <c:if test="${sessionScope.loginStatus != null }">
      <div class="btn_box">
-    	<a class="btn_logout" href="/customer/logout">
+    	<a class="btn_logout" href="/customer/logout" style="text-decoration: none;">
     		<button type="button" class="btn btn-default">로그아웃</button>
     	</a>
-    	<a class="btn_alterUser" href="/customer/alterUser">
+    	<a class="btn_alterUser" href="/customer/alterUser" style="text-decoration: none;">
     		<button type="button" class="btn btn-default">회원수정</button>
     	</a>
-    	<a class="btn_changeOut" href="/customer/changeOut">
+    	<a class="btn_changeOut" href="/customer/changeOut" style="text-decoration: none;">
     		<button type="button" class="btn btn-default">비밀번호변경/회원탈퇴</button>
     	</a>    	    	
      </div>	

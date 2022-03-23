@@ -59,7 +59,7 @@
 			      <input type="file" style="display: none;" id="upload" name="upload" multiple="multiple">
 			      <!-- 이미지 변경시 기존이미지정보를 이용하여 기존이미지 삭제, 이미지 변경 안하면, 기존이미지 정보를 수정데이타로 사용 -->
 			      <input type="hidden" name="pro_uploadpath" value="<c:out value="${productVO.pro_uploadpath}" />">
-			      <input type="hidden" name="pro_img" value="<c:out value="${productVO.pro_img}" />">
+			      <input type="hidden" name="pro_img" value="<c:out value="${productVO.pro_img}" />">			      
 			    <div class="col-md-5">
 			      <label for="previewImage"></label>
 			      <img alt="" src="" id="previewImage">			      		      		      
@@ -146,7 +146,8 @@
 					</div>					
 			    </div>
 			    <br><br>
-			    <div class="btn-box" style="text-align: center;">			      
+			    <div class="btn-box" style="text-align: center;">
+			      <input type="hidden" name="pro_num" value="${productVO.pro_num }">			      
 			      <button type="button" name="btnProductModify" id="btnProductModify" class="btn btn-warning" style="font-size: 20px;" data-pro_num='${productVO.pro_num }'>상품수정</button>
 			    </div>
 			    <br>	    
@@ -278,11 +279,11 @@
 		type="submit"  : $("폼이름").on("submit")
 		*/		
 		
-		let form = $("#modifyForm");
-		let pro_num = $(this).data("pro_num");
+		let form = $("#modifyForm");		
 
 		$("#btnProductModify").on("click", function(){		
 			let result = confirm("상품을 수정하시겠습니까?");			
+			let pro_num = $(this).data("pro_num");
 			
 			if(result){
 				// 유효성검사				
@@ -329,10 +330,12 @@
 					pro_con.focus();				
 					return;
 					
-				} else {				
-					form.submit();	
-					location.href = "/customer/product/mystore?pro_num=" + pro_num;
-				}				
+				} /*else {				
+					//form.submit();	
+					//location.href = "/customer/product/mystore?pro_num=" + pro_num;
+				}*/
+				
+				form.submit();
 			} 				
 			
 		});		

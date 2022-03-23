@@ -344,7 +344,7 @@ public class UserProductController {
 			vo.setPro_uploadpath(vo.getPro_uploadpath().replace("\\", "/"));
 		}
 								
-		model.addAttribute("myproduct", list);
+		model.addAttribute("myproduct", list);		
 		
 	}
 	
@@ -364,6 +364,8 @@ public class UserProductController {
 	@PostMapping("/productModify")
 	public String productModifyOk(Criteria cri, ProductVO vo, RedirectAttributes rttr) {
 		
+		log.info("상품수정정보: " + vo);		
+		
 		if(vo.getUpload().getSize() > 0) {
 			
 			UploadFileUtils.deleteFile(uploadFolder, vo.getPro_uploadpath(), vo.getPro_img());
@@ -374,6 +376,23 @@ public class UserProductController {
 		
 		service.productModifyOk(vo);		
 				
+		return "redirect:/customer/product/mystore";
+	}
+	
+	//상품삭제	
+	@PostMapping("/productDelete")
+	public String productDelete(Criteria cri, @RequestParam("pro_num") Integer pro_num, RedirectAttributes rttr) {
+		
+		System.out.println("상품삭제: " + cri);
+		System.out.println("상품코드: " + pro_num);
+		
+		service.productDelete(pro_num);
+		
+		rttr.addAttribute("pageNum", cri.getPageNum()); // 주소에서 호출되는 메서드 파라미터 참조.
+		rttr.addAttribute("amount", cri.getAmount());
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		
 		return "redirect:/customer/product/mystore";
 	}
 	

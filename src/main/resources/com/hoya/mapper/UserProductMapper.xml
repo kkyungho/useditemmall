@@ -255,4 +255,13 @@
 			
 	</update>
 	
+	<delete id="productDelete">
+	
+		DELETE FROM
+			product_tbl
+		WHERE
+			pro_num = #{pro_num}
+			
+	</delete>
+	
 </mapper>

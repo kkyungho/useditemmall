@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8">    
-    <title>Hmarket</title>
+    <title>H중고마켓</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">
         

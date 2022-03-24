@@ -3,13 +3,33 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/WEB-INF/views/include/plugin_js.jsp" %>
 
+<!-- 로고 -->
+<section class="header-top">
 <div class="container" style="padding-top: 30px;">    
  	<a title="홈페이지 이동" id="logo" href="/" style="float: left;">
- 		<img alt="Hmarket" src="/resources/img/logo.png" height="40" width="120"> 
- 	</a> 	
- 	      
-  <nav style="float: right;">	 
-
+ 		<img alt="Hmarket" src="/resources/img/hlogo.jpg" height="45" width="150"> 
+ 	</a> 
+  <!-- 검색창 -->	
+  <div class="second" style="float: left; margin-left: 170px;">
+  	<form id="searchForm" action="/customer/product/productList" method="get">
+  		<select name="type">
+  			<option value=""
+				<c:out value="${pageMaker.cri.type == null? 'selected':'' }" />>--</option>
+			<option value="${productVO.pro_name }"
+				<c:out value="${pageMaker.cri.type eq 'N'? 'selected':'' }" />>상품명</option>
+			<option value="P"
+				<c:out value="${pageMaker.cri.type eq 'P'? 'selected':'' }" />>거래처</option>
+  		</select>
+  		<input type="text" name="keyword" style="max-width:500px; width: calc(100% - 100px); display: inline-block;" 
+  			value="<c:out value="${pageMaker.cri.keyword}" />">
+		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">		
+		<input type="hidden" name="pro_name" value="${pro_name}">		
+  	</form>
+  </div>
+  
+  <!-- 우측 -->	      
+  <nav style="float: right;">
     <!-- 로그인 이전상태 표시 -->
     <c:if test="${sessionScope.loginStatus == null }">
 	  <div class="btn_box">
@@ -42,5 +62,5 @@
   
 	
 </div> 
-
+</section>
 

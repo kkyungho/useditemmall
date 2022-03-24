@@ -16,7 +16,7 @@
 
 <div class="container border-bottom" style="padding-top: 45px; padding-bottom: 20px;">
 	<div class="dropdown drop-tabs">	
-	<button type="button" class="btn btn-outline-light dropdown" style="font-size: 20px; color: black;" data-toggle="dropdown">카테고리</button>
+	<button type="button" class="btn btn-outline-light dropdown" style="font-size: 20px; color: black; font-weight: bold;" data-toggle="dropdown">카테고리</button>
 		<div class="dropdown-menu">
 		  <c:forEach items="${userCategory}" var="categoryVO">
 			  <div class="dropdown-item">
@@ -27,9 +27,14 @@
 				  </div>
 			  </div>
 		  </c:forEach>
-		 </div>		
+		 </div>		 		
 		 <!-- 로그인 상태가 아님 --> 	
 		 <c:if test="${sessionScope.loginStatus == null }">
+		 	 <!-- board주소넣을예정
+		 	 <a href="#" style="margin-left: 240px;"> 
+		 	 	<button class="btn btn-link" style="color: black; font-weight: bold; text-decoration: none;">Q&A</button>
+		 	 </a>
+		 	 -->		 	
 		 	 <a href="/customer/login" >
 	    		<img alt="내상점" src="/resources/img/mypage.png" width="85" height="30" style="float: right; margin-left: 30px;">
 	    	 </a>	    	    	 	    	 
@@ -39,7 +44,12 @@
     	 </c:if> 	
    	 	 <!-- 로그인 상태 -->
     	 <c:if test="${sessionScope.loginStatus != null }">
-    	 	 <a href="/customer/product/mystore" >
+    	 	 <!-- board주소넣을예정
+    	 	 <a href="#" style="margin-left: 40px;"> 
+		 	 	<button class="btn btn-link" style="color: black; font-weight: bold; text-decoration: none;">Q&A</button>
+		 	 </a>
+		 	 -->
+    	 	 <a href="/customer/product/myproduct" >
 	    		<img alt="내상점" src="/resources/img/mypage.png" width="85" height="30" style="float: right; margin-left: 30px;">
 	    	 </a>
 			 <a href="/customer/product/productInsert">

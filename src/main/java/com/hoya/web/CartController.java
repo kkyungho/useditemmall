@@ -32,25 +32,7 @@ public class CartController {
 	String uploadFolder;
 	
 	@Inject
-	private CartService service;
-	
-	// 찜목록 불러오기
-	@GetMapping("/mycart")
-	public void mycart(@RequestParam(value="pro_num", required=false) Integer pro_num, HttpSession session, Model model) {
-		
-		String hmal_id = ((CustomerVO) session.getAttribute("loginStatus")).getHmal_id();
-		
-		List<CartListVO> list = service.mycart(hmal_id, pro_num);
-		
-		// 슬래시로 바꾸는 구문.
-		for(int i=0; i<list.size(); i++) {
-			CartListVO vo = list.get(i);
-			vo.setPro_uploadpath(vo.getPro_uploadpath().replace("\\", "/"));
-		}
-		
-		model.addAttribute("mycart", list);
-		
-	}
+	private CartService service;	
 	
 	// 로그인 인증된 경우에만 찜하기 가능
 	@ResponseBody
@@ -75,5 +57,23 @@ public class CartController {
 		}
 		
 		return entity;
+	}	
+
+	// 찜목록 불러오기
+	@GetMapping("/mycart")
+	public void mycart(@RequestParam(value="pro_num", required=false) Integer pro_num, HttpSession session, Model model) {
+		
+		String hmal_id = ((CustomerVO) session.getAttribute("loginStatus")).getHmal_id();
+		
+		List<CartListVO> list = service.mycart(hmal_id, pro_num);
+		
+		// 슬래시로 바꾸는 구문.
+		for(int i=0; i<list.size(); i++) {
+			CartListVO vo = list.get(i);
+			vo.setPro_uploadpath(vo.getPro_uploadpath().replace("\\", "/"));
+		}
+		
+		model.addAttribute("mycart", list);
+		
 	}
 }

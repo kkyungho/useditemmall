@@ -3,12 +3,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.88.1">
-    <title>Hmarket</title>
+    <meta charset="utf-8">    
+    <title>H중고마켓</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">
 	
@@ -44,7 +40,7 @@
 		  	<h4>회원가입</h4><br>
 		  	✔ 아래 항목을 작성해주세요.<br><br><br>
 		    <div class="form-group" style="width: 100%;">
-			    <label for="hmal_id">✔ 아이디</label><br />
+			    <label for="hmal_id">✔ 아이디</label><br/>
 			    <input type="text" class="form-control" id="hmal_id" name="hmal_id" 
 			    	placeholder="아이디를 입력해주세요." style="max-width:540px; width: calc(100% - 100px); margin-right: 5px; display: inline-block;">				
 				<button type="button" id="btnUseIDChk" class="btn btn-light">중복확인</button>
@@ -65,9 +61,9 @@
 			    	placeholder="이름을 입력해주세요." style="max-width: 630px;">
 			</div>
 			<div class="form-group">
-		    	<label for="hmal_email">✔ 이메일</label><br />
+		    	<label for="hmal_email">✔ 이메일</label><br/>
 		    	<input type="text" class="form-control" id="hmal_email" name="hmal_email"
-		    		placeholder="이메일 주소를  입력해주세요." style="max-width: 526px; width: calc(100% - 115px); margin-right: 5px; display: inline-block;">
+		    		placeholder="이메일 주소를  입력해주세요." style="max-width: 526px; width: calc(100% - 115px); margin-right: 5px; display: inline-block;">		    	
 		    	<button type="button" class="btn btn-light" id="btnMailCertiReq">메일인증요청</button>
 		    </div>
 		    <div class="form-group" >
@@ -130,7 +126,7 @@
       }
     });  
 	*/
-	
+		
     //아이디중복체크
     $("#btnUseIDChk").on("click", function(){
     	
@@ -222,8 +218,8 @@
   	
     // 회원가입 버튼 클릭 시 
 	$("#btnJoin").on("click", function(){
-		let result = confirm("회원가입을 하시겠습니까?");
-		
+		let result = confirm("회원가입을 하시겠습니까?");		
+        
 		if(result) {		
 			// 유효성 검사 
 			let hmal_id = $("#hmal_id");

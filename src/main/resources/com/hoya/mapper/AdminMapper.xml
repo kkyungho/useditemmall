@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoya.mapper.AdminMapper">
+
+	<select id="adminLogin" resultType="com.hoya.domain.AdminVO">
+		
+		SELECT
+			ad_userid,
+			ad_userpw,
+			ad_name,
+			ad_logintime
+		FROM
+			admin_tbl
+		WHERE
+			ad_userid = #{ad_userid}
+	
+	</select>
+	
+	<insert id="adminJoin">
+	
+		INSERT INTO
+			admin_tbl(ad_userid, ad_userpw, ad_name)
+		VALUES
+			(#{ad_userid}, #{ad_userpw}, '관리자')
+				
+	</insert>
+	
+	<!-- 아이디중복확인 -->
+	<select id="reID" resultType="string">
+	
+		SELECT
+			ad_userid
+		FROM
+			admin_tbl
+		WHERE
+			ad_userid = #{ad_userid}
+			
+	</select>
+	
+</mapper>

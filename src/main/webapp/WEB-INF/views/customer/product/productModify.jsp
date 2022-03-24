@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8">    
-    <title>Hmarket</title>
+    <title>H중고마켓</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">
 	
@@ -50,12 +50,11 @@
 			      	<img alt="이미지 업로드" src="/customer/product/displayFile?fileName=<c:out value="${productVO.pro_img }"></c:out>&uploadPath=<c:out value="${productVO.pro_uploadpath }"></c:out>" height="230" width="230" id="previewImage" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">			      	
 			      </label>
 			      <br>			      
-			      <b>* 상품 이미지는 640x640에 최적화 되어 있습니다.</b>
-			    	<br>- 이미지는 상품등록 시 정사각형으로 짤려서 등록됩니다.
-			    	<br>- 이미지를 클릭 할 경우 원본이미지를 확인할 수 있습니다.
-			    	<br>- 이미지를 클릭 후 이동하여 등록순서를 변경할 수 있습니다.
-			    	<br>- 큰 이미지일경우 이미지가 깨지는 경우가 발생할 수 있습니다.
-			    	<br>최대 지원 사이즈인 640 X 640 으로 리사이즈 해서 올려주세요.(개당 이미지 최대 10M)
+			      <b style="font-size: small; color: red;">* 상품 이미지는 640x640에 최적화 되어 있습니다.</b>
+			    	<br><b style="font-size: small;">- 이미지는 상품등록 시 정사각형으로 짤려서 등록됩니다.</b>
+			    	<br><b style="font-size: small;">- 이미지를 클릭 할 경우 원본이미지를 확인할 수 있습니다.</b>
+			    	<br><b style="font-size: small;">- 이미지를 클릭 후 이동하여 등록순서를 변경할 수 있습니다.</b>
+			    	<br><b style="font-size: small;">- 큰 이미지일경우 이미지가 깨지는 경우가 발생할 수 있습니다.</b>
 			      <input type="file" style="display: none;" id="upload" name="upload" multiple="multiple">
 			      <!-- 이미지 변경시 기존이미지정보를 이용하여 기존이미지 삭제, 이미지 변경 안하면, 기존이미지 정보를 수정데이타로 사용 -->
 			      <input type="hidden" name="pro_uploadpath" value="<c:out value="${productVO.pro_uploadpath}" />">
@@ -167,10 +166,10 @@
           
         //let imgPath = input.files[0].value;
         let imgPath = $("#upload").val();
-        alert(imgPath);
+        //alert(imgPath);
         //return;
         let ext = imgPath.substring(imgPath.lastIndexOf(".")+1).toLowerCase();
-        alert(ext);
+        //alert(ext);
         if(typeof(FileReader) == "undefined") {
           alert("브라우저가 작업을 지원안합니다.");
           return;
@@ -257,20 +256,26 @@
 
 </script>
 
-<!-- 가격 3자리단위마다 쉼표 -->
-<!-- 
+<!-- 가격 3자리단위마다 쉼표 --> 
 <script>
-
-	function addCommas(x) {
-		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	}
+//현재 필드에 값을 읽어와서, 쉼표제거작업후  히든필드에 값을 적용
 	
-	$("#pro_price").on("keyup", function(e){
+	$("#pro_price").on("keyup", function(){
 		$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));
+		
+		
 	});
 	
+	function addCommas(value) {
+		
+		value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		
+		return value;
+	}
+
+	
 </script>
- -->
+
 <script>
 	
 	$(document).ready(function(){		
@@ -283,7 +288,9 @@
 
 		$("#btnProductModify").on("click", function(){		
 			let result = confirm("상품을 수정하시겠습니까?");			
-			let pro_num = $(this).data("pro_num");
+			let pro_num = $(this).data("pro_num");			
+			let value = $("#pro_price").val().replace(/[^\d]+/g, "");			
+			$("#pro_price").val(value);
 			
 			if(result){
 				// 유효성검사				
@@ -330,10 +337,7 @@
 					pro_con.focus();				
 					return;
 					
-				} /*else {				
-					//form.submit();	
-					//location.href = "/customer/product/mystore?pro_num=" + pro_num;
-				}*/
+				} 
 				
 				form.submit();
 			} 				

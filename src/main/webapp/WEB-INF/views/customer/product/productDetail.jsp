@@ -6,7 +6,7 @@
 <html>
   <head>
     <meta charset="utf-8">    
-    <title>Hmarket</title>
+    <title>H중고마켓</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">   
     
@@ -55,9 +55,11 @@
       	    	
       	<div class="col-sm-5">
       		<input type="hidden" name="pro_num" value="${productVO.pro_num }">
+      		<input type="hidden" name="cate_code" value="${productVO.cate_code}">
       		<label style="font-size: 1.375em;">${productVO.pro_name }</label><br>
       		<label style="font-size: 2.375em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${productVO.pro_price }"/>원</label><br><br>      		
       		<label style="font-size: 1.1em;"> 상품상태 &nbsp;&nbsp; ${productVO.pro_con }</label><br><br>
+      		<label style="font-size: 1.1em;"> 판매자 &nbsp;&nbsp; ${productVO.hmal_id }</label><br><br>
           <div class="form-row">
             <div class="btn-group">              
               <button type="button" name="btnCart" class="btn btn-light" style="font-size: 20px;">찜하기</button>&nbsp;              
@@ -101,7 +103,8 @@
           $("button[name='btnCart']").on("click", function(){
               
               let pro_num = $(this).parents("div.row").find("input[name='pro_num']").val();
-               
+              let cate_code = $(this).parents(".parentDetail").find("input[name='cate_code']").val();
+              
               $.ajax({
                  url: '/cart/cartAdd',
                  type: 'post',
@@ -110,7 +113,7 @@
                  success: function(data) {
                    if(data == "success") {   
                 	   if(confirm("찜상품에 추가되었습니다. \n 지금 확인하시겠습니까?")){
-                		   location.href = "/cart/mycart?pro_num=" + pro_num;                		   
+                		   location.href = "/cart/mycart?pro_num=" + $(this).attr("href") + "&cate_code=" + cate_code + "&type=N";               		   
                 	   }                                          
                    }
                  }

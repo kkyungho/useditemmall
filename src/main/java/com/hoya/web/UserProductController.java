@@ -329,7 +329,7 @@ public class UserProductController {
 	}
 	
 	// 회원아이디 정보에 따른 상품리스트 가져오기
-	@GetMapping("/mystore")
+	@GetMapping("/myproduct")
 	public void mystore(@ModelAttribute("cri")Criteria cri, HttpSession session, Model model) {		
 		
 		cri.setAmount(4);
@@ -356,6 +356,7 @@ public class UserProductController {
 		vo.setPro_uploadpath(vo.getPro_uploadpath().replace("\\", "/"));
 		model.addAttribute("productVO", vo);
 		
+		
 		model.addAttribute("mainCategory", service.mainCategory());
 		model.addAttribute("subCategory", service.subCategory(vo.getCate_prt_code()));
 	}
@@ -374,7 +375,12 @@ public class UserProductController {
 			vo.setPro_uploadpath(UploadFileUtils.getFolder());
 		}
 		
-		service.productModifyOk(vo);		
+		service.productModifyOk(vo);
+		
+		rttr.addAttribute("pageNum", cri.getPageNum()); // 주소에서 호출되는 메서드 파라미터 참조.
+		rttr.addAttribute("amount", cri.getAmount());
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
 				
 		return "redirect:/customer/product/mystore";
 	}

@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8">    
-    <title>Hmarket</title>
+    <title>H중고마켓</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">
 	
@@ -49,13 +49,12 @@
 			      <label for="upload">
 			      	<img alt="이미지 업로드" src="/resources/img/camera.png" height="230" width="230" id="previewImage" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">			      	
 			      </label>
-			      <br>			      
-			      <b>* 상품 이미지는 640x640에 최적화 되어 있습니다.</b>
-			    	<br>- 이미지는 상품등록 시 정사각형으로 짤려서 등록됩니다.
-			    	<br>- 이미지를 클릭 할 경우 원본이미지를 확인할 수 있습니다.
-			    	<br>- 이미지를 클릭 후 이동하여 등록순서를 변경할 수 있습니다.
-			    	<br>- 큰 이미지일경우 이미지가 깨지는 경우가 발생할 수 있습니다.
-			    	<br>최대 지원 사이즈인 640 X 640 으로 리사이즈 해서 올려주세요.(개당 이미지 최대 10M)
+			      <br>		      
+			      <b style="font-size: small; color: red;">* 상품 이미지는 640x640에 최적화 되어 있습니다.</b>
+			    	<br><b style="font-size: small;">- 이미지는 상품등록 시 정사각형으로 짤려서 등록됩니다.</b>
+			    	<br><b style="font-size: small;">- 이미지를 클릭 할 경우 원본이미지를 확인할 수 있습니다.</b>
+			    	<br><b style="font-size: small;">- 이미지를 클릭 후 이동하여 등록순서를 변경할 수 있습니다.</b>
+			    	<br><b style="font-size: small;">- 큰 이미지일경우 이미지가 깨지는 경우가 발생할 수 있습니다.</b>			    	
 			      <input type="file" style="display: none;" id="upload" name="upload" multiple="multiple">
 			    </div>			  
 			    <div class="col-md-5">
@@ -99,7 +98,7 @@
 				</div>
 				<div class="col-md-4">
 				    <input type="text" class="form-control" id="pro_price" name="pro_price" placeholder="가격을 입력해주세요."
-				    	value="" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;" onkeyup="addCommas(this.val())">				    			    				    
+				    	value="" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">				    				    			    				    
 			    </div><p style="text-align: justify;">원</p>			    			    
 			  </div>
 			  <br><br>
@@ -249,14 +248,20 @@
 
 <!-- 가격 3자리단위마다 쉼표 --> 
 <script>
-
-	function addCommas(x) {
-		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	}
 	
-	$("#pro_price").on("keyup", function(e){
+	$("#pro_price").on("keyup", function(){
 		$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));
+		
+		
 	});
+	
+	function addCommas(value) {
+		
+		value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		
+		return value;
+	}
+
 	
 </script>
 
@@ -272,6 +277,8 @@
 
 		$("#btnProductInsert").on("click", function(){		
 			let result = confirm("상품을 등록하시겠습니까?");
+			let value = $("#pro_price").val().replace(/[^\d]+/g, "");			
+			$("#pro_price").val(value);
 			
 			if(result){
 				// 유효성검사
@@ -324,9 +331,9 @@
 					pro_con.focus();				
 					return;
 					
-				} else {
-					form.submit();
-				}
+				} 
+				
+				form.submit();
 			} 			
 		});
 	});

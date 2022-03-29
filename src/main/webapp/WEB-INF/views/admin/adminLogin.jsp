@@ -35,12 +35,12 @@
              <h2 class="form-login-heading">로그인</h2>
              <br><br>
              <label for="ad_userid" class="sr-only">아이디</label>
-             <input type="text" id="hmal_id" name="ad_userid" class="form-control" placeholder="아이디" 
+             <input type="text" id="ad_userid" name="ad_userid" class="form-control" placeholder="아이디" 
              	style="margin-bottom: 15px;" required autofocus>  
              <label for="ad_userpw" class="sr-only">비밀번호</label>
              <input type="password" id="ad_userpw" name="ad_userpw" class="form-control" placeholder="비밀번호" required><br><br>                    
           <div style="text-align: center">          	
-            <button type="button"  id="btnlogin" class="btn btn-warning center">로그인</button>       	                                
+            <button type="button"  id="btnLogin" class="btn btn-warning center">로그인</button>       	                                
           </div>
          </form>
      </div>
@@ -56,43 +56,42 @@
   $(document).ready(function(){
 
     //로그인
-    $("#btnlogin").on("click", function(){
+    $("#btnLogin").on("click", function(){
 
-      let hmal_id = $("#hmal_id");
-      let hmal_pw = $("#hmal_pw");
+      let ad_userid = $("#ad_userid");
+      let ad_userpw = $("#ad_userpw");
 
-      if(hmal_id.val() == "" || hmal_id.val() == null){
+      if(ad_userid.val() == "" || ad_userid.val() == null){
         alert("아이디를 입력하세요.");
-        hmal_id.focus();
+        ad_userid.focus();
         return;
       }
 
-      if(hmal_pw.val() == "" || hmal_pw.val() == null){
+      if(ad_userpw.val() == "" || ad_userpw.val() == null){
         alert("비밀번호를 입력하세요.");
-        hmal_pw.focus();
+        ad_userpw.focus();
         return;
       }
 
       $.ajax({
-          url: '/customer/login',
+          url: '/admin/adminLogin',
           type: 'post',
           dataType: 'text',
-          data: { hmal_id : hmal_id.val(), hmal_pw : hmal_pw.val() },
+          data: { ad_userid : ad_userid.val(), ad_userpw : ad_userpw.val() },
           success: function(data){
             
-            if(data == "success"){
-              alert("회원님 반갑습니다.");
-              location.href = "/";
+            if(data == "success"){              
+              location.href = "/admin/adminMain";
             }else if(data == "idFail"){
               alert("아이디를 확인해주세요.");
-              hmal_id.focus();
-              hmal_id.val("");
+              ad_userid.focus();
+              ad_userid.val("");
               return;
               
             }else if(data == "pwFail"){
               alert("비밀번호를 확인해주세요.");
-              hmal_pw.focus();
-              hmal_pw.val("");
+              ad_userpw.focus();
+              ad_userpw.val("");
               return;
               
             }
@@ -100,9 +99,6 @@
         });
       });
     
-      $("#btnFindPw").on("click", function(){
-    	 location.href = "/customer/findPw"; 
-      });
   });
 
 </script>

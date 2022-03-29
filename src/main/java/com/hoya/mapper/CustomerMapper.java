@@ -1,5 +1,7 @@
 package com.hoya.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,6 +20,9 @@ public interface CustomerMapper {
 	// 2월11일 작업
 	// 회원수정
 	public int alterUser(CustomerVO vo);
+	
+	// 아이디찾기(이름,핸드폰)
+	public CustomerVO findId(String hmal_name, String hmal_phone); 
 	
 	// 2월11일 작업
 	// 비밀번호 찾기(이메일)

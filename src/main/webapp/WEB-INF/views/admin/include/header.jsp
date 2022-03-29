@@ -13,10 +13,10 @@
     <!-- 로그인 이전상태 표시 -->
     <c:if test="${sessionScope.loginStatus == null }">
 	  <div class="btn_box">
-      	<a class="btn_login" href="/admin/adminLogin" style="text-decoration: none;">
+      	<a class="btnLogin" href="/admin/adminLogin" style="text-decoration: none;">
       		<button type="button" class="btn btn-default">로그인</button>
       	</a>     
-      	<a class="btn_join" href="/admin/adminJoin" style="text-decoration: none;">
+      	<a class="btnJoin" href="/admin/adminJoin" style="text-decoration: none;">
       		<button type="button" class="btn btn-default">관리자 등록</button>
       	</a>   
 	  	     	
@@ -26,10 +26,10 @@
     <!-- 로그인 이후상태 표시 -->
     <c:if test="${sessionScope.loginStatus != null }">
      <div class="btn_box">
-    	<a class="btn_logout" href="/admin/logout" style="text-decoration: none;">
+    	<a class="btn_logout" href="/admin/adminLogout" style="text-decoration: none;">
     		<button type="button" class="btn btn-default">로그아웃</button>
     	</a>
-    	<a class="btn_alterUser" href="/admin/modify" style="text-decoration: none;">
+    	<a class="btn_alterUser" href="/admin/adminModify" style="text-decoration: none;">
     		<button type="button" class="btn btn-default">관리자 수정</button>
     	</a>
     	<a class="btn_changeOut" href="#" style="text-decoration: none;">

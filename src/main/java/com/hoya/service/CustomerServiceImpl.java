@@ -1,5 +1,7 @@
 package com.hoya.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -44,11 +46,18 @@ public class CustomerServiceImpl implements CustomerService{
 		return mapper.alterUser(vo);
 	}
 	
+	@Override
+	public CustomerVO findId(String hmal_name, String hmal_phone) {
+		
+		return mapper.findId(hmal_name, hmal_phone);
+	}
+	
+		
 	// 2월11일 작업
 	// 비밀번호 찾기(이메일)
 	@Override
 	public String findPwByEmail(String hmal_email) {
-		// TODO Auto-generated method stub
+		
 		return mapper.findPwByEmail(hmal_email);
 	}
 
@@ -56,7 +65,7 @@ public class CustomerServiceImpl implements CustomerService{
 	// 새로운 비밀번호 생성(이메일)
 	@Override
 	public int alterPw(String hmal_email, String hmal_pw) {
-		// TODO Auto-generated method stub
+		
 		return mapper.alterPw(hmal_email, hmal_pw);
 	}
 
@@ -89,7 +98,6 @@ public class CustomerServiceImpl implements CustomerService{
 		
 		return count;
 	}
-
 	
 
 }

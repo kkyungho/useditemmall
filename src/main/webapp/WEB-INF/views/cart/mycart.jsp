@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Hmarket</title>
+<title>중고거래의 시작, H중고마켓</title>
 </head>
 <body>
 	<div class="tab-pane fade" id="mycart" role="tabpanel" aria-labelledby="cart-tab">

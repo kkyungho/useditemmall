@@ -1,5 +1,7 @@
 package com.hoya.web;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hoya.domain.AdminVO;
+import com.hoya.domain.CustomerVO;
 import com.hoya.service.AdminService;
 
 import lombok.AllArgsConstructor;
@@ -35,7 +38,32 @@ public class AdminController {
 	}
 	
 	// 관리자 로그인 인증
-	
+	@ResponseBody
+	@PostMapping("/adminLogin")
+	public ResponseEntity<String> adminLogin(@RequestParam("ad_userid") String ad_userid, @RequestParam("ad_userpw") String ad_userpw, HttpSession session) throws Exception{
+		
+		String result = "";
+		ResponseEntity<String> entity = null;
+		
+		AdminVO vo = service.adminLogin(ad_userid);
+		
+		if(vo == null) { // id가 존재안하는 의미.
+			result = "idFail";			
+		}else { // id가 존재하는 의미.
+			
+			if(cryptPassEnc.matches(ad_userpw, vo.getAd_userpw())) {
+				result = "success";
+				
+				session.setAttribute("loginStatus", vo); // 로그인 성공 상태정보를 세션으로 저장
+			}else {
+				result = "pwFail";
+			}
+		}
+		
+		entity = new ResponseEntity<String>(result, HttpStatus.OK);
+		
+		return entity;
+	}
 	
 	// 관리자 등록폼
 	@GetMapping("/adminJoin")
@@ -73,6 +101,15 @@ public class AdminController {
 		entity = new ResponseEntity<String>(result, HttpStatus.OK);
 		
 		return entity;
+	}
+	
+	// 로그아웃
+	@GetMapping("/adminLogout")
+	public String logout(HttpSession session, RedirectAttributes rttr) {
+		
+		session.invalidate();
+		
+		return "redirect:/admin/adminLogin";
 	}
 	
 }

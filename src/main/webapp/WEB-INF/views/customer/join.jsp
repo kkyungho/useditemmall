@@ -4,20 +4,18 @@
 <html>
   <head>
     <meta charset="utf-8">    
-    <title>H중고마켓</title>
+    <title>중고거래의 시작, H중고마켓</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">
 	
 	
-	<style>	   	  
-	  
-	  form.joinForm{
-		  border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;
-		  padding: 15px;
-	  }
-	  
-	
-	  
+	<style>
+		
+		h4{
+		    text-align : center;    	
+		  }	 	
+	  	
+	  	  
   	</style>
     
     
@@ -30,63 +28,67 @@
 <!-- 카테고리정보 -->
 <%@include file="/WEB-INF/views/include/category.jsp" %>
 <br>
+<!-- 사이드메뉴 -->
+<%@include file="/WEB-INF/views/include/sideMenu.jsp" %>
+<br>
 <div class="container">
   
   <!-- 회원가입 작업 -->
   
-  	<div class="container" style="width: 100%; min-width: 900px; background-color: white; font-size: 16px;">
+  	<div class="container" style="width: 100%; min-width: 900px; background-color: white; font-size: 16px; margin-top: 30px;">
   		<form class="joinForm" action="/customer/join" method="post" id="joinForm">
 		  <div class="container" style="width: 800px; padding: 3% 2px;">
-		  	<h4>회원가입</h4><br>
-		  	✔ 아래 항목을 작성해주세요.<br><br><br>
-		    <div class="form-group" style="width: 100%;">
+		  	<h4>회원가입</h4><br><br>
+		  	<b style="margin-left: 160px;">✔ 아래 항목을 작성해주세요.</b><br><br>
+		    <div class="form-group" style="width: 100%; margin-left: 160px;">
+		    	<br>
 			    <label for="hmal_id">✔ 아이디</label><br/>
 			    <input type="text" class="form-control" id="hmal_id" name="hmal_id" 
-			    	placeholder="아이디를 입력해주세요." style="max-width:540px; width: calc(100% - 100px); margin-right: 5px; display: inline-block;">				
+			    	placeholder="아이디를 입력해주세요." style="max-width:400px; width: calc(100% - 100px); margin-right: 5px; display: inline-block;">				
 				<button type="button" id="btnUseIDChk" class="btn btn-light">중복확인</button>
 			</div>
-			<div class="form-group">
+			<div class="form-group" style="width: 100%; margin-left: 160px;">
 	    		<label for="hmal_pw">✔ 비밀번호</label>
 	    		<input type="password" class="form-control" id="hmal_pw" name="hmal_pw"
-	    			placeholder="비밀번호를 입력해주세요." style="max-width: 630px;">
+	    			placeholder="비밀번호를 입력해주세요." style="max-width: 400px;">
 	    	</div>
-	    	<div class="form-group">
+	    	<div class="form-group" style="width: 100%; margin-left: 160px;">
 			    <label for="hmal_pw_check">✔ 비밀번호 확인</label>
 			    <input type="password" class="form-control" id="hmal_pw_check" name="hmal_pw_check"
-			    	placeholder="비밀번호 확인을 위해 다시 한번 입력 해주세요." style="width: 630px;">
+			    	placeholder="비밀번호 확인을 위해 한번 더 입력 해주세요." style="width: 400px;">
 			</div>
-			<div class="form-group">
+			<div class="form-group" style="width: 100%; margin-left: 160px;">
 			    <label for="hmal_name">✔ 이름</label>
 			    <input type="text" class="form-control" id="hmal_name" name="hmal_name"
-			    	placeholder="이름을 입력해주세요." style="max-width: 630px;">
+			    	placeholder="이름을 입력해주세요." style="max-width: 400px;">
 			</div>
-			<div class="form-group">
+			<div class="form-group" style="width: 100%; margin-left: 160px;">
 		    	<label for="hmal_email">✔ 이메일</label><br/>
 		    	<input type="text" class="form-control" id="hmal_email" name="hmal_email"
-		    		placeholder="이메일 주소를  입력해주세요." style="max-width: 526px; width: calc(100% - 115px); margin-right: 5px; display: inline-block;">		    	
+		    		placeholder="이메일 주소를  입력해주세요." style="max-width: 400px; width: calc(100% - 115px); margin-right: 5px; display: inline-block;">		    	
 		    	<button type="button" class="btn btn-light" id="btnMailCertiReq">메일인증요청</button>
 		    </div>
-		    <div class="form-group" >
+		    <div class="form-group" style="width: 100%; margin-left: 160px;">
 		    	<label for="certi_mail">✔ 이메일 인증코드</label><br />
 		    	<input type="text" class="form-control" id="certi_mail" name="certi_mail"
-		    		placeholder="인증코드를 입력해주세요." style="max-width: 500px; width: calc(100% - 70px); margin-right: 5px; display: inline-block;" >
+		    		placeholder="인증코드를 입력해주세요." style="max-width: 280px; width: calc(100% - 70px); margin-right: 5px; display: inline-block;" >
 		    	<button type="button" class="btn btn-light" id="btnMailCertiConfirm">메일인증확인</button>
 		    </div>
-		    <div class="form-group">
-			    <label for="inputAddr">✔  주소</label>			      
+		    <div class="form-group" style="width: 100%; margin-left: 160px;">
+			    <label for="inputAddr">✔  주소</label><br />			    			      
 			    <input type="text" class="form-control" id="hmal_zipcode" name="hmal_zipcode"
-			     	placeholder="우편번호" style="max-width: 510px; width: calc(100% - 128px); margin-right: 5px; display: inline-block;" readonly>
+			     	placeholder="우편번호" style="max-width: 300px; width: calc(100% - 128px); margin-right: 5px; display: inline-block;" readonly>
 			    <input type="button" class="btn btn-light" id="btnPostCode" name="btnPostCode"  value="우편번호찾기" onclick="sample2_execDaumPostcode()"><br>
 			    <input type="text" class="form-control" id="hmal_addr" name="hmal_addr"
-			    	placeholder="주소" style="max-width: 630px; margin: 3px 0px;" readonly>
+			    	placeholder="주소" style="max-width: 530px; margin: 3px 0px;" readonly>
 			    <input type="text" class="form-control" id="hmal_deaddr" name="hmal_deaddr"
-			    	placeholder="상세주소" style="max-width: 630px;">
+			    	placeholder="상세주소" style="max-width: 530px;">
 			    <input type="hidden" id="sample2_extraAddress" placeholder="참고항목">			        
 			 </div>
-			 <div>
+			 <div class="form-group" style="width: 100%; margin-left: 160px;">
 		  	 	<label for="hmal_phone">✔  전화번호</label>
       		 	<input type="tel" class="form-control" id="hmal_phone" name="hmal_phone"
-      		 		placeholder="휴대폰번호를 입력해주세요." style="max-width: 630px;">
+      		 		placeholder="휴대폰번호를 입력해주세요." style="max-width: 400px;">
       		 </div><br><br>      		  
 	  		 <div class="form-group text-center">
 	  		 	<button type="submit" id="btnJoin" class="btn btn-light">회원가입</button>

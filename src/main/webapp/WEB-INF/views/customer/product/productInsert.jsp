@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8">    
-    <title>H중고마켓</title>
+    <title>중고거래의 시작, H중고마켓</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">
 	
@@ -32,7 +32,9 @@
 <!-- 카테고리정보 -->
 <%@include file="/WEB-INF/views/include/category.jsp" %>
 <br>
-
+<!-- 사이드메뉴 -->
+<%@include file="/WEB-INF/views/include/sideMenu.jsp" %>
+<br>
 <div class="container">
 	  
   <!-- 판매하기 -->  

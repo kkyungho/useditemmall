@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.hoya.domain.OrderDetailList;
 import com.hoya.domain.OrderInfoVO;
 import com.hoya.domain.OrderVO;
+import com.hoya.mapper.CartMapper;
 import com.hoya.mapper.OrderMapper;
 
 @Service
@@ -16,6 +17,9 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Inject
 	private OrderMapper mapper;
+	
+	@Inject
+	private CartMapper cartMapper;
 
 	@Override
 	public List<OrderInfoVO> orderInfo(String hmal_id) {
@@ -37,6 +41,15 @@ public class OrderServiceImpl implements OrderService {
 			oDetail.setOrd_code(ord_code);
 			mapper.orderDetailInsert(oDetail);
 		});
+		
+		// 3)장바구니 삭제
+		
+	}
+
+	@Override
+	public List<OrderInfoVO> directOrderInfo(Integer pro_num, Integer ord_amount) {
+		
+		return mapper.directOrderInfo(pro_num, ord_amount);
 	}
 
 }

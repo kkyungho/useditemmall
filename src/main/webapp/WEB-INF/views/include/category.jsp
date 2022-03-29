@@ -27,7 +27,19 @@
 				  </div>
 			  </div>
 		  </c:forEach>
-		 </div>		 		
+		 </div>
+		 <!-- 검색창 -->
+		 <!-- 
+		 <div class="container" style="text-align: center;">
+		  	<form id="searchForm" action="/customer/product/productList" method="get">		  		
+		  		<input type="text" name="keyword" style="max-width:400px; width: calc(100% - 100px); display: inline-block;" 
+		  			value="<c:out value="${pageMaker.cri.keyword}" />">
+				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">		
+				<input type="hidden" name="pro_name" value="${pro_name}">		
+		  	</form>
+		 </div>
+		 -->		 		
 		 <!-- 로그인 상태가 아님 --> 	
 		 <c:if test="${sessionScope.loginStatus == null }">
 		 	 <!-- board주소넣을예정

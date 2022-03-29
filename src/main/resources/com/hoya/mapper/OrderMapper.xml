@@ -2,20 +2,78 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hoya.mapper.OrderMapper">
 
-	<select id="orderInfo" resultType="com.hoya.domain.OrderInfoVO">
+	<select id="directOrderInfo" resultType="com.hoya.domain.OrderInfoVO">
 		
 		SELECT
 			pro_num,
 			pro_name,
 			pro_img,
-			pro_uploadpath,
-			pro_amount,
-			pro_price as orderprice
+			pro_uploadpath,			
+			pro_price * #{ord_amount} as orderprice
 		FROM
 			product_tbl		
-		AND
-			hmal_id = #{hmal_id}
+		WHERE
+			pro_num = #{pro_num}
 			
 	</select>
+	
+	<insert id="orderInsert" parameterType="com.hoya.domain.OrderVO">
+		<!-- BoardVO클래스의 bno변수값이 시퀀스값으로 채워진다.  -->
+		<selectKey keyProperty="ord_code" order="BEFORE" resultType="Integer">
+			SELECT 
+				seq_order_code.nextval 
+			FROM 
+				dual
+		</selectKey>
+		
+		INSERT INTO 
+			order_tbl
+			(
+				ord_code, 
+				hmal_id, 
+				ord_name, 
+				ord_zipcode, 
+				ord_addr_basic, 
+				ord_addr_detail, 
+				ord_tel, 
+				ord_price, 
+				ord_message, 
+				ord_depositor
+			)
+		VALUES
+			(
+				#{ord_code},
+				#{hmal_id},
+				#{ord_name},
+				#{ord_zipcode},
+				#{ord_addr_basic},
+				#{ord_addr_detail},
+				#{ord_tel},
+				#{ord_price},
+				#{ord_message},
+				#{ord_depositor}
+			)
+	
+	</insert>
+	
+	<insert id="orderDetailInsert" parameterType="com.hoya.domain.OrderDetail">
+				
+		INSERT INTO 
+			ordetail_tbl
+			(
+				ord_code, 
+				pro_num, 
+				dt_amount, 
+				dt_price
+			)
+		VALUES
+			(
+				#{ord_code},
+				#{pro_num},
+				#{dt_amount},
+				#{dt_price}				
+			)
+	
+	</insert>
 	
 </mapper>

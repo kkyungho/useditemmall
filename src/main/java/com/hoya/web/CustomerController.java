@@ -245,6 +245,27 @@ public class CustomerController {
 		return "redirect:/";
 	}
 	
+	// 아이디 찾기 폼
+	@GetMapping("/findId")
+	public void findIdReq() {
+		
+	}	
+	
+	// 아이디 찾기(이름과 핸드폰번호)
+	@ResponseBody
+	@PostMapping("/findId")
+	public ResponseEntity<String> findId(@RequestParam(value = "hmal_name", required = false) String hmal_name, @RequestParam("hmal_phone") String hmal_phone, HttpSession session) throws Exception{
+		
+		String result = "";
+		ResponseEntity<String> entity = null;
+		
+		CustomerVO vo = service.findId(hmal_name, hmal_phone);			
+		
+		entity = new ResponseEntity<String>(result, HttpStatus.OK);
+		
+		return entity;
+	}
+	
 	// 비밀번호 찾기 폼
 	@GetMapping("/findPw")
 	public void findPwReq() {

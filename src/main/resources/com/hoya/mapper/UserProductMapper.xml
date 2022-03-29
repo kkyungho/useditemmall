@@ -189,7 +189,7 @@
 		
 	</select>
 	
-	<select id="mystore" resultType="com.hoya.domain.ProductVO">
+	<select id="myproduct" resultType="com.hoya.domain.ProductVO">
 	
 		SELECT
 			pro_num, 

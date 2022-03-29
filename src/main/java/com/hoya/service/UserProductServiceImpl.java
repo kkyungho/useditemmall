@@ -61,9 +61,9 @@ public class UserProductServiceImpl implements UserProductService {
 	}
 
 	@Override
-	public List<ProductVO> mystore(String hmal_id, Criteria cri) {
+	public List<ProductVO> myproduct(String hmal_id, Criteria cri) {
 		
-		return mapper.mystore(hmal_id, cri);
+		return mapper.myproduct(hmal_id, cri);
 	}
 
 	@Override

@@ -4,10 +4,19 @@
 <html>
   <head>
     <meta charset="utf-8">    
-    <title>H중고마켓</title>
+    <title>중고거래의 시작, H중고마켓</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">
+         
         
+    <style>	
+    
+    	h2{
+	    	text-align : center;    	
+	    }   	  
+	  		
+	  	  
+  	</style>
    
   </head>
   <body>
@@ -18,26 +27,23 @@
 <!-- 카테고리정보 -->
 <%@include file="/WEB-INF/views/include/category.jsp" %>
 <br>
+<!-- 사이드메뉴 -->
+<%@include file="/WEB-INF/views/include/sideMenu.jsp" %>
+<br>
 <div class="container">
   
   <!-- 회원가입 폼 작업 -->  
   <section class="content container-fluid">
-  	<div class="container" style="width: 70%; min-width: 900px; background-color: white; font-size: 16px;">
-  		<form action="/customer/changeOut" method="post">
-		  <div class="container" style="width: 800px; padding: 10% 5%;">
-		  	<h4>비밀번호 찾기</h4>
-		  	<br>		    
-			<div class="form-group">
-	    		<label for="hmal_email">이메일 주소 입력</label>
-	    		<input type="text" class="form-control" id="hmal_email" name="hmal_email"
-	    			placeholder="이메일주소" style="max-width: 630px;">
-	    	</div>
-	    	<div class="form-group row">                                
-                <div class="col-md-12">
-                    <button type="button" id="btnMailSend" class="btn btn-warning">메일 전송</button>
-                </div>
-            </div> 		
-	  	  </div> 
+  	<div class="container" style="width: 450px; height: 420px; background-color: white; margin-top: 30px;">
+  		<form id="findPwForm" class="findPwForm" action="/customer/changeOut" method="post" style="padding: 50px 10px;">
+		  <h2 class="form-findPw-heading">비밀번호찾기</h2>
+             <br><br>
+             <label for="hmal_email">이메일주소</label>
+             <input type="text" class="form-control" id="hmal_email" name="hmal_email"
+	    			placeholder="이메일주소" style="max-width: 630px;"><br>                                 
+          <div style="text-align: center">          	
+            <button type="button"  id="btnMailSend" class="btn btn-warning center">메일전송</button>
+          </div>          
 		</form>	 
 	  </div> 
   </section>
@@ -70,7 +76,7 @@
     		 success: function(data){
     			 
     			 if(data == "success"){
-    				 alert("임시비밀번호가 메일발송했습니다. \n변경바랍니다.");    				 
+    				 alert("임시비밀번호가 메일발송했습니다. \n임시비밀번호로 로그인해주세요.");    				 
     			 }else if(data == "fail"){
     				 alert("메일발송시 문제가 발생했습니다. 다시 진행해주세요. \n 문제가 발생시 관리자에게 연락주세요.")
     			 }else if(data == "noMail"){

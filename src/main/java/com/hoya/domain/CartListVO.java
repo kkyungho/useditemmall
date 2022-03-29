@@ -12,7 +12,6 @@ public class CartListVO {
 	private String pro_name;
 	private String pro_img;
 	private String pro_uploadpath;
-	private int pro_price;
-	private int pro_discount;
+	private int pro_price;	
 
 }

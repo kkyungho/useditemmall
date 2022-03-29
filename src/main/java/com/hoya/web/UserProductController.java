@@ -164,7 +164,7 @@ public class UserProductController {
 		// 2차카테고리 리스트로 돌아가는 구문
 		rttr.addAttribute("cate_code", vo.getCate_code());
 		
-		return "redirect:/customer/product/productList";
+		return "redirect:/customer/product/myproduct";
 	}
 	
 	// 2차카테고리에 해당하는 상품리스트
@@ -336,7 +336,7 @@ public class UserProductController {
 		
 		String hmal_id = ((CustomerVO) session.getAttribute("loginStatus")).getHmal_id();
 		
-		List<ProductVO> list = service.mystore(hmal_id, cri);
+		List<ProductVO> list = service.myproduct(hmal_id, cri);
 		
 		// 슬래시로 바꾸는 구문.
 		for(int i=0; i<list.size(); i++) {
@@ -382,11 +382,11 @@ public class UserProductController {
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
 				
-		return "redirect:/customer/product/mystore";
+		return "redirect:/customer/product/myproduct";
 	}
 	
 	//상품삭제	
-	@PostMapping("/productDelete")
+	@GetMapping("/productDelete")
 	public String productDelete(Criteria cri, @RequestParam("pro_num") Integer pro_num, RedirectAttributes rttr) {
 		
 		System.out.println("상품삭제: " + cri);
@@ -399,7 +399,7 @@ public class UserProductController {
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
 		
-		return "redirect:/customer/product/mystore";
+		return "redirect:/customer/product/myproduct";
 	}
 	
 	

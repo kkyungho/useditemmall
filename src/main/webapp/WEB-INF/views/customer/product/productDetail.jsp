@@ -6,7 +6,7 @@
 <html>
   <head>
     <meta charset="utf-8">    
-    <title>H중고마켓</title>
+    <title>중고거래의 시작, H중고마켓</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">   
     
@@ -23,45 +23,33 @@
 <!-- 카테고리정보 -->
 <%@include file="/WEB-INF/views/include/category.jsp" %>
 <br>
+<!-- 사이드메뉴 -->
+<%@include file="/WEB-INF/views/include/sideMenu.jsp" %>
 <div class="container">
 	<div class="container">	  	
   		<a title="홈페이지 이동" id="home" href="/" style="color: black;">
   			<img alt="Home" src="/resources/img/home.png" width="15" height="15">&nbsp;HOME
   		</a>  				  	  		  	
-	  </div>
-	  <br>	
-	<div class="row">
-		<div class="swiper-wrapper parentDetail"
-      	style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
-      	<div class="swiper-slide thumbnail_wrapper swiper-slide-active"
-			style="width: 418px;">
-			<div class="badeagle">
-				<div class="centered">
-					<img name="productImage" width="120%" height="300" src="/customer/product/displayFile?fileName=<c:out value="${productVO.pro_img }"></c:out>&uploadPath=<c:out value="${productVO.pro_uploadpath }"></c:out>">
-				</div>
-			</div>
-		</div>
-      </div>
-		<!-- 
-		<div class="col-sm-6">
-      		<img name="productImage" width="100%" height="225" src="/customer/product/displayFile?fileName=<c:out value="${productVO.pro_img }"></c:out>&uploadPath=<c:out value="${productVO.pro_uploadpath }"></c:out>">
-      	</div>
-      	 -->
-        
+	</div>
+	<br><br>	
+	  <div class="row">		
+		<div class="col-sm-5">
+      		<img name="productImage" width="120%" height="360" src="/customer/product/displayFile?fileName=<c:out value="${productVO.pro_img }"></c:out>&uploadPath=<c:out value="${productVO.pro_uploadpath }"></c:out>">
+      	</div>        
 
-      	<div class="col-sm-2">
+      	<div class="col-sm-1">
       		
       	</div>  
       	    	
       	<div class="col-sm-5">
       		<input type="hidden" name="pro_num" value="${productVO.pro_num }">
       		<input type="hidden" name="cate_code" value="${productVO.cate_code}">
-      		<label style="font-size: 1.375em;">${productVO.pro_name }</label><br>
-      		<label style="font-size: 2.375em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${productVO.pro_price }"/>원</label><br><br>      		
-      		<label style="font-size: 1.1em;"> 상품상태 &nbsp;&nbsp; ${productVO.pro_con }</label><br><br>
-      		<label style="font-size: 1.1em;"> 판매자 &nbsp;&nbsp; ${productVO.hmal_id }</label><br><br>
+      		<label style="font-size: 1.3em; font-weight: 600; padding-left: 20px;">${productVO.pro_name }</label><br>
+      		<label style="font-size: 2.375em; font-weight: 600; padding-left: 20px;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${productVO.pro_price }"/>원</label><br><br>      		
+      		<label style="font-size: 1.0em; padding-left: 20px; color: gray;">• 상품상태 &nbsp;${productVO.pro_con }</label><br>
+      		<label style="font-size: 1.0em; padding-left: 20px; color: gray;">• 판매자 &nbsp;${productVO.hmal_id }</label><br><br>
           <div class="form-row">
-            <div class="btn-group">              
+            <div class="btn-group" style="padding-left: 20px;">              
               <button type="button" name="btnCart" class="btn btn-light" style="font-size: 20px;">찜하기</button>&nbsp;              
               <button type="button" name="btnBuy" class="btn btn-warning" style="font-size: 20px;">바로구매</button>&nbsp;
             </div>                        
@@ -99,9 +87,9 @@
     	  
     	  let actionForm = $("#actionForm");
     	  
-    	  //장바구니 담기
-          $("button[name='btnCart']").on("click", function(){
-              
+    	  //찜상품 담기
+          $("button[name='btnCart']").on("click", function(){        	 
+        	  
               let pro_num = $(this).parents("div.row").find("input[name='pro_num']").val();
               let cate_code = $(this).parents(".parentDetail").find("input[name='cate_code']").val();
               
@@ -123,24 +111,9 @@
           //주문하기
           $("button[name='btnBuy']").on("click", function(){
           
-            let pro_num = $(this).parents("div.row").find("input[name='pro_num']").val();
-          
-            console.log("상품코드" + pro_num);
-          
-		  
-            $.ajax({
-              url:'/order/buy',
-              type: 'post',
-              dataType: 'text',
-              data: {pro_num: ${productVO.pro_num}, cart_amount: $("#pro_amount").val()},
-              success: function(data) {
-                if(data == "success") {
-                  if(confirm("장바구니에 추가되었습니다.\n 지금 확인하겠습니까?")){
-                    location.href = "/cart/cartList";
-                  }
-                }
-              }
-            });
+            let pro_num = $(this).parents("div.row").find("input[name='pro_num']").val();            
+
+            location.href = "/order/orderInfo?type=direct&pro_num="+ pro_num;
 		  
           });
 

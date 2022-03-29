@@ -26,7 +26,7 @@ public interface UserProductMapper {
 	public List<ProductVO> productListByCategory(Integer cate_code);
 	
 	// 아이디에 따른 등록 게시물 리스트
-	public List<ProductVO> mystore(@Param("hmal_id")String hmal_id, @Param("cri") Criteria cri);
+	public List<ProductVO> myproduct(@Param("hmal_id")String hmal_id, @Param("cri") Criteria cri);
 	
 	// 상품수정
 	public ProductVO productModify(Integer pro_num);

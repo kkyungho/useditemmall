@@ -3,17 +3,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    
-    <title>H중고마켓</title>
+    <meta charset="utf-8">
+    <title>중고거래의 시작, H중고마켓</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">
         
         
     <style>
     
-    h2{
-    	text-align : center;    	
-    }
+	    h2{
+	    	text-align : center;    	
+	    }
+	    	    
     
     </style>
   </head>
@@ -25,13 +26,16 @@
 <!-- 카테고리정보 -->
 <%@include file="/WEB-INF/views/include/category.jsp" %>
 <br>
+<!-- 사이드메뉴 -->
+<%@include file="/WEB-INF/views/include/sideMenu.jsp" %>
+<br>
 
 <div class="container">
   
   <!-- 로그인 -->  
   <section class="content container-fluid">
      <div class="container" style="width: 450px; height: 420px; background-color: white; margin-top: 30px;">
-         <form id="loginForm" class="form-login" action="/customer/login" method="post" style="padding: 50px 10px;">
+         <form id="loginForm" class="loginForm" action="/customer/login" method="post" style="padding: 50px 10px;">
              <h2 class="form-login-heading">로그인</h2>
              <br><br>
              <label for="hmal_id" class="sr-only">아이디</label>
@@ -40,8 +44,9 @@
              <label for="hmal_pw" class="sr-only">비밀번호</label>
              <input type="password" id="hmal_pw" name="hmal_pw" class="form-control" placeholder="비밀번호" required><br><br>                    
           <div style="text-align: center">          	
-            <button type="button"  id="btnlogin" class="btn btn-warning center">로그인</button>	                  
-         	<button type="button"  id="btnFindPw" class="btn btn-primary center">비밀번호 찾기</button>                                
+            <button type="button"  id="btnlogin" class="btn btn-warning center">로그인</button>
+            <button type="button"  id="btnFindId" class="btn btn-light center">아이디 찾기</button>	                  
+         	<button type="button"  id="btnFindPw" class="btn btn-light center">비밀번호 찾기</button>                                
           </div>
          </form>
      </div>
@@ -82,7 +87,7 @@
           success: function(data){
             
             if(data == "success"){
-              alert("회원님 반갑습니다.");
+              //alert("회원님 반갑습니다.");
               location.href = "/";
             }else if(data == "idFail"){
               alert("아이디를 확인해주세요.");
@@ -100,10 +105,17 @@
           } 
         });
       });
+      // 아이디 찾기
+      $("#btnFindId").on("click", function(){
+    	 location.href = "/customer/findId"; 
+      });
     
+      // 비밀번호 찾기
       $("#btnFindPw").on("click", function(){
     	 location.href = "/customer/findPw"; 
       });
+      
+      
   });
 
 </script>

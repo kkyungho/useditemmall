@@ -20,7 +20,7 @@
   <body>
     
 <!-- 헤더정보 -->
-<%@include file="/WEB-INF/views/admin/include/header.jsp" %>
+<%@include file="/WEB-INF/views/admin/include/pageHeader.jsp" %>
 <br>
 
 
@@ -44,9 +44,8 @@
           </div>
          </form>
      </div>
-  </section>
-  
-<%@include file="/WEB-INF/views/admin/include/footer.jsp" %>
+  </section>  
+
    
    
 </div>
@@ -81,7 +80,7 @@
           success: function(data){
             
             if(data == "success"){              
-              location.href = "/admin/adminMain";
+              location.href = "/admin/main";
             }else if(data == "idFail"){
               alert("아이디를 확인해주세요.");
               ad_userid.focus();

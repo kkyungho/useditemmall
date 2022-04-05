@@ -35,8 +35,9 @@ public class OrderController {
 	@Autowired
 	private OrderService oService;
 	
+	// 주문상세
 	@RequestMapping("/orderInfo")
-	public void orderInfo(String type, @RequestParam(value = "pro_num", required = false) Integer pro_num, @RequestParam(value = "pro_amount", required = false) Integer pro_amount, HttpSession session, Model model) {
+	public void orderInfo(String type, @RequestParam(value = "pro_num", required = false) Integer pro_num, HttpSession session, Model model) {
 		
 		String hmal_id = ((CustomerVO) session.getAttribute("loginStatus")).getHmal_id();
 		
@@ -44,10 +45,10 @@ public class OrderController {
 		
 		if(type.equals("direct")) {
 			// 상품1개
-			list = oService.directOrderInfo(pro_num, pro_amount); // 1)메인에서 바로구매, 2)상품상세 바로구매
-			(list.get(0)).setCart_amount(pro_amount);
+			list = oService.directOrderInfo(pro_num); // 상품상세 바로구매	
+			
 		}else if(type.equals("cart_order")) {
-			list = oService.orderInfo(hmal_id);  // 장바구니에서 구매
+			list = oService.directOrderInfo(pro_num);  // 찜목록 구매
 		}
 		
 		

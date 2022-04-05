@@ -59,13 +59,15 @@ public class CartController {
 		return entity;
 	}	
 
-	// 찜목록 불러오기
-	@GetMapping("/mycart")
-	public void mycart(@RequestParam(value="pro_num", required=false) Integer pro_num, HttpSession session, Model model) {
+	// 찜목록 불러오기.   @RequestParam(value="pro_num", required=false) Integer pro_num
+	@GetMapping("/mycart") 
+	public void mycart(@ModelAttribute("cri")Criteria cri, HttpSession session, Model model) {
+		
+		cri.setAmount(4);
 		
 		String hmal_id = ((CustomerVO) session.getAttribute("loginStatus")).getHmal_id();
-		
-		List<CartListVO> list = service.mycart(hmal_id, pro_num);
+				
+		List<CartListVO> list = service.mycart(hmal_id);
 		
 		// 슬래시로 바꾸는 구문.
 		for(int i=0; i<list.size(); i++) {
@@ -73,7 +75,17 @@ public class CartController {
 			vo.setPro_uploadpath(vo.getPro_uploadpath().replace("\\", "/"));
 		}
 		
-		model.addAttribute("mycart", list);
+		model.addAttribute("mycart", list);		
 		
+	}
+	
+	
+	// 찜목록	  
+	@GetMapping("/cartEmpty")
+	public String cartEmpty(Integer cart_code) {
+		
+		service.cartEmpty(cart_code);		
+		
+		return "redirect:/cart/mycart";		
 	}
 }

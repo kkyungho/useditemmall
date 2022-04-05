@@ -150,7 +150,7 @@ public class UploadFileUtils {
 		*/
 		//원본이미지, 썸네일이미지 삭제작업
 		new File(uploadFolder+ "\\"+ uploadPath.replace('/', File.separatorChar), fileName).delete();
-		new File(uploadFolder+"\\"+"s_"+uploadPath.replace('/', File.separatorChar), fileName).delete();
+		new File(uploadFolder+"\\"+uploadPath.replace('/', File.separatorChar), "s_" + fileName).delete();
 	}
 	
 	

@@ -110,7 +110,7 @@
 				</div>
 				<div class="col-md-4">
 				    <input type="text" class="form-control" id="pro_price" name="pro_price" value='<c:out value="${productVO.pro_price}" />'
-				    	style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse; ime-mode:disabled">				    
+				    	style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">				    
 			    </div><p style="text-align: justify;">원</p>			    			    
 			  </div>
 			  <br><br>
@@ -261,7 +261,6 @@
 
 <!-- 가격 3자리단위마다 쉼표 --> 
 <script>
-//현재 필드에 값을 읽어와서, 쉼표제거작업후  히든필드에 값을 적용
 	
 	$("#pro_price").on("keyup", function(){
 		$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));

@@ -48,4 +48,14 @@
 		
 	</select>
 	
+	<!-- 찜목록 삭제하기 -->
+	<delete id="cartEmpty">
+		
+		DELETE FROM
+			cart_tbl
+		WHERE
+			cart_code = #{cart_code}
+		
+	</delete>
+	
 </mapper>

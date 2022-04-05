@@ -36,5 +36,11 @@ public interface UserProductMapper {
 	
 	// 상품삭제
 	public int productDelete(Integer pro_num);
+	
+	// 상품검색
+	public List<ProductVO> getProductList(Criteria cri);
+	
+	// 상품총개수
+	public int getTotalProduct(Criteria cri);
 
 }

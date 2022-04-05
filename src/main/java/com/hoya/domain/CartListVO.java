@@ -8,6 +8,7 @@ public class CartListVO {
 		
 	private Long cart_code;
 	private Integer pro_num;
+	private String cate_code;
 	private String hmal_id;	
 	private String pro_name;
 	private String pro_img;

@@ -163,9 +163,8 @@ ul, li {
 				<div class="new_side_box01">
 					<div class="new_side_title">QUICK MENU</div>
 					<div class="new_side_con01">
-						<a href="#" class="new_side_btn01">Q&amp;A</a> 
-						<a href="#"	class="new_side_btn01">REVIEW</a> 
-						<a href="#"	class="new_side_btn01">SEARCH</a>
+						<a href="#" class="new_side_btn01" style="color: black; text-decoration: none;">Q&amp;A</a>						
+						<a href="#"	class="new_side_btn01" style="color: black; text-decoration: none;">검색</a>
 					</div>
 				</div>
 				<div class="new_side_box02">

@@ -41,12 +41,10 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 @RequestMapping("/customer/product/*")
 @Controller
-public class UserProductController {
-	
+public class UserProductController {	
 	
 	@Resource(name = "uploadFolder")
-	String uploadFolder;
-	
+	String uploadFolder;	
 	
 	private UserProductService service;
 
@@ -71,14 +69,15 @@ public class UserProductController {
 		return entity;
 	}	
 	
+	/*
 	//CKEditor 상품설명 이미지.
 	@PostMapping("/editor/imageUpload")
 	public void imageUpload(HttpServletRequest request, HttpServletResponse response,@RequestParam MultipartFile upload) {
 		
-		/*
+		
 		 CKEditor 파일업로드 1)파일업로드 작업 2) 업로드된 파일정보를 브라우저에게 보내야 한다. 
 		  
-		 */
+		 
 		
 		
 		// 클라이언트로부터 전송되어 온 파일을 업로드폴더에 복사(생성)작업
@@ -104,7 +103,7 @@ public class UserProductController {
 			out.write(bytes);
 			out.flush();
 			
-			/*======================================================================*/
+			======================================================================
 			
 			
 			String callback = request.getParameter("CKEditorFuncNum");
@@ -141,7 +140,7 @@ public class UserProductController {
 		//return;
 		
 	}
-	
+	*/
 	
 	// 상품등록 저장	
 	@PostMapping("/productInsert")
@@ -328,6 +327,7 @@ public class UserProductController {
 		return entity;
 	}
 	
+	
 	// 회원아이디 정보에 따른 상품리스트 가져오기
 	@GetMapping("/myproduct")
 	public void mystore(@ModelAttribute("cri")Criteria cri, HttpSession session, Model model) {		
@@ -402,5 +402,27 @@ public class UserProductController {
 		return "redirect:/customer/product/myproduct";
 	}
 	
+	// 상품검색
+	@GetMapping("/search")
+	public String searchProduct(Criteria cri, Model model) {
+		
+		log.info("검색정보: " + cri);
+		
+		List<ProductVO> list = service.getProductList(cri);
+		log.info("상품정보: " + list);
+		
+		if(!list.isEmpty()) {
+			model.addAttribute("list", list);
+			log.info("상품정보: " + list);
+		}else {
+			model.addAttribute("listcheck", "empty");
+			
+			return "/customer/product/search";
+		}
+		
+		model.addAttribute("pageMaker", new PageDTO(cri, service.getTotalProduct(cri)));
+		
+		return "/customer/product/search";
+	}
 	
 }

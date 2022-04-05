@@ -2,6 +2,7 @@ package com.hoya.service;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -42,14 +43,23 @@ public class CustomerServiceImpl implements CustomerService{
 	// 회원수정
 	@Override
 	public int alterUser(CustomerVO vo) {
-		// TODO Auto-generated method stub
+		
 		return mapper.alterUser(vo);
 	}
 	
+	// 아이디찾기
 	@Override
-	public CustomerVO findId(String hmal_name, String hmal_phone) {
+	public String findId(String hmal_name, String hmal_phone) {
 		
-		return mapper.findId(hmal_name, hmal_phone);
+		String result = "";
+		
+		try {
+			result = mapper.findId(hmal_name, hmal_phone);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 	
 		

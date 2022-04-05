@@ -84,6 +84,18 @@ public class UserProductServiceImpl implements UserProductService {
 		return mapper.productDelete(pro_num);
 	}
 
+	@Override
+	public List<ProductVO> getProductList(Criteria cri) {
+		
+		return mapper.getProductList(cri);
+	}
+
+	@Override
+	public int getTotalProduct(Criteria cri) {
+		
+		return mapper.getTotalProduct(cri);
+	}
+
 	
 
 	

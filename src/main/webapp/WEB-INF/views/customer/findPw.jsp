@@ -40,7 +40,7 @@
              <br><br>
              <label for="hmal_email">이메일주소</label>
              <input type="text" class="form-control" id="hmal_email" name="hmal_email"
-	    			placeholder="이메일주소" style="max-width: 630px;"><br>                                 
+	    			placeholder="가입하신 이메일주소를 입력해주세요." style="max-width: 630px;"><br>                                 
           <div style="text-align: center">          	
             <button type="button"  id="btnMailSend" class="btn btn-warning center">메일전송</button>
           </div>          
@@ -78,7 +78,7 @@
     			 if(data == "success"){
     				 alert("임시비밀번호가 메일발송했습니다. \n임시비밀번호로 로그인해주세요.");    				 
     			 }else if(data == "fail"){
-    				 alert("메일발송시 문제가 발생했습니다. 다시 진행해주세요. \n 문제가 발생시 관리자에게 연락주세요.")
+    				 alert("메일발송시 문제가 발생했습니다. 다시 진행해주세요. \n문제가 발생시 관리자에게 연락주세요.")
     			 }else if(data == "noMail"){
     				 alert("가입하신 메일주소가 다릅니다. 확인해 주세요.");
     			 }

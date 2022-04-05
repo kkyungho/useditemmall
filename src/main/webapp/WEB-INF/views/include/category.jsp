@@ -14,9 +14,9 @@
 </head>
 <body>
 
-<div class="container border-bottom" style="padding-top: 45px; padding-bottom: 20px;">
+<div class="container border-bottom" style="padding-top: 70px; padding-bottom: 10px;">
 	<div class="dropdown drop-tabs">	
-	<button type="button" class="btn btn-outline-light dropdown" style="font-size: 20px; color: black; font-weight: bold;" data-toggle="dropdown">카테고리</button>
+	<button type="button" class="btn btn-outline-dark dropdown" style="font-size: 20px; font-weight: bold;" data-toggle="dropdown">카테고리</button>
 		<div class="dropdown-menu">
 		  <c:forEach items="${userCategory}" var="categoryVO">
 			  <div class="dropdown-item">
@@ -28,54 +28,27 @@
 			  </div>
 		  </c:forEach>
 		 </div>
-		 <!-- 검색창 -->
-		 <!-- 
-		 <div class="container" style="text-align: center;">
-		  	<form id="searchForm" action="/customer/product/productList" method="get">		  		
-		  		<input type="text" name="keyword" style="max-width:400px; width: calc(100% - 100px); display: inline-block;" 
-		  			value="<c:out value="${pageMaker.cri.keyword}" />">
-				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">		
-				<input type="hidden" name="pro_name" value="${pro_name}">		
-		  	</form>
-		 </div>
-		 -->		 		
-		 <!-- 로그인 상태가 아님 --> 	
-		 <c:if test="${sessionScope.loginStatus == null }">
-		 	 <!-- board주소넣을예정
-		 	 <a href="#" style="margin-left: 240px;"> 
-		 	 	<button class="btn btn-link" style="color: black; font-weight: bold; text-decoration: none;">Q&A</button>
-		 	 </a>
-		 	 -->		 	
-		 	 <a href="/customer/login" >
-	    		<img alt="내상점" src="/resources/img/mypage.png" width="85" height="30" style="float: right; margin-left: 30px;">
+		<!-- 판매하기, 내상점 -->	 
+	 	<!-- 로그인 상태가 아님 --> 	
+		 <c:if test="${sessionScope.loginStatus == null }">	
+		 	 <a href="/customer/login">
+	    		<img alt="내상점" src="/resources/img/mypage.png" width="85" height="30" style="float: right; margin-left: 10px;">
 	    	 </a>	    	    	 	    	 
 	    	 <a href="/customer/login">
 	    		<img alt="판매하기" src="/resources/img/selling.png" width="95" height="32" style="float: right;">  	
 	    	 </a>	    	 
     	 </c:if> 	
    	 	 <!-- 로그인 상태 -->
-    	 <c:if test="${sessionScope.loginStatus != null }">
-    	 	 <!-- board주소넣을예정
-    	 	 <a href="#" style="margin-left: 40px;"> 
-		 	 	<button class="btn btn-link" style="color: black; font-weight: bold; text-decoration: none;">Q&A</button>
-		 	 </a>
-		 	 -->
+    	 <c:if test="${sessionScope.loginStatus != null }">    	 	 		 	 
     	 	 <a href="/customer/product/myproduct" >
-	    		<img alt="내상점" src="/resources/img/mypage.png" width="85" height="30" style="float: right; margin-left: 30px;">
+	    		<img alt="내상점" src="/resources/img/mypage.png" width="85" height="30" style="float: right; margin-left: 10px;">
 	    	 </a>
 			 <a href="/customer/product/productInsert">
 			 	<img alt="판매하기" src="/resources/img/selling.png" width="95" height="32" style="float: right;">	    		  	
 	    	 </a>	    	 
-    	 </c:if>
-    	 
-	 </div>
-	 	  
-</div>
-
-
-
- 
+    	 </c:if>	
+	 </div>	 	  
+</div> 
 
 <script>
 	$(function(){

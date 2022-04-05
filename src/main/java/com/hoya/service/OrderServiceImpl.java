@@ -18,9 +18,6 @@ public class OrderServiceImpl implements OrderService {
 	@Inject
 	private OrderMapper mapper;
 	
-	@Inject
-	private CartMapper cartMapper;
-
 	@Override
 	public List<OrderInfoVO> orderInfo(String hmal_id) {
 		
@@ -47,9 +44,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<OrderInfoVO> directOrderInfo(Integer pro_num, Integer ord_amount) {
+	public List<OrderInfoVO> directOrderInfo(Integer pro_num) {
 		
-		return mapper.directOrderInfo(pro_num, ord_amount);
+		return mapper.directOrderInfo(pro_num);
 	}
 
 }

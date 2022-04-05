@@ -23,7 +23,7 @@ public interface CustomerService {
 	public int alterUser(CustomerVO vo);
 	
 	// 아이디찾기(이름,핸드폰)
-	public CustomerVO findId(String hmal_name, String hmal_phone);
+	public String findId(String hmal_name, String hmal_phone);
 	
 	// 2월11일 작업
 	// 비밀번호 찾기(이메일)

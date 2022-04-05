@@ -75,7 +75,7 @@
       		 		 style="max-width: 400px;">
       		 </div><br><br>      		  
 	  		 <div class="form-group text-center">
-	  		 	<button type="button" id="btnAlterUser" class="btn btn-light">회원수정</button>
+	  		 	<button type="button" id="btnAlterUser" class="btn btn-outline-dark">회원수정</button>
 	  			<button type="reset" id="btnCancle" class="btn btn-danger">취소</button>
 	  		 </div> 
 	  	   </div> 
@@ -144,7 +144,7 @@
 			
 			console.log("취소버튼");
 			
-			let result = confirm("회원 정보 수정을 취소하시겠습니까?");
+			let result = confirm("회원정보수정을 취소하시겠습니까?");
 			
 			if(result){
 				location.href="/"; 

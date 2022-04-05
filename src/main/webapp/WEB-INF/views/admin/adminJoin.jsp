@@ -20,7 +20,7 @@
   <body>
     
 <!-- 헤더정보 -->
-<%@include file="/WEB-INF/views/admin/include/header.jsp" %>
+<%@include file="/WEB-INF/views/admin/include/pageHeader.jsp" %>
 <br>
 
 
@@ -52,9 +52,7 @@
          </form>
      </div>
   </section>
-  
-<%@include file="/WEB-INF/views/admin/include/footer.jsp" %>
-   
+
    
 </div>
 
@@ -62,7 +60,7 @@
   
   $(document).ready(function(){
 
-	  let form = $("#joinForm");
+	  let form = $("#adminJoinForm");
 	    // 아이디중복체크
 	    let isReID = false;    
 	    			

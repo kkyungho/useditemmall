@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -247,23 +248,32 @@ public class CustomerController {
 	
 	// 아이디 찾기 폼
 	@GetMapping("/findId")
-	public void findIdReq() {
+	public void findId() {
 		
 	}	
 	
 	// 아이디 찾기(이름과 핸드폰번호)
 	@ResponseBody
 	@PostMapping("/findId")
-	public ResponseEntity<String> findId(@RequestParam(value = "hmal_name", required = false) String hmal_name, @RequestParam("hmal_phone") String hmal_phone, HttpSession session) throws Exception{
-		
-		String result = "";
+	public ResponseEntity<String> findId(@RequestParam("hmal_name") String hmal_name, @RequestParam("hmal_phone") String hmal_phone){
+				
 		ResponseEntity<String> entity = null;
 		
-		CustomerVO vo = service.findId(hmal_name, hmal_phone);			
+		String vo = service.findId(hmal_name, hmal_phone);
 		
-		entity = new ResponseEntity<String>(result, HttpStatus.OK);
+		if(vo != null) {
+			entity = new ResponseEntity<String>(vo, HttpStatus.OK);
+		}else {
+			entity = new ResponseEntity<String>("no", HttpStatus.OK);
+		}	
 		
 		return entity;
+	}
+	
+	// 아이디찾기 불러오기폼
+	@GetMapping("/findIdAction")
+	public void findIdAction(@ModelAttribute("hmal_id") String hmal_id) {
+		
 	}
 	
 	// 비밀번호 찾기 폼

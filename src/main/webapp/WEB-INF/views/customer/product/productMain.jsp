@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -26,7 +28,6 @@
 <br>
 <!-- 사이드메뉴 -->
 <%@include file="/WEB-INF/views/include/sideMenu.jsp" %>
-<br>
 <!-- carousel 사용 -->
 <div class="container">
 	<div id="carouselExampleControlsNoTouching" class="carousel slide" data-ride="carousel" >
@@ -65,9 +66,14 @@
             <div class="card-body">
               <p class="card-text">
                 <a href="${phoneProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
-                  <c:out value="${phoneProductVO.pro_name }"></c:out><br>
+                    <c:if test="${fn:length(phoneProductVO.pro_name) > 13 }">
+	           			<c:out value="${fn:substring(phoneProductVO.pro_name, 0, 13) }"></c:out>...<br>
+	           		</c:if>
+	           		<c:if test="${fn:length(phoneProductVO.pro_name) <= 13 }">
+	           			<c:out value="${fn:substring(phoneProductVO.pro_name, 0, 13) }"></c:out><br>
+	           		</c:if>
                 </a>                
-              	<label style="font-size: 1.100em; font-weight: 600;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${phoneProductVO.pro_price }"/>원</label>
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${phoneProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${phoneProductVO.pro_num }">
               </p>              
             </div>
@@ -87,9 +93,14 @@
             <div class="card-body">
               <p class="card-text">
                 <a href="${furnitureProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
-                  <c:out value="${furnitureProductVO.pro_name }"></c:out><br>
+                    <c:if test="${fn:length(furnitureProductVO.pro_name) > 13 }">
+	           			<c:out value="${fn:substring(furnitureProductVO.pro_name, 0, 13) }"></c:out>...<br>
+	           		</c:if>
+	           		<c:if test="${fn:length(furnitureProductVO.pro_name) <= 13 }">
+	           			<c:out value="${fn:substring(furnitureProductVO.pro_name, 0, 13) }"></c:out><br>
+	           		</c:if>
                 </a>                
-              	<label style="font-size: 1.100em; font-weight: 600;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${furnitureProductVO.pro_price }"/>원</label>
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${furnitureProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${furnitureProductVO.pro_num }">
               </p>              
             </div>
@@ -109,9 +120,14 @@
             <div class="card-body">
               <p class="card-text">
                 <a href="${stationeryProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
-                  <c:out value="${stationeryProductVO.pro_name }"></c:out><br>
+                    <c:if test="${fn:length(stationeryProductVO.pro_name) > 13 }">
+	           			<c:out value="${fn:substring(stationeryProductVO.pro_name, 0, 13) }"></c:out>...<br>
+	           		</c:if>
+	           		<c:if test="${fn:length(stationeryProductVO.pro_name) <= 13 }">
+	           			<c:out value="${fn:substring(stationeryProductVO.pro_name, 0, 13) }"></c:out><br>
+	           		</c:if>
                 </a>                
-              	<label style="font-size: 1.100em; font-weight: 600;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${stationeryProductVO.pro_price }"/>원</label>
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${stationeryProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${stationeryProductVO.pro_num }">
               </p>              
             </div>
@@ -130,11 +146,15 @@
 			<input type="hidden" name="cate_code" value="${computerProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${computerProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none; 
-                text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
-                  <c:out value="${computerProductVO.pro_name }"></c:out><br>
+                <a href="${computerProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
+                    <c:if test="${fn:length(computerProductVO.pro_name) > 13 }">
+	           			<c:out value="${fn:substring(computerProductVO.pro_name, 0, 13) }"></c:out>...<br>
+	           		</c:if>
+	           		<c:if test="${fn:length(computerProductVO.pro_name) <= 13 }">
+	           			<c:out value="${fn:substring(computerProductVO.pro_name, 0, 13) }"></c:out><br>
+	           		</c:if>
                 </a>                
-              	<label style="font-size: 1.100em; font-weight: 600;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${computerProductVO.pro_price }"/>원</label>
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${computerProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${computerProductVO.pro_num }">
               </p>              
             </div>
@@ -154,9 +174,14 @@
             <div class="card-body">
               <p class="card-text">
                 <a href="${lifeProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
-                  <c:out value="${lifeProductVO.pro_name }"></c:out><br>
+                    <c:if test="${fn:length(lifeProductVO.pro_name) > 13 }">
+	           			<c:out value="${fn:substring(lifeProductVO.pro_name, 0, 13) }"></c:out>...<br>
+	           		</c:if>
+	           		<c:if test="${fn:length(lifeProductVO.pro_name) <= 13 }">
+	           			<c:out value="${fn:substring(lifeProductVO.pro_name, 0, 13) }"></c:out><br>
+	           		</c:if>
                 </a>                
-              	<label style="font-size: 1.100em; font-weight: 600;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${lifeProductVO.pro_price }"/>원</label>
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${lifeProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${lifeProductVO.pro_num }">
               </p>              
             </div>
@@ -176,9 +201,14 @@
             <div class="card-body">
               <p class="card-text">
                 <a href="${figureProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
-                  <c:out value="${figureProductVO.pro_name }"></c:out><br>
+                    <c:if test="${fn:length(figureProductVO.pro_name) > 13 }">
+	           			<c:out value="${fn:substring(figureProductVO.pro_name, 0, 13) }"></c:out>...<br>
+	           		</c:if>
+	           		<c:if test="${fn:length(figureProductVO.pro_name) <= 13 }">
+	           			<c:out value="${fn:substring(figureProductVO.pro_name, 0, 13) }"></c:out><br>
+	           		</c:if>
                 </a>                
-              	<label style="font-size: 1.100em; font-weight: 600;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${figureProductVO.pro_price }"/>원</label>
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${figureProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${figureProductVO.pro_num }">
               </p>              
             </div>
@@ -197,10 +227,15 @@
 			<input type="hidden" name="cate_code" value="${cameraProductVO.cate_code}">
             <div class="card-body">
               <p class="card-text">
-                <a href="${phoneProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
-                  <c:out value="${cameraProductVO.pro_name }"></c:out><br>
+                <a href="${cameraProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
+                    <c:if test="${fn:length(cameraProductVO.pro_name) > 13 }">
+	           			<c:out value="${fn:substring(cameraProductVO.pro_name, 0, 13) }"></c:out>...<br>
+	           		</c:if>
+	           		<c:if test="${fn:length(cameraProductVO.pro_name) <= 13 }">
+	           			<c:out value="${fn:substring(cameraProductVO.pro_name, 0, 13) }"></c:out><br>
+	           		</c:if>
                 </a>                
-              	<label style="font-size: 1.100em; font-weight: 600;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${cameraProductVO.pro_price }"/>원</label>
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${cameraProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${cameraProductVO.pro_num }">
               </p>              
             </div>
@@ -220,9 +255,14 @@
             <div class="card-body">
               <p class="card-text">
                 <a href="${gameProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
-                  <c:out value="${gameProductVO.pro_name }"></c:out><br>
+                    <c:if test="${fn:length(gameProductVO.pro_name) > 13 }">
+	           			<c:out value="${fn:substring(gameProductVO.pro_name, 0, 13) }"></c:out>...<br>
+	           		</c:if>
+	           		<c:if test="${fn:length(gameProductVO.pro_name) <= 13 }">
+	           			<c:out value="${fn:substring(gameProductVO.pro_name, 0, 13) }"></c:out><br>
+	           		</c:if>
                 </a>                
-              	<label style="font-size: 1.100em; font-weight: 600;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${gameProductVO.pro_price }"/>원</label>
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${gameProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${gameProductVO.pro_num }">
               </p>              
             </div>
@@ -242,9 +282,14 @@
             <div class="card-body">
               <p class="card-text">
                 <a href="${homeappProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
-                  <c:out value="${homeappProductVO.pro_name }"></c:out><br>
+                    <c:if test="${fn:length(homeappProductVO.pro_name) > 13 }">
+	           			<c:out value="${fn:substring(homeappProductVO.pro_name, 0, 13) }"></c:out>...<br>
+	           		</c:if>
+	           		<c:if test="${fn:length(homeappProductVO.pro_name) <= 13 }">
+	           			<c:out value="${fn:substring(homeappProductVO.pro_name, 0, 13) }"></c:out><br>
+	           		</c:if>
                 </a>                
-              	<label style="font-size: 1.100em; font-weight: 600;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${homeappProductVO.pro_price }"/>원</label>
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${homeappProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${homeappProductVO.pro_num }">
               </p>              
             </div>
@@ -264,9 +309,14 @@
             <div class="card-body">
               <p class="card-text">
                 <a href="${womenswProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
-                  <c:out value="${womenswProductVO.pro_name }"></c:out><br>
+                    <c:if test="${fn:length(womenswProductVO.pro_name) > 13 }">
+	           			<c:out value="${fn:substring(womenswProductVO.pro_name, 0, 13) }"></c:out>...<br>
+	           		</c:if>
+	           		<c:if test="${fn:length(womenswProductVO.pro_name) <= 13 }">
+	           			<c:out value="${fn:substring(womenswProductVO.pro_name, 0, 13) }"></c:out><br>
+	           		</c:if>
                 </a>                
-              	<label style="font-size: 1.100em; font-weight: 600;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${womenswProductVO.pro_price }"/>원</label>
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${womenswProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${womenswProductVO.pro_num }">
               </p>              
             </div>
@@ -286,9 +336,14 @@
             <div class="card-body">
               <p class="card-text">
                 <a href="${menswProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
-                  <c:out value="${menswProductVO.pro_name }"></c:out><br>
+                    <c:if test="${fn:length(menswProductVO.pro_name) > 13 }">
+	           			<c:out value="${fn:substring(menswProductVO.pro_name, 0, 13) }"></c:out>...<br>
+	           		</c:if>
+	           		<c:if test="${fn:length(menswProductVO.pro_name) <= 13 }">
+	           			<c:out value="${fn:substring(menswProductVO.pro_name, 0, 13) }"></c:out><br>
+	           		</c:if>
                 </a>                
-              	<label style="font-size: 1.100em; font-weight: 600;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${menswProductVO.pro_price }"/>원</label>
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${menswProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${menswProductVO.pro_num }">
               </p>              
             </div>
@@ -308,9 +363,14 @@
             <div class="card-body">
               <p class="card-text">
                 <a href="${shoesbagProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
-                  <c:out value="${shoesbagProductVO.pro_name }"></c:out><br>
+                    <c:if test="${fn:length(shoesbagProductVO.pro_name) > 13 }">
+	           			<c:out value="${fn:substring(shoesbagProductVO.pro_name, 0, 13) }"></c:out>...<br>
+	           		</c:if>
+	           		<c:if test="${fn:length(shoesbagProductVO.pro_name) <= 13 }">
+	           			<c:out value="${fn:substring(shoesbagProductVO.pro_name, 0, 13) }"></c:out><br>
+	           		</c:if>
                 </a>                
-              	<label style="font-size: 1.100em; font-weight: 600;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${shoesbagProductVO.pro_price }"/>원</label>
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${shoesbagProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${shoesbagProductVO.pro_num }">
               </p>              
             </div>
@@ -330,9 +390,14 @@
             <div class="card-body">
               <p class="card-text">
                 <a href="${bookProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
-                  <c:out value="${bookProductVO.pro_name }"></c:out><br>
+                    <c:if test="${fn:length(bookProductVO.pro_name) > 13 }">
+	           			<c:out value="${fn:substring(bookProductVO.pro_name, 0, 13) }"></c:out>...<br>
+	           		</c:if>
+	           		<c:if test="${fn:length(bookProductVO.pro_name) <= 13 }">
+	           			<c:out value="${fn:substring(bookProductVO.pro_name, 0, 13) }"></c:out><br>
+	           		</c:if>
                 </a>                
-              	<label style="font-size: 1.100em; font-weight: 600;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${bookProductVO.pro_price }"/>원</label>
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${bookProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${bookProductVO.pro_num }">
               </p>              
             </div>
@@ -352,9 +417,14 @@
             <div class="card-body">
               <p class="card-text">
                 <a href="${sportsProductVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;">
-                  <c:out value="${sportsProductVO.pro_name }"></c:out><br>
+                    <c:if test="${fn:length(sportsProductVO.pro_name) > 13 }">
+	           			<c:out value="${fn:substring(sportsProductVO.pro_name, 0, 13) }"></c:out>...<br>
+	           		</c:if>
+	           		<c:if test="${fn:length(sportsProductVO.pro_name) <= 13 }">
+	           			<c:out value="${fn:substring(sportsProductVO.pro_name, 0, 13) }"></c:out><br>
+	           		</c:if>
                 </a>                
-              	<label style="font-size: 1.100em; font-weight: 600;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${sportsProductVO.pro_price }"/>원</label>
+              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${sportsProductVO.pro_price }"/>원</label>
               	<input type="hidden" name="pro_num" value="${sportsProductVO.pro_num }">
               </p>           
             </div>

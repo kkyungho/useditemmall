@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -25,17 +27,16 @@
 <br>
 <!-- 사이드메뉴 -->
 <%@include file="/WEB-INF/views/include/sideMenu.jsp" %>
-<br>
-<div class="container">
+<div class="container">	
 	<h3>내 상점</h3>
 	<br>
-	<div class="nav">
+	<div class="nav">		
 		<ul class="nav nav-tabs" id="storelist" role="tablist">
-		  <li class="nav-item" id="myproduct" role="presentation">
-		    <a class="nav-link active" id="myproduct" data-toggle="tab" href="/customer/product/myproduct" role="tab" aria-controls="myproduct" aria-selected="true">판매상품</a>
+		  <li class="nav-item" id="myproduct_sub" role="presentation">
+		    <a class="nav-link active" id="myproduct" data-toggle="tab" href="/customer/product/myproduct" style="color: black;" role="tab" aria-selected="true">판매상품</a>
 		  </li>
-		  <li class="nav-item" id="mycart" role="presentation">
-		    <a class="nav-link" id="mycart" data-toggle="tab" href="/cart/mycart" role="tab" aria-controls="mycart" aria-selected="false">찜상품</a>
+		  <li class="nav-item" id="mycart_sub" role="presentation">
+		    <a class="nav-link " id="mycart" data-toggle="tab" href="/cart/mycart" style="color: black;" role="tab" aria-selected="false">찜상품</a>		    
 		  </li>		  
 		</ul>
 	</div>	
@@ -53,9 +54,13 @@
 				<input type="hidden" name="cate_code" value="${productVO.cate_code }">
 	            <div class="card-body">
 	              <p class="card-text">
-	              	<a href="${productVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;
-	              	text-overflow: ellipsis; white-space: nowrap; overflow: hidden;"> 
-	              		<c:out value="${productVO.pro_name }"></c:out><br>
+	              	<a href="${productVO.pro_num}" class="proDetail" style="color: black; text-decoration: none;"> 
+	              		<c:if test="${fn:length(productVO.pro_name) > 13 }">
+		           			<c:out value="${fn:substring(productVO.pro_name, 0, 13) }"></c:out>...<br>
+		           		</c:if>
+		           		<c:if test="${fn:length(productVO.pro_name) <= 13 }">
+		           			<c:out value="${fn:substring(productVO.pro_name, 0, 13) }"></c:out><br>
+		           		</c:if><br>
 	              	</a>
 	              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${productVO.pro_price }" />원</label>
 	              	<input type="hidden" name="pro_num" value="${productVO.pro_num }">
@@ -71,34 +76,9 @@
 	        </div>
 	       </c:forEach> 
 	      </div>
-	  	</div>		    	    
-		<br>	
-		<!-- 찜목록 -->
-	    <%-- <%@include file="/WEB-INF/views/cart/mycart.jsp" %> --%>
-	    <div class="tab-pane fade" id="mycart" role="tabpanel" aria-labelledby="cart-tab">
-	  	<div class="row">
-	      <c:forEach items="${mycart }" var="cartListVO" varStatus="status">
-	        <div class="col-md-3 parentDetail">
-	          <div class="card mb-4">
-	          	<a href="${cartListVO.pro_num}" class="proDetail">                  
-					<img name="productImage" width="100%" height="180" src="/customer/product/displayFile?fileName=s_<c:out value="${cartListVO.pro_img }"></c:out>&uploadPath=<c:out value="${cartListVO.pro_uploadpath }"></c:out>">
-				</a>
-				<input type="hidden" name="cate_code" value="${cartListVO.cate_code }">
-	            <div class="card-body">
-	              <p class="card-text">
-	              	<a href="${cartListVO.pro_num}" class="proDetail" style="color: black;"> 
-	              		<c:out value="${cartListVO.pro_name }"></c:out><br>
-	              	</a>
-	              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${cartListVO.pro_price }" />원</label>
-	              	<input type="hidden" name="pro_num" value="${cartListVO.pro_num }">
-	              </p>	               
-	            </div>
-	          </div>
-	        </div>
-	       </c:forEach> 
-	      </div>
-	  </div>	  
+	  	</div>
 	</div>
+	
             
 		   
 		
@@ -106,23 +86,13 @@
 </div>
 
 <script>
-
+  
   $(function(){
 	  
-	  // 찜목록 클릭시
-	  $("#mycart").on("click", function(e){		  
-		  e.preventDefault();
-		  
-		  let cate_code = $(this).parents(".parentDetail").find("input[name='cate_code']").val();		  
-		  console.log("카트");
-		  
-		  location.href = "/cart/mycart?pro_num=" + $(this).attr("href") + "&cate_code=" + cate_code + "&type=N";
+	  $("#mycart").on("click", function(){
 		 
-	  });	  
-
-  });
-  
-  $(function(){	  
+		  location.href = "/cart/mycart";
+	  });
 	    
   	  // 수정버튼 클릭시
       $("button[name='btnModify']").on("click", function(){ 

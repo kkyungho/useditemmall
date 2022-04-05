@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -35,11 +36,11 @@
   <!-- 로그인 -->  
   <section class="content container-fluid">
      <div class="container" style="width: 450px; height: 420px; background-color: white; margin-top: 30px;">
-         <form id="findIdForm" class="findIdForm" action="/customer/findId" method="post" style="padding: 50px 10px;">
+         <form id="findIdForm" class="findIdForm" action="/customer/findIdAction" method="get" style="padding: 50px 10px;">
              <h2 class="form-findId-heading">가입한 아이디</h2>
-             <br><br>             
-             <input type="text" id="hmal_name" name="hmal_name" class="form-control" placeholder="이름을 입력해주세요." 
-             	style="margin-bottom: 15px;" required autofocus>
+             <br>             
+             <input type="text" id="hmal_id" name="hmal_id" class="form-control"
+             	style="margin-bottom: 30px;" value='<c:out value="${hmal_id }" />' readonly>
           <div style="text-align: center">          	
             <button type="button"  id="btnLoginAction" class="btn btn-warning center">로그인하러가기</button>
           </div>

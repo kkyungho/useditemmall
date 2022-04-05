@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.hoya.domain.CartListVO;
 import com.hoya.domain.CartVO;
-import com.hoya.domain.Criteria;
-import com.hoya.domain.ProductVO;
 import com.hoya.mapper.CartMapper;
 
 @Service
@@ -25,9 +23,15 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public List<CartListVO> mycart(String hmal_id, Integer pro_num) {
+	public List<CartListVO> mycart(String hmal_id) {
 		
-		return mapper.mycart(hmal_id, pro_num);
+		return mapper.mycart(hmal_id);
+	}
+
+	@Override
+	public void cartEmpty(Integer cart_code) {
+		
+		mapper.cartEmpty(cart_code);
 	}
 
 	

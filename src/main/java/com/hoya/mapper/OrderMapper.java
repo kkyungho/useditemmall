@@ -12,7 +12,7 @@ public interface OrderMapper {
 
 	public List<OrderInfoVO> orderInfo(String hmal_id);
 	
-	public List<OrderInfoVO> directOrderInfo(@Param("pro_num") Integer pro_num, @Param("ord_amount") Integer ord_amount);
+	public List<OrderInfoVO> directOrderInfo(Integer pro_num);
 	
 	public void orderInsert(OrderVO vo);
 	

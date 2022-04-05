@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -34,6 +37,15 @@
 	  </div>
 	  <br><br>	
       <div class="row">
+      <!-- 등록상품이 없을 때 -->
+      <c:if test="${empty productList}">
+		<tr role="row"
+			class="<c:if test="${status.count % 2 == 0 }">odd</c:if><c:if test="${status.count % 2 != 0 }">even</c:if>">
+			<td>상품이 없습니다.</td>
+		</tr>
+	  </c:if>
+	  <!-- 등록상품이 있을 때 -->
+      <c:if test="${not empty productList}">
       <c:forEach items="${productList }" var="productVO" varStatus="status">
         <div class="col-md-3">
           <div class="card mb-4">
@@ -43,8 +55,13 @@
             <div class="card-body">
               <p class="card-text">
               	<a href="${productVO.pro_num}" class="proDetail" style="color: black; 
-              	text-decoration: none; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;"> 
-              		<c:out value="${productVO.pro_name }"></c:out><br>
+              	text-decoration: none;"> 
+              		<c:if test="${fn:length(productVO.pro_name) > 13 }">
+              			<c:out value="${fn:substring(productVO.pro_name, 0, 13) }"></c:out>...<br>
+              		</c:if>
+              		<c:if test="${fn:length(productVO.pro_name) <= 13 }">
+              			<c:out value="${fn:substring(productVO.pro_name, 0, 13) }"></c:out><br>
+              		</c:if>
               	</a>
               	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${productVO.pro_price }" />원</label>
               	<input type="hidden" name="pro_num" value="${productVO.pro_num }">
@@ -54,6 +71,7 @@
           </div>
         </div>
        </c:forEach> 
+       </c:if>
       </div>
       <!-- 페이징 출력 -->
       <div class="com-sm-12">      

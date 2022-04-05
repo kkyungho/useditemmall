@@ -42,7 +42,8 @@
              <input type="text" id="hmal_name" name="hmal_name" class="form-control" placeholder="이름을 입력해주세요." 
              	style="margin-bottom: 15px;" required autofocus>  
              <label for="hmal_phone">핸드폰번호</label>
-             <input type="text" id="hmal_phone" name="hmal_phone" class="form-control" placeholder="핸드폰번호를 입력해주세요." required><br>                    
+             <input type="text" id="hmal_phone" name="hmal_phone" class="form-control" placeholder="핸드폰번호를 입력해주세요." required>
+             <br>                    
           <div style="text-align: center">          	
             <button type="button"  id="btnFindId" class="btn btn-warning center">다음</button>
           </div>
@@ -60,7 +61,7 @@
   $(document).ready(function(){
 
     // 아이디찾기
-    $("#btnFindId").on("click", function(){
+    $("#btnFindId").on("click", function(){   	
     	
     	let hmal_name = $("#hmal_name");
     	let hmal_phone = $("#hmal_phone");
@@ -84,27 +85,15 @@
             data: { hmal_name : hmal_name.val(), hmal_phone : hmal_phone.val() },
             success: function(data){
               
-              if(data == "success"){
-                //alert("회원님 반갑습니다.");
-                console.log("다음");
-                location.href = "/customer/findIdAction";
-              }else if(data == "nameFail"){
-                alert("이름을 확인해주세요.");
-                hmal_name.focus();
-                hmal_name.val("");
-                return;
-                
-              }else if(data == "phoneFail"){
-                alert("핸드폰번호를 확인해주세요.");
-                hmal_phone.focus();
-                hmal_phone.val("");
-                return;
-                
-              }
-            } 
-          });
-    	
-    	//location.href = "/customer/findIdAction";
+	              if(data == "no"){
+	                alert("입력정보를 확인하세요.");                
+	                //location.href = "/customer/findIdAction";
+	              }else {
+	            	  location.href = "/customer/findIdAction?hmal_id="+data;
+	              }                
+              
+               } 
+          });   	
     	  
     });
     

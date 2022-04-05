@@ -62,22 +62,97 @@
 			
 	</select>
 	
+	<!-- 검색조건 -->
 	<sql id="criteria">
 		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
 			<foreach item="type" collection="typeArr">
 				<trim prefix="OR">
 					<choose>
-						<when test="type == 'N'.toString()">
-							pro_name like '%' || #{keyword} || '%'
-						</when>
-						<when test="type == 'P'.toString()">
-							pro_publisher like '%' || #{keyword} || '%'
-						</when>
+						<when test="keword != null">
+							pro_name like '%' || #{keyword} || '%' and
+						</when>						
 					</choose>
 				</trim>
 			</foreach>
 		</trim> 
 	</sql>
+	
+	 
+	<!-- 검색조건 -->
+	<!-- 
+	<sql id="criteria">
+		<if test="keyword != null">
+			pro_name like '%' || #{keyword} '%' and
+		</if>
+	</sql>
+	 -->
+	<!-- 상품검색 -->
+	<select id="getProductList" resultType="com.hoya.domain.ProductVO">
+		
+		<![CDATA[ 
+		SELECT 
+			pro_num,
+			hmal_id, 
+			cate_prt_code, 
+			cate_code, 
+			pro_name, 
+			pro_price, 			 
+			pro_content, 
+			pro_img,
+			pro_uploadpath, 
+			pro_amount, 
+			pro_con, 
+			pro_date, 
+			pro_updatedate 
+			
+		FROM (
+		        SELECT 
+		        	/*+ index_desc(product_tbl pk_product_tbl) */ 
+		        	rownum rn, 
+		        	pro_num, 
+		        	hmal_id,
+		        	cate_prt_code, 
+		        	cate_code, 
+		        	pro_name, 
+		        	pro_price,		        	 
+		        	pro_content,
+		        	pro_uploadpath, 
+		        	pro_img, 
+		        	pro_amount, 
+		        	pro_con, 
+		        	pro_date, 
+		        	pro_updatedate
+				FROM 
+					product_tbl
+				WHERE 
+		]]>     
+		    
+		<include refid="criteria"></include>
+		
+		<![CDATA[     
+				    rownum <= (#{pageNum} * #{amount}) 
+				)
+		
+		WHERE 
+			rn > ((#{pageNum} - 1) * #{amount} )
+		]]>
+		
+	</select>
+	
+	<!-- 상품총개수 -->
+	<select id="getTotalProduct" resultType="int">
+		
+		SELECT 
+			count(*) 
+		FROM 
+			product_tbl 
+		WHERE
+		
+		<include refid="criteria"></include> 
+		
+		pro_num > 0
+		
+	</select>
 	
 	<select id="getListWithPaging" resultType="com.hoya.domain.ProductVO">
 	

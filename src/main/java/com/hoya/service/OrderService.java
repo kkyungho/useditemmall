@@ -11,7 +11,7 @@ public interface OrderService {
 	public List<OrderInfoVO> orderInfo(String hmal_id);
 	
 	// 상품1개
-	public List<OrderInfoVO> directOrderInfo(Integer pro_num, Integer ord_amount);
+	public List<OrderInfoVO> directOrderInfo(Integer pro_num);
 	
 	public void orderInsert(OrderVO vo, OrderDetailList vo2);
 }

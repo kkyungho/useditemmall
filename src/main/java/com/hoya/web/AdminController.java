@@ -47,6 +47,20 @@ public class AdminController {
 		
 		AdminVO vo = service.adminLogin(ad_userid);
 		
+		/*
+		// 아이디가 존재한다면
+		if(!StringUtils.isEmpty(vo)) {
+			
+			// 비밀번호가 일치한다면(인증성공)
+			if(cryptPassEnc.matches(ad_userpw, vo.getAd_userpw())) {
+				
+				session.setAttribute("adminStatus", vo);
+				String redirectUrl = "/admin/main";
+			}
+			
+		}		
+		*/
+		
 		if(vo == null) { // id가 존재안하는 의미.
 			result = "idFail";			
 		}else { // id가 존재하는 의미.
@@ -63,6 +77,21 @@ public class AdminController {
 		entity = new ResponseEntity<String>(result, HttpStatus.OK);
 		
 		return entity;
+	}
+	
+	// 로그아웃
+	@RequestMapping("/adminLogout")
+	public String adminLogout(HttpSession session, RedirectAttributes rttr) {
+		
+		session.invalidate();
+		
+		return "redirect:/admin/adminLogin";
+	}
+	
+	// 관리자 메인페이지
+	@GetMapping("/main")
+	public void main() {
+		
 	}
 	
 	// 관리자 등록폼
@@ -101,15 +130,7 @@ public class AdminController {
 		entity = new ResponseEntity<String>(result, HttpStatus.OK);
 		
 		return entity;
-	}
+	}	
 	
-	// 로그아웃
-	@GetMapping("/adminLogout")
-	public String logout(HttpSession session, RedirectAttributes rttr) {
-		
-		session.invalidate();
-		
-		return "redirect:/admin/adminLogin";
-	}
 	
 }

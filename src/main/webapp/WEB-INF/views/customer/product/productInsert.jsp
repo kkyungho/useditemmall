@@ -15,7 +15,8 @@
 	  }
 
 	  form.insertForm{
-		  border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;
+		  border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;
+		  border-radius: 5px;
 		  padding: 15px;
 	  }
 	  
@@ -49,7 +50,7 @@
 			    </div>
 			    <div class="col-md-5">
 			      <label for="upload">
-			      	<img alt="이미지 업로드" src="/resources/img/camera.png" height="230" width="230" id="previewImage" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">			      	
+			      	<img alt="이미지 업로드" src="/resources/img/camera.png" height="230" width="230" id="previewImage" style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;">			      	
 			      </label>
 			      <br>		      
 			      <b style="font-size: small; color: red;">* 상품 이미지는 640x640에 최적화 되어 있습니다.</b>
@@ -71,7 +72,7 @@
 				</div>				
 				<div class="col-md-9">
 					<input type="text" class="form-control" id="pro_name" name="pro_name" placeholder="상품제목을 입력해주세요."
-						style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">
+						style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;">
 				</div>
 			  </div>
 			  <br><br>
@@ -80,7 +81,7 @@
 				    <label for="cate_prt_code" style="font-weight: 800;">카테고리</label>
 				</div>
 				<div class="col-md-3">
-				    <select class="form-control" id="mainCategory" name="cate_prt_code" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">
+				    <select class="form-control" id="mainCategory" name="cate_prt_code" style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;">
 				      <option value="">카테고리</option>				      
 				      <c:forEach items="${mainCategory}" var="categoryVO">
 				      	<option value="${categoryVO.cate_code }">${categoryVO.cate_name }</option>
@@ -88,7 +89,7 @@
 				    </select>
 				</div>
 				<div class="col-md-3">
-					<select class="form-control" id="subCategory" name="cate_code" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">				      
+					<select class="form-control" id="subCategory" name="cate_code" style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;">				      
 						<option value="">하위 카테고리</option>										  
 				    </select>
 				</div>
@@ -100,17 +101,17 @@
 				</div>
 				<div class="col-md-4">
 				    <input type="text" class="form-control" id="pro_price" name="pro_price" placeholder="가격을 입력해주세요."
-				    	value="" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">				    				    			    				    
+				    	value="" style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;">				    				    			    				    
 			    </div><p style="text-align: justify;">원</p>			    			    
 			  </div>
 			  <br><br>
-			   <!-- 상품설명 : CKeditor -->
-			   <div class="form-row">
+			  <!-- 상품설명 -->
+			  <div class="form-row">
 			    <div class="col-md-2">
 			      <label for="pro_content" style="font-weight: 800;">상품설명</label>
 				</div>
 				<div class="col-md-10">
-			      <textarea id="pro_content" name="pro_content" rows="10" cols="100" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;" placeholder="상품 설명을 입력해주세요."></textarea>
+			      <textarea id="pro_content" name="pro_content" rows="10" cols="100" style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;" placeholder="상품 설명을 입력해주세요."></textarea>
 			    </div>
 			  </div>
 			  <br><br>			 

@@ -9,14 +9,14 @@
 <title>category</title>
 
 <style>
-	
+ 
 </style>
 </head>
 <body>
 
-<div class="container border-bottom" style="padding-top: 70px; padding-bottom: 10px;">
-	<div class="dropdown drop-tabs">	
-	<button type="button" class="btn btn-outline-dark dropdown" style="font-size: 20px; font-weight: bold;" data-toggle="dropdown">카테고리</button>
+<div class="container border-bottom" style="padding-top: 55px; padding-bottom: 5px;">
+	<div class="first dropdown drop-tabs">	
+	<button type="button" class="btn btn-outline-dark dropdown" style="font-size: 20px; font-weight: bold; margin-bottom: 5px;" data-toggle="dropdown">카테고리</button>
 		<div class="dropdown-menu">
 		  <c:forEach items="${userCategory}" var="categoryVO">
 			  <div class="dropdown-item">
@@ -28,8 +28,24 @@
 			  </div>
 		  </c:forEach>
 		 </div>
-		<!-- 판매하기, 내상점 -->	 
-	 	<!-- 로그인 상태가 아님 --> 	
+		 <!-- 검색창 -->	
+		 <!-- 		 	 		  	 
+		 <div class="second" style="text-align: center;"> 
+			 <form id="searchForm" action="/customer/product/search" method="get">
+			 <select name="type">
+				<option value=""
+					<c:out value="${pageMaker.cri.type == null? 'selected':'' }" />>--</option>
+				<option value="N"
+					<c:out value="${pageMaker.cri.type eq 'N'? 'selected':'' }" />>상품명</option>	
+			 </select>			 	  			  			  		
+			 <input type="search" name="keyword" style="width:400px;" 
+			  	value="<c:out value="${pageMaker.cri.keyword }" />">			 
+			 <button class="btn search_btn">검색</button>		
+			 </form>
+		 </div>
+		  -->
+		 <!-- 판매하기, 내상점 -->	 
+	 	 <!-- 로그인 상태가 아님 -->	 	 	 	 	 	
 		 <c:if test="${sessionScope.loginStatus == null }">	
 		 	 <a href="/customer/login">
 	    		<img alt="내상점" src="/resources/img/mypage.png" width="85" height="30" style="float: right; margin-left: 10px;">
@@ -37,17 +53,17 @@
 	    	 <a href="/customer/login">
 	    		<img alt="판매하기" src="/resources/img/selling.png" width="95" height="32" style="float: right;">  	
 	    	 </a>	    	 
-    	 </c:if> 	
-   	 	 <!-- 로그인 상태 -->
-    	 <c:if test="${sessionScope.loginStatus != null }">    	 	 		 	 
-    	 	 <a href="/customer/product/myproduct" >
+	   	 </c:if> 	
+	  	 	 <!-- 로그인 상태 -->
+	   	 <c:if test="${sessionScope.loginStatus != null }">    	 	 		 	 
+	   	 	 <a href="/customer/product/myproduct" >
 	    		<img alt="내상점" src="/resources/img/mypage.png" width="85" height="30" style="float: right; margin-left: 10px;">
 	    	 </a>
 			 <a href="/customer/product/productInsert">
 			 	<img alt="판매하기" src="/resources/img/selling.png" width="95" height="32" style="float: right;">	    		  	
 	    	 </a>	    	 
-    	 </c:if>	
-	 </div>	 	  
+	   	 </c:if>	   	 	    	 
+	 </div>    	  	 	  
 </div> 
 
 <script>

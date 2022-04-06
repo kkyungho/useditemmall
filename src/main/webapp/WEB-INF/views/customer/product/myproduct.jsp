@@ -33,10 +33,12 @@
 	<div class="nav">		
 		<ul class="nav nav-tabs" id="storelist" role="tablist">
 		  <li class="nav-item" id="myproduct_sub" role="presentation">
-		    <a class="nav-link active" id="myproduct" data-toggle="tab" href="/customer/product/myproduct" style="color: black;" role="tab" aria-selected="true">판매상품</a>
+		    <a class="nav-link active" id="myproduct" data-toggle="tab" href="/customer/product/myproduct" 
+		    style="color: black; width: 200px; text-align: center; border-top-color: black; border-left-color: black; border-right-color: black;" role="tab" aria-selected="true">상품<span>${pro_amount }</span></a>
 		  </li>
 		  <li class="nav-item" id="mycart_sub" role="presentation">
-		    <a class="nav-link " id="mycart" data-toggle="tab" href="/cart/mycart" style="color: black;" role="tab" aria-selected="false">찜상품</a>		    
+		    <a class="nav-link " id="mycart" data-toggle="tab" href="/cart/mycart" 
+		    style="color: black; width: 200px; text-align: center; border-bottom-color: black;" role="tab" aria-selected="false">찜</a>		    
 		  </li>		  
 		</ul>
 	</div>	
@@ -60,7 +62,7 @@
 		           		</c:if>
 		           		<c:if test="${fn:length(productVO.pro_name) <= 13 }">
 		           			<c:out value="${fn:substring(productVO.pro_name, 0, 13) }"></c:out><br>
-		           		</c:if><br>
+		           		</c:if>
 	              	</a>
 	              	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${productVO.pro_price }" />원</label>
 	              	<input type="hidden" name="pro_num" value="${productVO.pro_num }">

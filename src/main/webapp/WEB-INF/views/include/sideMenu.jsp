@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -163,8 +164,17 @@ ul, li {
 				<div class="new_side_box01">
 					<div class="new_side_title">QUICK MENU</div>
 					<div class="new_side_con01">
-						<a href="#" class="new_side_btn01" style="color: black; text-decoration: none;">Q&amp;A</a>						
-						<a href="#"	class="new_side_btn01" style="color: black; text-decoration: none;">검색</a>
+						<!-- /board/insert 주소바꾸기 /board/list -->
+						<!-- 로그인 이전상태 표시 -->
+	    				<c:if test="${sessionScope.loginStatus == null }">
+							<a href="/customer/login" class="new_side_btn01" style="color: black; text-decoration: none;">Q&amp;A</a>
+							<a href="#"	class="new_side_btn01" style="color: black; text-decoration: none;">검색</a>
+						</c:if>						
+						<!-- 로그인 이후상태 표시 -->
+	    				<c:if test="${sessionScope.loginStatus != null }">
+	    					<a href="/board/list" class="new_side_btn01" style="color: black; text-decoration: none;">Q&amp;A</a>
+							<a href="#"	class="new_side_btn01" style="color: black; text-decoration: none;">검색</a>
+	    				</c:if>
 					</div>
 				</div>
 				<div class="new_side_box02">

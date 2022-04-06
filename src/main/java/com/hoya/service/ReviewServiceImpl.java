@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hoya.domain.Criteria;
+import com.hoya.domain.ReviewListVO;
 import com.hoya.domain.ReviewVO;
 import com.hoya.mapper.ReviewMapper;
 
@@ -16,10 +17,10 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	@Setter(onMethod_= @Autowired)
 	private ReviewMapper mapper;
-
+		
 	// 상품문의불러오기
 	@Override
-	public List<ReviewVO> getReviewListWithPaging(Criteria cri, Integer pro_num) {
+	public List<ReviewListVO> getReviewListWithPaging(Criteria cri, Integer pro_num) {
 		
 		return mapper.getReviewListWithPaging(cri, pro_num);
 	}
@@ -51,5 +52,7 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		mapper.reviewDel(rew_num);
 	}
+
+	
 
 }

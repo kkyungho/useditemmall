@@ -14,8 +14,8 @@
 		  text-align: center;		  
 	  }
 
-	  form.insertForm{
-		  border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;
+	  form.modifyForm{
+		  border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;
 		  padding: 15px;
 	  }
 	  
@@ -50,7 +50,7 @@
 			    </div>			    
 			    <div class="col-md-5">
 			      <label for="upload">
-			      	<img alt="이미지 업로드" src="/customer/product/displayFile?fileName=<c:out value="${productVO.pro_img }"></c:out>&uploadPath=<c:out value="${productVO.pro_uploadpath }"></c:out>" height="230" width="230" id="previewImage" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">			      	
+			      	<img alt="이미지 업로드" src="/customer/product/displayFile?fileName=<c:out value="${productVO.pro_img }"></c:out>&uploadPath=<c:out value="${productVO.pro_uploadpath }"></c:out>" height="230" width="230" id="previewImage" style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;">			      	
 			      </label>
 			      <br>			      
 			      <b style="font-size: small; color: red;">* 상품 이미지는 640x640에 최적화 되어 있습니다.</b>
@@ -75,7 +75,7 @@
 				</div>				
 				<div class="col-md-9">
 					<input type="text" class="form-control" id="pro_name" name="pro_name" 
-						style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;" value='<c:out value="${productVO.pro_name }" />'>
+						style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;" value='<c:out value="${productVO.pro_name }" />'>
 				</div>
 			  </div>
 			  <br><br>
@@ -84,7 +84,7 @@
 				    <label for="cate_prt_code" style="font-weight: 800;">카테고리</label>
 				</div>
 				<div class="col-md-3">
-				    <select class="form-control" id="mainCategory" name="cate_prt_code" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">
+				    <select class="form-control" id="mainCategory" name="cate_prt_code" style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;">
 				      <option value="">카테고리</option>				      
 				      <c:forEach items="${mainCategory}" var="categoryVO">
 				      	<option value="${categoryVO.cate_code }" ${categoryVO.cate_code==productVO.cate_prt_code ? 'selected':''}>
@@ -93,7 +93,7 @@
 				    </select>
 				</div>
 				<div class="col-md-3">
-					<select class="form-control" id="subCategory" name="cate_code" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">				      
+					<select class="form-control" id="subCategory" name="cate_code" style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;">				      
 						<option value="">하위 카테고리</option>	
 						<c:forEach items="${subCategory}" var="categoryVO">
 					      	<option value="${categoryVO.cate_code }" ${categoryVO.cate_code==productVO.cate_code ? 'selected':''} >
@@ -110,7 +110,7 @@
 				</div>
 				<div class="col-md-4">
 				    <input type="text" class="form-control" id="pro_price" name="pro_price" value='<c:out value="${productVO.pro_price}" />'
-				    	style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;">				    
+				    	style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;">				    
 			    </div><p style="text-align: justify;">원</p>			    			    
 			  </div>
 			  <br><br>
@@ -120,7 +120,7 @@
 			      <label for="pro_content" style="font-weight: 800;">상품설명</label>
 				</div>
 				<div class="col-md-10">
-			      <textarea id="pro_content" name="pro_content" rows="10" cols="100" style="border: 0.01px solid rgb(235, 235, 235); border-collapse: collapse;"><c:out value="${productVO.pro_content}" /></textarea>
+			      <textarea id="pro_content" name="pro_content" rows="10" cols="100" style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;"><c:out value="${productVO.pro_content}" /></textarea>
 			    </div>
 			  </div>
 			  <br><br>			 

@@ -28,14 +28,13 @@
 <br>
 <!-- 사이드메뉴 -->
 <%@include file="/WEB-INF/views/include/sideMenu.jsp" %>
-<br>
 <div class="container">
 	  <div class="container">	  	
   		<a title="홈페이지 이동" id="home" href="/" style="color: black;">
   			<img alt="Home" src="/resources/img/home.png" width="15" height="15">&nbsp;HOME
   		</a>  				  	  		  	
 	  </div>
-	  <br><br>	
+	  <br>
       <div class="row">
       <!-- 등록상품이 없을 때 -->
       <c:if test="${empty productList}">

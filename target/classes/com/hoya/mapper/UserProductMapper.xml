@@ -68,8 +68,8 @@
 			<foreach item="type" collection="typeArr">
 				<trim prefix="OR">
 					<choose>
-						<when test="keword != null">
-							pro_name like '%' || #{keyword} || '%' and
+						<when test="type == 'N'.toString()">
+							pro_name like '%' || #{keyword} || '%' 
 						</when>						
 					</choose>
 				</trim>

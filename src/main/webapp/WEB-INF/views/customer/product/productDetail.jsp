@@ -65,10 +65,12 @@
       <div class="nav">
 		<ul class="nav nav-tabs" id="storelist" role="tablist">
 		  <li class="nav-item" id="info_sub" role="presentation">
-		    <a class="nav-link active" id="productInfo" data-toggle="tab" href="/customer/product/productDetail" style="color: black;" role="tab" aria-selected="true">상품정보</a>
+		    <a class="nav-link active" id="productInfo" data-toggle="tab" href="/customer/product/productDetail" 
+		    style="color: black; width: 200px; text-align: center; border-top-color: black; border-left-color: black; border-right-color: black;" role="tab" aria-selected="true">상품정보</a>
 		  </li>
 		  <li class="nav-item" id="inqu_sub" role="presentation">
-		    <a class="nav-link" id="productInqu" data-toggle="tab" href="/review/productReview" style="color: black;" role="tab" aria-selected="false">상품문의</a>		    
+		    <a class="nav-link" id="productInqu" data-toggle="tab" href="/review/productReview" 
+		    style="color: black; width: 200px; text-align: center; border-bottom-color: black;" role="tab" data-pro_num='<c:out value="${productVO.pro_num }"></c:out>' aria-selected="false">상품문의</a>		    
 		  </li>		  
 		</ul>
 	  </div>
@@ -119,6 +121,8 @@
     $(function(){
     	
     	$("#productInqu").on("click", function(){
+    		
+    		let pro_num = $(this).data("pro_num");
     		
 	  		location.href = "/review/productReview?pro_num=" + pro_num;
 	  		

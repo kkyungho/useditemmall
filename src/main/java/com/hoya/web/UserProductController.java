@@ -1,14 +1,9 @@
 package com.hoya.web;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
@@ -23,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hoya.domain.CategoryVO;
@@ -46,6 +40,7 @@ public class UserProductController {
 	@Resource(name = "uploadFolder")
 	String uploadFolder;	
 	
+	@Inject
 	private UserProductService service;
 
 	// 상품등록
@@ -343,6 +338,8 @@ public class UserProductController {
 			ProductVO vo = list.get(i);
 			vo.setPro_uploadpath(vo.getPro_uploadpath().replace("\\", "/"));
 		}
+		
+		
 								
 		model.addAttribute("myproduct", list);		
 		

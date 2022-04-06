@@ -7,20 +7,23 @@
     <title>중고거래의 시작, H중고마켓</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/pricing/">
-    
-    <style>
+	
+	
+	<style>
 		
 		h4{
 		    text-align : center;    	
-		}	
-		   	
-	  	form.alterUserForm{
+		}
+			
+		form.insertForm{
 		  border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;
 		  border-radius: 5px;
-		  padding: 15px;
-	    } 
+		  padding-bottom: 40px;
+	    } 	
+	  	
 	  	  
-  	</style>        
+  	</style>
+    
     
   </head>
   <body>
@@ -36,133 +39,105 @@
 <br>
 <div class="container">
   
-  <!-- 회원수정 -->  
-  	<div class="container" style="width: 100%; background-color: white; font-size: 16px;">
-  		<form class="alterUserForm" action="/customer/alterUser" method="post" id="alterUserForm">
-		  <div class="container" style="width: 900px; padding: 3% 2px;">
-		  	<h4>회원수정</h4><br><br>
-		  	<b style="margin-left: 160px;">✔ 아래 항목을 수정해주세요.</b><br><br>
-		    <div class="form-group" style="width: 100%; margin-left: 160px;">
-			    <label for="hmal_id">아이디</label><br />
-			    <input type="text" class="form-control" id="hmal_id" name="hmal_id" 
-			    	 style="max-width:400px;" value='<c:out value="${customerVO.hmal_id }" />'  readonly>				
-			</div>
-			<div class="form-group" style="width: 100%; margin-left: 160px;">
-	    		<label for="hmal_pw">비밀번호</label><br />
-	    		<input type="password" class="form-control" id="hmal_pw" name="hmal_pw"
-	    			style="max-width: 400px; width: calc(100% - 100px); margin-right: 5px; display: inline-block;" value='<c:out value="${customerVO.hmal_pw }" />' readonly>
-	    		<input type="button" class="btn btn-outline-dark" id="btnChangePw" name="btnChangePw" value="비밀번호변경"><br>
-	    	</div>	    		    	
-			<div class="form-group" style="width: 100%; margin-left: 160px;">
-			    <label for="hmal_name">이름</label>
-			    <input type="text" class="form-control" id="hmal_name" name="hmal_name"
-			    	style="max-width: 400px;" value='<c:out value="${customerVO.hmal_name }" />' readonly>
-			</div>
-			<div class="form-group" style="width: 100%; margin-left: 160px;">
-		    	<label for="hmal_email">✔ 이메일</label><br />
-		    	<input type="text" class="form-control" id="hmal_email" name="hmal_email"
-		    		style="max-width: 400px; width: calc(100% - 115px); margin-right: 5px; display: inline-block;" value='<c:out value="${customerVO.hmal_email }" />'>		    	
-		    </div>		    
-		    <div class="form-group" style="width: 100%; margin-left: 160px;">
-			    <label for="inputAddr">✔  주소</label><br />			      
-			    <input type="text" class="form-control" id="hmal_zipcode" name="hmal_zipcode" value='<c:out value="${customerVO.hmal_zipcode }" />'
-			     	style="max-width: 300px; width: calc(100% - 128px); margin-right: 5px; display: inline-block;" readonly>
-			    <input type="button" class="btn btn-light" id="btnPostCode" name="btnPostCode"  value="우편번호찾기" onclick="sample2_execDaumPostcode()"><br>
-			    <input type="text" class="form-control" id="hmal_addr" name="hmal_addr" value='<c:out value="${customerVO.hmal_addr }" />'
-			    	style="max-width: 530px; margin: 3px 0px;" readonly>
-			    <input type="text" class="form-control" id="hmal_deaddr" name="hmal_deaddr" value='<c:out value="${customerVO.hmal_deaddr }" />'
-			    	style="max-width: 530px;">
-			    <input type="hidden" id="sample2_extraAddress" >			        
+  <!-- 게시판 -->  
+  	<div class="container" style="width: 100%; min-width: 900px; background-color: white; font-size: 16px;">
+  		<form class="insertForm" action="/board/insert" method="post" id="insertForm">
+		  <div class="container" style="width: 800px; padding: 3% 2px;">
+		  	<h4>Q&amp;A게시판</h4><br><br>
+		  	 <div class="form-row">			    
+				<div class="col-md-2">
+				    <label for="brd_title" style="font-weight: 800;">제목</label>									    
+				</div>				
+				<div class="col-md-9">
+					<input type="text" class="form-control" id="brd_title" name="brd_title"
+						style="max-width:400px; display: inline-block;">
+				</div>
 			 </div>
-			 <div class="form-group" style="width: 100%; margin-left: 160px;">
-		  	 	<label for="hmal_phone">✔  전화번호</label>
-      		 	<input type="tel" class="form-control" id="hmal_phone" name="hmal_phone" value='<c:out value="${customerVO.hmal_phone }" />'
-      		 		 style="max-width: 400px;">
-      		 </div><br>      		  
-	  		 <div class="form-group text-center">
-	  		 	<button type="button" id="btnAlterUser" class="btn btn-outline-dark">회원수정</button>
+			 <br>
+			 <div class="form-row">			    
+				<div class="col-md-2">
+				    <label for="hmal_name" style="font-weight: 800;">이름/작성자</label>									    
+				</div>				
+				<div class="col-md-9">
+					<input type="text" class="form-control" id="hmal_name" name="hmal_name"
+						style="max-width:400px; display: inline-block;" value='<c:out value="${customerVO.hmal_name }" />'>
+				</div>
+			 </div>
+			 <br>
+			 <div class="form-row">
+			    <div class="col-md-2">
+			      <label for="brd_content" style="font-weight: 800;">내용</label>
+				</div>
+				<div class="col-md-10">
+			      <textarea id="brd_content" name="brd_content" maxlength="65536" style="width:100%; height:300px;
+			       border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse; border-radius: 5px;"></textarea>			      
+			    </div>
+			 </div>	
+			 	  			          		  
+	  		 <div class="form-row" style="float: right; margin-top: 10px;">
+	  		 	<button type="button" id="btnInsert" class="btn btn-dark">작성</button>
 	  			<button type="reset" id="btnCancle" class="btn btn-danger">취소</button>
 	  		 </div> 
 	  	   </div> 
 		</form>	 
-	  </div> 
-  
-
-  <%@include file="/WEB-INF/views/include/footer.jsp" %>
+	  </div>  
+	  <%@include file="/WEB-INF/views/include/footer.jsp" %>
 </div>
+
 
 <script>
 
-	$(document).ready(function(){	
-		
-		let form = $("#alterUserForm");
-		
-		/* 회원수정 버튼 클릭 시 */ 
-		$("#btnAlterUser").on("click", function(){			
-			let result = confirm("회원수정을 하시겠습니까?");
-
-            if(result){
-                let hmal_email = $("#hmal_email");			
-                let hmal_zipcode = $("input[name='hmal_zipcode']");
-                let hmal_addr = $("input[name='hmal_addr']");
-                let hmal_deaddr = $("input[name='hmal_deaddr']");
-                let hmal_phone = $("#hmal_phone");
-                
-                /* 유효성 검사 */
-                
-                if(hmal_email.val() == "" || hmal_email.val() == null){
-                    alert("이메일을 입력해주세요.");
-                    hmal_email.focus();
-                    return;			
-                
-                } else if(hmal_zipcode.val() == "" || hmal_zipcode.val() == null){
-                    alert("우편번호를 입력해주세요.");
-                    $("#btnPostCode").focus();
-                    return;
-                    
-                } else if(hmal_addr.val() == "" || hmal_addr.val() == null){
-                    alert("주소를 입력해주세요.");
-                    $("#btnPostCode").focus();
-                    return;
-                    
-                } else if(hmal_deaddr.val() == "" || hmal_deaddr.val() == null){
-                    alert("상세주소를 입력해주세요.");
-                    hmal_deaddr.focus();
-                    return;
-                    
-                } else {
-                    form.submit();
-                }
-            } 
+  $(document).ready(function(){	
+	  
+	let form = $("#insertForm");
+    
+    // 회원가입 버튼 클릭 시 
+	$("#btnInsert").on("click", function(){
+		let result = confirm("글 작성을 하시겠습니까?");		
+        
+		if(result) {		
+			// 유효성 검사 
+			let brd_title = $("#brd_title");
+			let hmal_name = $("#hmal_name");
+			let brd_content = $("#brd_content");					
 			
+			if(brd_title.val() == "" || brd_title.val() == null){
+				alert("제목을 입력해주세요");
+				brd_title.focus();
+				return false;				
+		
+			} else if(hmal_name.val()== "" || hmal_name.val() == null){
+				alert("이름을 입력해주세요.");
+				hmal_name.focus();
+				return false;
 			
-		});
-		
-		// 비밀번호변경버튼 클릭시
-		$("#btnChangePw").on("click", function(){
-			
-			location.href = "/customer/changeOut";
-		});
-		
-		/* 취소 버튼 클릭 시 */
-		$("#btnCancle").on("click", function(){
-			
-			console.log("취소버튼");
-			
-			let result = confirm("회원수정을 취소하시겠습니까?");
-			
-			if(result){
-				location.href="/"; 
-			} else{}
-		});
-		
-		
-		//폼에서 일반버튼<input type="button">을 클릭하면 호출되는 이벤트설정
-		
-				
-		
+			} else if(brd_content.val()== "" || brd_content.val() == null){
+				alert("내용을 입력해주세요.");
+				brd_content.focus();
+				return false;
 	
+			}  else {
+				form.submit();
+			}
+		
+		}
 	});
+	
+    // 취소 버튼 클릭시
+	$("#btnCancle").on("click", function(){
+		
+		let result = confirm("작성을 취소하시겠습니까?");
+		if(result){
+			location.href="/"; 
+		} else{}
+	});
+
+  	
+    
+    
+  });
+
+
 </script>
 
 <!--우폅번호 DAUM API-->
@@ -259,6 +234,9 @@
           element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
       }
   </script>
+
+
+
 
     
   </body>

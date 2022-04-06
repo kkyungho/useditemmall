@@ -13,7 +13,13 @@
 		
 		h4{
 		    text-align : center;    	
-		  }	 	
+		}
+		
+		form.joinForm{
+		  border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;
+		  border-radius: 5px;
+		  padding: 15px;
+	    }	 	
 	  	
 	  	  
   	</style>
@@ -35,9 +41,9 @@
   
   <!-- 회원가입 작업 -->
   
-  	<div class="container" style="width: 100%; min-width: 900px; background-color: white; font-size: 16px; margin-top: 30px;">
+  	<div class="container" style="width: 100%; background-color: white; font-size: 16px;">
   		<form class="joinForm" action="/customer/join" method="post" id="joinForm">
-		  <div class="container" style="width: 800px; padding: 3% 2px;">
+		  <div class="container" style="width: 900px; padding: 3% 2px;">
 		  	<h4>회원가입</h4><br><br>
 		  	<b style="margin-left: 160px;">✔ 아래 항목을 작성해주세요.</b><br><br>
 		    <div class="form-group" style="width: 100%; margin-left: 160px;">
@@ -89,7 +95,7 @@
 		  	 	<label for="hmal_phone">✔  전화번호</label>
       		 	<input type="tel" class="form-control" id="hmal_phone" name="hmal_phone"
       		 		placeholder="휴대폰번호를 입력해주세요." style="max-width: 400px;">
-      		 </div><br><br>      		  
+      		 </div><br>      		  
 	  		 <div class="form-group text-center">
 	  		 	<button type="submit" id="btnJoin" class="btn btn-light">회원가입</button>
 	  			<button type="reset" id="btnCancle" class="btn btn-danger">취소</button>

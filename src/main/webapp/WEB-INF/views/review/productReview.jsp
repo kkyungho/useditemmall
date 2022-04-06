@@ -34,19 +34,19 @@
   		</a>  				  	  		  	
 	</div>
 	<br>	
+	<!-- 상품이미지, 상품명, 상품가격, 상품상태, 판매자 -->
 	  <div class="row">		
 		<div class="col-sm-5">
-      		<img name="productImage" width="120%" height="360" src="/customer/product/displayFile?fileName=<c:out value="${productVO.pro_img }"></c:out>&uploadPath=<c:out value="${productVO.pro_uploadpath }"></c:out>">
+      		<img name="productImage" width="120%" height="360" src="/customer/product/displayFile?fileName=<c:out value="${reviewListVO.pro_img }"></c:out>&uploadPath=<c:out value="${reviewListVO.pro_uploadpath }"></c:out>">
       	</div>
-      	<div class="col-sm-1"></div>
-      	<!-- 상품명, 상품가격, 상품상태, 판매자 -->
+      	<div class="col-sm-1"></div>      	
       	<div class="col-sm-5">
-      		<input type="hidden" name="pro_num" value="${productVO.pro_num }">
-      		<input type="hidden" name="cate_code" value="${productVO.cate_code}">
-      		<label style="font-size: 1.3em; font-weight: 600; padding-left: 20px;">${productVO.pro_name }</label><br>
-      		<label style="font-size: 2.375em; font-weight: 600; font-weight: 600; padding-left: 20px;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${productVO.pro_price }"/>원</label><br><br>      		
-      		<label style="font-size: 1.0em; padding-left: 20px; color: gray;">• 상품상태 &nbsp;${productVO.pro_con }</label><br>
-      		<label style="font-size: 1.0em; padding-left: 20px; color: gray;">• 판매자 &nbsp;${productVO.hmal_id }</label><br><br>
+      		<input type="hidden" name="pro_num" value="${reviewListVO.pro_num }">
+      		<input type="hidden" name="cate_code" value="${reviewListVO.cate_code}">
+      		<label style="font-size: 1.3em; font-weight: 600; padding-left: 20px;">${reviewListVO.pro_name }</label><br>
+      		<label style="font-size: 2.375em; font-weight: 600; font-weight: 600; padding-left: 20px;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${reviewListVO.pro_price }"/>원</label><br><br>      		
+      		<label style="font-size: 1.0em; padding-left: 20px; color: gray;">• 상품상태 &nbsp;${reviewListVO.pro_con }</label><br>
+      		<label style="font-size: 1.0em; padding-left: 20px; color: gray;">• 판매자 &nbsp;${reviewListVO.hmal_id }</label><br><br>
           <div class="form-row">
             <div class="btn-group" style="padding-left: 20px;"> 
             <!-- 로그인 이전 --> 
@@ -64,109 +64,113 @@
       	</div> 
       </div>
       <br><br>
+      <!-- 탭기능 -->
       <div class="nav">
 		<ul class="nav nav-tabs" id="storelist" role="tablist">
 		  <li class="nav-item" id="info_sub" role="presentation">
-		    <a class="nav-link" id="productInfo" data-toggle="tab" href="/customer/product/productDetail" role="tab" aria-selected="false">상품정보</a>
+		    <a class="nav-link" id="productInfo" data-toggle="tab" href="/customer/product/productDetail" 
+		    style="color: black; width: 200px; text-align: center; border-bottom-color: black;" role="tab" data-pro_num='<c:out value="${productVO.pro_num }"></c:out>' aria-selected="false">상품정보</a>
 		  </li>
 		  <li class="nav-item" id="inqu_sub" role="presentation">
-		    <a class="nav-link active" id="productInqu" data-toggle="tab" href="/review/productReview" role="tab" aria-selected="true">상품문의</a>		    
+		    <a class="nav-link active" id="productInqu" data-toggle="tab" href="/review/productReview" 
+		    style="color: black; width: 200px; text-align: center; border-top-color: black; border-left-color: black; border-right-color: black;" role="tab" aria-selected="true">상품문의</a>		    
 		  </li>		  
 		</ul>
 	  </div>
 		<!-- 로그인 이전 상태표시 -->
 		<div class="tab-pane fade show active" id="review_sub" role="tabpanel" aria-labelledby="review-tab">
 			<c:if test="${sessionScope.loginStatus == null }">
-			<!-- 상품문의 -->
-			<div id="product_review" class="row">		   	 	
-			</div>
+				<!-- 상품문의 -->
+				<div id="product_review" class="row">	
+					<c:if test="${sessionScope.loginStatus == null }">
+						<h4 style="font-size: 1.375em; font-weight: 600; padding-top: 30px;">상품문의</h4><br><br>
+						    <div id="productReview" class="col-sm-12">
+						    	로그인을 해야 볼수 있습니다.
+						    </div>
+					</c:if>	   	 	
+				</div>
 			</c:if>
-			</div>
+		</div>
 		<!-- 로그인 이후 상태표시 -->
 		<div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
 			<c:if test="${sessionScope.loginStatus != null }">
-			<!-- 상품문의 -->
-			<div id="product_review" class="row">
-			</div>
+				<!-- 상품문의 -->
+				<div id="product_review" class="row">
+					<c:if test="${sessionScope.loginStatus != null }">
+						<h4 style="font-size: 1.375em; font-weight: 600; padding-top: 30px;">상품문의</h4><br>		
+						<div id="productReview" class="col-sm-12">
+							<input type="hidden" name="pro_num" value="${reviewListVO.pro_num }">
+							<input type="hidden" id="reviewNum">
+							<textarea id="reviewContent" rows="3" style="width: 100%;"></textarea>
+							<br>
+							<button id="btnReview" class="btn btn-outline-dark" data-pro_num='<c:out value="${reviewListVO.pro_num }"></c:out>'>등록</button>
+							<button id="btnReviewEdit" class="btn btn-outline-primary"
+								style="display: none;">수정</button>
+						</div>
+					
+					
+					<div class="col-sm-12" style="padding-top: 35px;">
+						<table id="example2" class="table table-bordered table-hover dataTable"
+							role="grid" aria-describedby="example2_info">
+							<tbody>		
+								<c:forEach items="${productReview }" var="reviewListVO" varStatus="status">
+									<tr>												
+										<td><textarea name="rew_content" rows="3" style="width: 100%;">${reviewListVO.rew_content }</textarea>
+											<br> ${fn:substring(reviewListVO.hmal_id, 0, 4)  }**** | <fmt:formatDate
+												value="${reviewListVO.rew_regdate }" pattern="yyyy-MM-dd HH:mm" /></td>
+										<td>
+											<button type="button" name="btnReviewEditModal"
+												class="btn btn-ouline-primary">수정</button>
+											<button type="button" name="btnReviewDelModal"
+												class="btn btn-ouline-danger">삭제</button>
+										</td>		
+									</tr>
+								</c:forEach>
+							</tbody>		
+						</table>
+					</div>
+					
+					
+					<div class="col-sm-12">			
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+								<c:if test="${pageMaker.prev }">
+									<li class="page-item"><a class="page-link" href="#"
+										aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+									</a></li>
+								</c:if>
+								<c:forEach begin="${pageMaker.startPage }"
+									end="${pageMaker.endPage }" var="num">
+									<li class="page-item ${pageMaker.cri.pageNum == num ? 'active':'' }"><a
+										class="page-link" href="${num}">${num}</a></li>
+								</c:forEach>
+								<c:if test="${pageMaker.next }">
+									<li class="page-item"><a class="page-link" href="#"  
+										aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+									</a></li>
+								</c:if>
+							</ul>
+						</nav>
+					
+					</div>
+					<!--prev,page number, next 를 클릭하면 아래 form이 작동된다.-->
+					<form id="reviewForm" action="/review/productReview" method="get">
+						<!--list.jsp 가 처음 실행되었을 때 pageNum의 값을 사용자가 선택한 번호의 값으로 변경-->
+						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+					
+						<!--글번호추가-->
+					</form>
+					</c:if>   
+				</div>
 			</c:if>
 		</div>
 		
 		<!-- 로그인 이전상태표시 -->
-		<c:if test="${sessionScope.loginStatus == null }">
-		<h4 style="font-size: 1.375em; font-weight: 600;">상품문의</h4><br><br>
-		    <div id="product_review" class="col-sm-12">
-		    	로그인을 해야 볼수 있습니다.
-		    </div>
-		</c:if>
+		
 		
 		<!-- 로그인 이후상태표시 -->
-		<c:if test="${sessionScope.loginStatus != null }">
-			<h4 style="font-size: 1.375em; font-weight: 600;">상품문의</h4>
-		
-			<div class="col-sm-12">
-				<input type="hidden" name="pro_num" value="${productVO.pro_num }">
-				<input type="hidden" id="reviewNum">
-				<textarea id="reviewContent" rows="3" style="width: 100%;"></textarea>
-				<br>
-				<button id="btnReview" class="btn btn-outline-dark" data-pro_num='<c:out value="${productVO.pro_num }"></c:out>'>등록</button>
-				<button id="btnReviewEdit" class="btn btn-outline-primary"
-					style="display: none;">수정</button>
-			</div>
-		
-		
-		<div class="col-sm-12" style="padding-top: 35px;">
-			<table id="example2" class="table table-bordered table-hover dataTable"
-				role="grid" aria-describedby="example2_info">
-				<tbody>		
-					<c:forEach items="${reviewListVO }" var="reviewVO" varStatus="status">
-						<tr>												
-							<td><textarea name="rew_content" rows="3" style="width: 100%;">${reviewVO.rew_content }</textarea>
-								<br> ${fn:substring(reviewVO.hmal_id, 0, 4)  }**** | <fmt:formatDate
-									value="${reviewVO.rew_regdate }" pattern="yyyy-MM-dd HH:mm" /></td>
-							<td>
-								<button type="button" name="btnReviewEditModal"
-									class="btn btn-ouline-primary">수정</button>
-								<button type="button" name="btnReviewDelModal"
-									class="btn btn-ouline-danger">삭제</button>
-							</td>		
-						</tr>
-					</c:forEach>
-				</tbody>		
-			</table>
-		</div>
-		
-		
-		<div class="col-sm-12">			
-			<nav aria-label="Page navigation example">
-				<ul class="pagination">
-					<c:if test="${pageMaker.prev }">
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						</a></li>
-					</c:if>
-					<c:forEach begin="${pageMaker.startPage }"
-						end="${pageMaker.endPage }" var="num">
-						<li class="page-item ${pageMaker.cri.pageNum == num ? 'active':'' }"><a
-							class="page-link" href="${num}">${num}</a></li>
-					</c:forEach>
-					<c:if test="${pageMaker.next }">
-						<li class="page-item"><a class="page-link" href="#"  
-							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-						</a></li>
-					</c:if>
-				</ul>
-			</nav>
-		
-		</div>
-		<!--prev,page number, next 를 클릭하면 아래 form이 작동된다.-->
-		<form id="reviewForm" action="/review/productReview" method="get">
-			<!--list.jsp 가 처음 실행되었을 때 pageNum의 값을 사용자가 선택한 번호의 값으로 변경-->
-			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-		
-			<!--글번호추가-->
-		</form>
-		</c:if>   	 
+			 
    	 
        	
       
@@ -175,24 +179,28 @@
 
 <script>
 	
+	/*
 	// 상품문의
 	let getProductReview = function(){
 	  $("#product_review").load("/review/productReview?pro_num=" + ${productVO.pro_num });
 	}
 	
 	getProductReview();    
-    
+    */
 	
 	// 상품관련
     $(function(){
     	
-    	$("#productInfo").on("click", function(){
+    	// 상품정보 클릭시
+    	$("#productInfo").on("click", function(){    		
     		
-	  		location.href = "/customer/product/productDetail?pro_num=" + $(this).attr("href") + "&cate_code=" + cate_code + "&type=N";
+    		let pro_num = $(this).data("pro_num");
+    		
+	  		location.href = "/customer/product/productDetail?pro_num=" + pro_num + "&cate_code=" + cate_code + "&type=N";
 	  		
 	  	});
     	  
-    	let actionForm = $("#actionForm");
+    	//let actionForm = $("#actionForm");
     	  
     	// 로그인 이전
     	// 찜상품 담기

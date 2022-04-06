@@ -2,6 +2,7 @@ package com.hoya.web;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hoya.domain.CartListVO;
 import com.hoya.domain.Criteria;
 import com.hoya.domain.CustomerVO;
 import com.hoya.domain.PageDTO;
+import com.hoya.domain.ReviewListVO;
 import com.hoya.domain.ReviewVO;
 import com.hoya.service.ReviewService;
 
@@ -28,26 +31,35 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/review/*")
 @Controller
 public class ReviewController {
+	
+	@Resource(name = "uploadFolder")
+	String uploadFolder;
 
 	@Autowired
-	private ReviewService service;
-	
+	private ReviewService service;	
 	
 	// 상품문의목록, 페이징구현정보
 	@GetMapping("/productReview")
-	public void product_review(@ModelAttribute("cri") Criteria cri, @RequestParam("pro_num") Integer pro_num, Model model) {
+	public void productReview(@ModelAttribute("cri") Criteria cri, @RequestParam("pro_num") Integer pro_num, Model model) {
 				
 		log.info("productReview");
 		
 		cri.setAmount(4);
 		
-		List<ReviewVO> list = service.getReviewListWithPaging(cri, pro_num);
+		List<ReviewListVO> list = service.getReviewListWithPaging(cri, pro_num);
+		
+		// 슬래시로 바꾸는 구문.
+		for(int i=0; i<list.size(); i++) {
+			ReviewListVO vo = list.get(i);
+			vo.setPro_uploadpath(vo.getPro_uploadpath().replace("\\", "/"));
+		}
 		 
 		int total = service.getTotalCount(pro_num);
 		
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
-		model.addAttribute("reviewListVO", list);
+		model.addAttribute("productReview", list);
 	}
+		
 	
 	// 상품문의등록
 	@ResponseBody

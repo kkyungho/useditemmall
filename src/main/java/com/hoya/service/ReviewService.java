@@ -3,13 +3,12 @@ package com.hoya.service;
 import java.util.List;
 
 import com.hoya.domain.Criteria;
-import com.hoya.domain.ReviewListVO;
 import com.hoya.domain.ReviewVO;
 
 public interface ReviewService {	
 
 	// 상품문의보여주기
-	public List<ReviewListVO> getReviewListWithPaging(Criteria cri, Integer pro_num);
+	public List<ReviewVO> getReviewListWithPaging(Criteria cri, Integer pro_num);
 	
 	// 상품문의개수
 	public int getTotalCount(Integer pro_num);

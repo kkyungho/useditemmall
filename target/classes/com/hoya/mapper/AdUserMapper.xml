@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoya.mapper.AdUserMapper">
+
+	<select id="getListWithPaging" parameterType="com.hoya.domain.Criteria" resultType="com.hoya.domain.CustomerVO">
+	
+		<![CDATA[
+		SELECT 
+			hmal_id, 
+			hmal_pw, 
+			hmal_name, 
+			hmal_email, 
+			hmal_zipcode, 
+			hmal_addr, 
+			hmal_deaddr, 
+			hmal_phone, 
+			hmal_datesub, 
+			hmal_updatedate, 
+			hmal_lastlogin
+		FROM(
+		    select /*+ index_desc(hmal_tbl pk_hmal_tbl) */ 
+		    	rownum rn, 
+		    	hmal_id, 
+				hmal_pw, 
+				hmal_name, 
+				hmal_email, 
+				hmal_zipcode, 
+				hmal_addr, 
+				hmal_deaddr, 
+				hmal_phone, 
+				hmal_datesub, 
+				hmal_updatedate, 
+				hmal_lastlogin
+		    from 
+		    	hmal_tbl
+		    where 
+		]]>    		
+		
+		<include refid="criteria"></include>	    
+		     
+		<![CDATA[
+		    rownum <= (#{pageNum} * #{amount})
+		)
+		where rn > ((#{pageNum} - 1) * #{amount})
+		]]>
+		
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+	
+		SELECT 
+			count(*) 
+		FROM 
+			hmal_tbl 
+		WHERE
+		
+		<include refid="criteria"></include>
+				
+		hmal_id > 0
+				
+	</select>
+			
+	
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR"> 
+			<foreach item="type" collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'I'.toString()">
+							hmal_id like '%' || #{keyword} || '%'
+						</when>
+						<when test="type == 'N'.toString()">
+							hmal_name like '%' || #{keyword} || '%'
+						</when>
+						<when test="type == 'E'.toString()">
+							hmal_email like '%' || #{keyword} || '%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>	
+	</sql>
+	
+	
+	<select id="get" parameterType="Long" resultType="com.hoya.domain.CustomerVO">
+	
+		SELECT 
+			hmal_id, 
+			hmal_pw, 
+			hmal_name, 
+			hmal_email, 
+			hmal_zipcode, 
+			hmal_addr, 
+			hmal_deaddr, 
+			hmal_phone, 
+			hmal_datesub, 
+			hmal_updatedate, 
+			hmal_lastlogin 
+		FROM 
+			hmal_tbl
+		WHERE 
+			hmal_id = #{hmal_id}
+			
+	</select>
+	
+</mapper>

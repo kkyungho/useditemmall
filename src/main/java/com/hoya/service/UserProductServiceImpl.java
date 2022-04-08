@@ -96,6 +96,12 @@ public class UserProductServiceImpl implements UserProductService {
 		return mapper.getTotalProduct(cri);
 	}
 
+	@Override
+	public int getProductCount(String hmal_id) {
+		
+		return mapper.getProductCount(hmal_id);
+	}
+
 	
 
 	

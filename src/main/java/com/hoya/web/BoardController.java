@@ -51,6 +51,7 @@ public class BoardController {
 		return "redirect:/";
 	}
 	
+	// 게시물 목록
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
 		
@@ -67,13 +68,23 @@ public class BoardController {
 		model.addAttribute("pageMaker", pageDTO);
 	}
 	
-	@GetMapping("/get")
-	public void get(@RequestParam("brd_bno")Long brd_bno, Criteria cri, Model model) {
+	// 게시물 읽어오기
+	@GetMapping({"/get", "/modify"})
+	public void get(@RequestParam("brd_bno")Long brd_bno, @ModelAttribute("cri") Criteria cri, Model model) {
 		
 		log.info("get..." + brd_bno);
 		
 		BoardVO board = service.get(brd_bno);
 		model.addAttribute("board", board);
+	}
+	
+	// 게시물 수정 저장
+	@PostMapping("/modify")
+	public String modify(BoardVO board, Criteria cri, RedirectAttributes rttr) {
+		
+		service.modify(board);
+		
+		return "redirect:/board/list" + cri.getListLink();
 	}
 
 }

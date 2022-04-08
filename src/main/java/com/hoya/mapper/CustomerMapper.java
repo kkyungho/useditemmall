@@ -23,7 +23,7 @@ public interface CustomerMapper {
 	
 	// 2월11일 작업
 	// 비밀번호 찾기(이메일)
-	public String findPwByEmail(String hmal_email);
+	public String findPwByEmail(@Param("hmal_name") String hmal_name, @Param("hmal_email") String hmal_email);
 	
 	// 2월11일 작업
 	// 새로운 비밀번호 생성(이메일)

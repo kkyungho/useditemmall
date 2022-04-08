@@ -5,13 +5,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.hoya.domain.Criteria;
-import com.hoya.domain.ReviewListVO;
 import com.hoya.domain.ReviewVO;
 
 public interface ReviewMapper {
 	
 	// 상품문의보여주기
-	public List<ReviewListVO> getReviewListWithPaging(@Param("cri") Criteria cri, @Param("pro_num") Integer pro_num);
+	public List<ReviewVO> getReviewListWithPaging(@Param("cri") Criteria cri, @Param("pro_num") Integer pro_num);
 	
 	// 상품문의개수
 	public int getTotalCount(Integer pro_num);

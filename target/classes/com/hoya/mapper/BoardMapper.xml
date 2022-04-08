@@ -36,7 +36,8 @@
 			 		brd_bno, 
 			 		brd_title, 
 			 		brd_content, 
-			 		hmal_name)
+			 		hmal_name
+			 		)
 		VALUES(
 					#{brd_bno}, 
 					#{brd_title}, 
@@ -132,5 +133,18 @@
 			brd_bno = #{brd_bno}
 			
 	</select>
+	
+	<update id="modify">
+	
+		UPDATE
+			board_tbl
+		SET 
+			brd_title = #{brd_title}, 
+			brd_content = #{brd_content}, 
+			brd_updatedate = sysdate 
+		WHERE 
+			brd_bno = #{brd_bno}
+		
+	</update>
 	
 </mapper>

@@ -93,7 +93,7 @@ public class CustomerController {
 		session.setAttribute("certiCode", certiCode);
 		
 		// 인증코드를 세션에 임시적으로 저장		
-		EmailDTO dto = new EmailDTO("Hmarket", "kyung2643@naver.com", hmal_email, "Hmarket 인증메일", certiCode);
+		EmailDTO dto = new EmailDTO("H중고마켓", "kyung2643@naver.com", hmal_email, "H중고마켓 회원가입인증메일", "회원가입 인증코드: " + certiCode);
 		
 		// 메일내용을 구성하는 클래스
 		MimeMessage message = mailSender.createMimeMessage();
@@ -286,15 +286,15 @@ public class CustomerController {
 	// 비밀번호 찾기(이메일)
 	@ResponseBody
 	@PostMapping("/findPw")
-	public ResponseEntity<String> findPwAction(@RequestParam("hmal_email") String hmal_email){
+	public ResponseEntity<String> findPwAction(@RequestParam("hmal_name") String hmal_name, @RequestParam("hmal_email") String hmal_email){
 		
 		ResponseEntity<String> entity = null;
 		
-		if(!StringUtils.isEmpty(service.findPwByEmail(hmal_email))) {
+		if(!StringUtils.isEmpty(service.findPwByEmail(hmal_name, hmal_email))) {
 			
 			String tempPw = makeCertiCode();
 			
-			EmailDTO dto = new EmailDTO("Hmarket", "kyung2643@gmail.com", hmal_email, "Hmarket 인증메일", tempPw);
+			EmailDTO dto = new EmailDTO("H중고마켓", "kyung2643@gmail.com", hmal_email, "H중고마켓 임시비밀번호", "임시비밀번호: " + tempPw);
 			
 			MimeMessage message = mailSender.createMimeMessage();
 			

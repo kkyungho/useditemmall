@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -44,7 +45,7 @@
       		<label style="font-size: 1.3em; font-weight: 600; padding-left: 20px;">${productVO.pro_name }</label><br>
       		<label style="font-size: 2.375em; font-weight: 600; font-weight: 600; padding-left: 20px;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${productVO.pro_price }"/>원</label><br><br>      		
       		<label style="font-size: 1.0em; padding-left: 20px; color: gray;">• 상품상태 &nbsp;${productVO.pro_con }</label><br>
-      		<label style="font-size: 1.0em; padding-left: 20px; color: gray;">• 판매자 &nbsp;${productVO.hmal_id }</label><br><br>
+      		<label style="font-size: 1.0em; padding-left: 20px; color: gray;">• 판매자 &nbsp;${productVO.hmal_id }</label><br><br>      		
           <div class="form-row">
             <div class="btn-group" style="padding-left: 20px;"> 
             <!-- 로그인 이전 --> 
@@ -63,27 +64,109 @@
       </div>
       <br><br>
       <div class="nav">
-		<ul class="nav nav-tabs" id="storelist" role="tablist">
-		  <li class="nav-item" id="info_sub" role="presentation">
-		    <a class="nav-link active" id="productInfo" data-toggle="tab" href="/customer/product/productDetail" 
-		    style="color: black; width: 200px; text-align: center; border-top-color: black; border-left-color: black; border-right-color: black;" role="tab" aria-selected="true">상품정보</a>
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+		  <li class="nav-item" role="presentation">
+		    <a class="nav-link active" id="productInfo_tap" data-toggle="tab" href="#product_info"
+		    style="color: black; width: 200px; text-align: center; font-weight: 600;" role="tab" aria-controls="product_info" aria-selected="true">상품정보</a>
 		  </li>
-		  <li class="nav-item" id="inqu_sub" role="presentation">
-		    <a class="nav-link" id="productInqu" data-toggle="tab" href="/review/productReview" 
-		    style="color: black; width: 200px; text-align: center; border-bottom-color: black;" role="tab" data-pro_num='<c:out value="${productVO.pro_num }"></c:out>' aria-selected="false">상품문의</a>		    
+		  <li class="nav-item" role="presentation">
+		    <a class="nav-link" id="productInqu_tap" data-toggle="tab" href="#product_inqu"
+		    style="color: black; width: 200px; text-align: center; font-weight: 600;" role="tab" aria-controls="product_inqu" aria-selected="false">상품문의</a>		    
 		  </li>		  
 		</ul>
 	  </div>
 	  <!-- 상품정보 -->
-	  <div class="tab-content" id="nav-tabContent">		  	    
-		  <div class="tab-pane fade show active" id="product" role="tabpanel" aria-labelledby="product-tab">
-		  	<div class="form-row">
+	  <!-- 로그인 이전 상태표시 -->
+	  <div class="tab-content" id="myContent">
+	  	<c:if test="${sessionScope.loginStatus == null }">		  	    
+		  <div class="tab-pane fade show active" id="product_info" role="tabpanel" aria-labelledby="info-tab">
+		  	<div class="form-row" id="productInfo">
 	      	  <h4 style="font-size: 1.375em; font-weight: 600; padding-top: 30px;">상품정보</h4>      	
 	        </div>
-	        <br>
-	        <div>${productVO.pro_content }</div><br>
-		  </div>		  
-	  </div>	  
+	        <div>${productVO.pro_content }</div><br>  
+	      </div>	     	            
+	      <div class="tab-pane fade" id="product_inqu" role="tabpanel" aria-labelledby="inqu-tab">
+	        <div class="form-row" id="productInqu">				
+				<h4 style="font-size: 1.375em; font-weight: 600; padding-top: 30px;">상품문의</h4><br><br>
+			    <div id="productReview" class="col-sm-12">
+			    	로그인을 해야 볼수 있습니다.
+			    </div>					   	 	
+			</div>
+	      </div>	      	  		  
+		</c:if>	  
+	  </div>	  	  
+	  <!-- 로그인 이후 상태표시 -->
+	  <div class="tab-content" id="myContent">
+	  	<c:if test="${sessionScope.loginStatus != null }">
+		  	<div class="tab-pane fade show active" id="product_info" role="tabpanel" aria-labelledby="info-tab">
+			  	<div class="form-row">
+		      	  <h4 style="font-size: 1.375em; font-weight: 600; padding-top: 30px;">상품정보</h4>      	
+		        </div>
+		        <br>
+		        <div>${productVO.pro_content }</div><br>
+			</div>			  
+			<div class="tab-pane fade" id="product_inqu" role="tabpanel" aria-labelledby="inqu-tab">			
+				<!-- 상품문의 -->
+				<div class="form-row" id="productReview" >										
+					<h4 style="font-size: 1.375em; font-weight: 600; padding-top: 30px;">상품문의</h4><br>		
+					<div id="productReview" class="col-sm-12">						
+						<input type="hidden" id="reviewNum">
+						<textarea id="reviewContent" rows="3" style="width: 100%;"></textarea>
+						<br>
+						<!-- data-pro_num='<c:out value="${productVO.pro_num }"></c:out>' -->
+						<button id="btnReview" class="btn btn-outline-dark" >등록</button>
+						<button id="btnReviewEdit" class="btn btn-outline-primary"
+							style="display: none;">수정</button>
+					</div>
+					<div class="col-sm-12" style="padding-top: 35px;">
+						<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+							<tbody>		
+								<c:forEach items="${reviewVO }" var="reviewVO" varStatus="status">
+									<tr>												
+										<td>
+											<input type="hidden" name="rew_num" value="${reviewVO.rew_num}">
+											<textarea name="rew_content" rows="3" style="width: 100%;" readonly>${reviewVO.rew_content }</textarea>
+											<br> ${fn:substring(reviewVO.hmal_id, 0, 1)  }**** | <fmt:formatDate value="${reviewVO.rew_regdate }" pattern="yyyy-MM-dd HH:mm" />
+										</td>
+										<td>
+											<button type="button" name="btnReviewEditModal"	class="btn btn-primary">수정</button>
+											<button type="button" name="btnReviewDelModal" class="btn btn-danger">삭제</button>
+										</td>		
+									</tr>
+								</c:forEach>
+							</tbody>		
+						</table>
+					</div>
+					<div class="col-sm-12">			
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+								<c:if test="${pageMaker.prev }">
+									<li class="page-item"><a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+									</a></li>
+								</c:if>
+								<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="num">
+									<li class="page-item ${pageMaker.cri.pageNum == num ? 'active':'' }">
+									<a class="page-link" href="${num}">${num}</a></li>
+								</c:forEach>
+								<c:if test="${pageMaker.next }">
+									<li class="page-item"><a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+									</a></li>
+								</c:if>
+							</ul>
+						</nav>
+					</div>
+					<!--prev,page number, next 를 클릭하면 아래 form이 작동된다.-->
+					<form id="reviewForm" action="/review/productReview" method="get">
+						<!--list.jsp 가 처음 실행되었을 때 pageNum의 값을 사용자가 선택한 번호의 값으로 변경-->
+						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+					
+						<!--글번호추가-->
+					</form>									  
+				</div>
+			</div>			
+		</c:if>
+     </div>  
       <form id="actionForm" action="" method="get">
         <!--list.jsp 가 처음 실행되었을 때 pageNum의 값을 사용자가 선택한 번호의 값으로 변경-->
         
@@ -106,28 +189,18 @@
 <%@include file="/WEB-INF/views/include/footer.jsp" %>
 </div>
 
-<script>
-	
-	<%--
-	// 상품문의
-	let getProductReview = function(){
-	  $("#product_review").load("/review/productReview?pro_num=" + ${productVO.pro_num });
-	}
-	
-	getProductReview();    
-    --%>
+<script>	
 	
 	// 상품관련
-    $(function(){
+    $(function(){   
     	
-    	$("#productInqu").on("click", function(){
-    		
-    		let pro_num = $(this).data("pro_num");
-    		
-	  		location.href = "/review/productReview?pro_num=" + pro_num;
-	  		
-	  	});
-    	  
+    	// 상품문의
+    	let getProductReview = function(){
+    	  $("#product_review").load("/review/productReview?pro_num=" + ${productVO.pro_num });
+    	}
+    	
+    	getProductReview();
+    	
     	let actionForm = $("#actionForm");
     	  
     	// 로그인 이전
@@ -177,10 +250,10 @@
         });
         
      	// 상품문의 등록
-        $("#product_review").on("click", "#btnReview", function() {
+        $("#productReview").on("click", "#btnReview", function() {
           console.log("상품문의 클릭");
           
-          let pro_num = $(this).data("pro_num");
+          //let pro_num = $(this).data("pro_num");
           
           $.ajax({
             url: '/review/productReviewWrite',
@@ -192,8 +265,7 @@
             },
             success: function(data){
               if(data == "success") {
-                alert("상품문의 등록완료");
-                //location.href = "/customer/product/productDetail";
+                alert("상품문의 등록완료");                
                 getProductReview();
               }
             }
@@ -201,7 +273,7 @@
         });
      	
       	//상품문의수정
-        $("#product_review").on("click", "#btnReviewEdit", function(){
+        $("#productReview").on("click", "#btnReviewEdit", function(){
         	        	
         	$("#btnReviewAdd").show(); // 상품문의등록버튼 보이기
         	$("#btnReviewEdit").hide(); // 상품문의수정버튼 숨기기
@@ -228,50 +300,33 @@
         });
 
 
-        // 리뷰목록수정버튼
-        $("#product_review").on("click", "button[name='btnReviewEditModal']", function(){
-          //console.log("상품후기 클릭");
+        // 상품문의목록수정버튼
+        $("#productReview").on("click", "button[name='btnReviewEditModal']", function(){
+          //console.log("상품문의 클릭");
 
-          $("#btnReviewAdd").show(); // 상품후기등록버튼 보이기
-          $("#btnReviewEdit").hide(); // 상품후기수정버튼 숨기기
+          $("#btnReviewAdd").show(); // 상품문의등록버튼 보이기
+          $("#btnReviewEdit").hide(); // 상품문의수정버튼 숨기기
 
           console.log($("#reviewContent").val());
           
           //리뷰 번호
           let rew_num = $(this).parent().parent().find("[name='rew_num']").val();
           $("#reviewNum").val(rew_num);
-
-          // 리뷰 별점
-          /*
-          let rew_score = $(this).parent().parent().find("[name='rew_score']").val();
-          $("#reviewScore").val(rew_score);
-          console.log("스코어" + rew_score);
-          */
-
+          
           // 리뷰내용
           let rew_content = $(this).parent().parent().find("[name='rew_content']").val();
           $("#reviewContent").val(rew_content);
-          $("#btnReview").text("상품후기 수정");
+          $("#btnReview").text("상품문의 수정");
 
-          // a태그가 5개
-          /*
-          $("#star_grade a").each(function(index, item){
-            if(index<rew_score) {
-              $(item).addClass("on");
-            }else {
-              $(item).removeClass("on");
-            }
-          });
-          */
-
+          
         });
 
         // 상품후기 삭제클릭 btnReveiwDelModal
-        $("#product_review").on("click", "button[name='btnReviewDelModal']", function(){
+        $("#productReview").on("click", "button[name='btnReviewDelModal']", function(){
           
           //$("#reviewModal").modal("show");
 
-          if(!confirm("상품후기를 삭제하겠습니까?")) return;
+          if(!confirm("상품문의를 삭제하겠습니까?")) return;
 
           // 리뷰 번호
           let rew_num = $(this).parent().parent().find("[name='rew_num']").val();
@@ -286,10 +341,10 @@
             },
             success: function(data){
               if(data == "success"){
-                alert("상품후기가 삭제됨");
+                alert("상품문의가 삭제되었습니다.");
                 getProductReview();
                 pageNum = 1;
-                reviewLoad();
+                reviewLoad();                
               }
             }
           });
@@ -297,9 +352,9 @@
         });
         
         
-        // 상품후기목록 페이지번호 클릭
+        // 상품문의목록 페이지번호 클릭
         let pageNum, pro_num;        
-        $("#product_review").on("click", "ul.pagination a.page-link", function(e){
+        $("#productReview").on("click", "ul.pagination a.page-link", function(e){
         	e.preventDefault();
         	pro_num = $("#pro_num").val();
         	pageNum = $(this).attr("href");
@@ -313,7 +368,7 @@
         	let amount = reviewForm.find("input[name=amount]").val();
         	
         	// 상품코드, 페이징정보
-        	$("#product_review").load("/review/productReview?pro_num=" + pro_num + "&pageNum" + pageNum + "&amount" + amount);
+        	$("#productReview").load("/review/productReview?pro_num=" + pro_num + "&pageNum" + pageNum + "&amount" + amount);
         }
 
     });

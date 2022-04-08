@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hoya.mapper.ReviewMapper">
 
+    <!-- 
 	<select id="productReview" resultType="com.hoya.domain.ProductVO">
 		
 		SELECT
@@ -33,6 +34,7 @@
 			p.hmal_id = #{hmal_id}
 			
 	</select>
+	 -->
 	<!-- 상품문의보여주기 -->
 	<select id="getReviewListWithPaging" resultType="com.hoya.domain.ReviewVO">
 	

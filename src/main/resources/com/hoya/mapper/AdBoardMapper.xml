@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoya.mapper.AdBoardMapper">
+
+	<!-- 
+	<insert id="insert" parameterType="com.hoya.domain.BoardVO">
+		
+		INSERT INTO 
+			board_tbl(
+				brd_bno,
+				brd_title,
+				brd_content,
+				hmal_name		
+		       )			
+		VALUES(
+				seq_board_bno.nextval,
+				#{brd_title},
+				#{brd_content},
+				#{hmal_name}		
+			  )
+			  
+	</insert>
+	
+	<insert id="insertSelectKey" parameterType="com.hoya.domain.BoardVO">
+	
+		<selectKey keyProperty="brd_bno" order="BEFORE" resultType="long">
+		
+			SELECT 
+				seq_board_bno.nextval 
+			FROM 
+				dual
+				
+		</selectKey>
+		
+		INSERT INTO
+			 board_tbl(
+			 		brd_bno, 
+			 		brd_title, 
+			 		brd_content, 
+			 		hmal_name
+			 		)
+		VALUES(
+					#{brd_bno}, 
+					#{brd_title}, 
+					#{brd_content}, 
+					#{hmal_name}
+			  )
+	
+	</insert>
+	 -->
+	<select id="getList" resultType="com.hoya.domain.BoardVO">
+	
+		SELECT 
+			brd_bno, 
+			brd_title, 
+			brd_content, 
+			hmal_name, 
+			brd_regdate, 
+			brd_updatedate 
+		FROM 
+			board_tbl
+			
+	</select>
+		
+	<select id="getListWithPaging" parameterType="com.hoya.domain.Criteria" resultType="com.hoya.domain.BoardVO">
+	
+		<![CDATA[
+		SELECT 
+			brd_bno, brd_title, brd_content, hmal_name, brd_regdate, brd_updatedate, brd_replycnt
+		FROM(
+		    select /*+ index_desc(board_tbl pk_board_tbl) */ 
+		    	rownum rn, brd_bno, brd_title, brd_content, hmal_name, brd_regdate, brd_updatedate, brd_replycnt
+		    from 
+		    	board_tbl
+		    where 
+		]]>    		
+		
+		<include refid="criteria"></include>	    
+		     
+		<![CDATA[
+		    rownum <= (#{pageNum} * #{amount})
+		)
+		where rn > ((#{pageNum} - 1) * #{amount})
+		]]>
+		
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+	
+		SELECT 
+			count(*) 
+		FROM 
+			board_tbl 
+		WHERE
+		
+		<include refid="criteria"></include>
+				
+		brd_bno > 0
+				
+	</select>
+	
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR"> 
+			<foreach item="type" collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							brd_title like '%' || #{keyword} || '%'
+						</when>
+						<when test="type == 'C'.toString()">
+							brd_content like '%' || #{keyword} || '%'
+						</when>
+						<when test="type == 'N'.toString()">
+							hmal_name like '%' || #{keyword} || '%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>	
+	</sql>
+	
+	<select id="get" parameterType="Long" resultType="com.hoya.domain.BoardVO">
+	
+		SELECT 
+			brd_bno, 
+			brd_title, 
+			brd_content, 
+			hmal_name, 
+			brd_regdate, 
+			brd_updatedate 
+		FROM 
+			board_tbl 
+		WHERE 
+			brd_bno = #{brd_bno}
+			
+	</select>
+	
+	<!-- 
+	<update id="modify">
+	
+		UPDATE
+			board_tbl
+		SET 
+			brd_title = #{brd_title}, 
+			brd_content = #{brd_content}, 
+			brd_updatedate = sysdate 
+		WHERE 
+			brd_bno = #{brd_bno}
+		
+	</update>
+	 -->
+	 
+</mapper>

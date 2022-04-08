@@ -34,6 +34,12 @@ public class CartServiceImpl implements CartService {
 		mapper.cartEmpty(cart_code);
 	}
 
+	@Override
+	public int getCartCount(String hmal_id) {
+		
+		return mapper.getCartCount(hmal_id);
+	}
+
 	
 
 }

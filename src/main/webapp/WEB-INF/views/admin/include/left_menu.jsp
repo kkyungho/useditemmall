@@ -41,7 +41,7 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/admin/userList">회원목록</a></li>            
+            <li><a href="/admin/user/list">회원목록</a></li>            
           </ul>
         </li>
         <li class="treeview">
@@ -51,7 +51,7 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/admin/order/orderList">Q&amp;A</a></li>
+            <li><a href="/admin/board/list">Q&amp;A</a></li>
           </ul>
         </li>
       </ul>

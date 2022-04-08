@@ -75,6 +75,8 @@ public class CartController {
 			vo.setPro_uploadpath(vo.getPro_uploadpath().replace("\\", "/"));
 		}
 		
+		model.addAttribute("hmal_id", service.getCartCount(hmal_id));
+		
 		model.addAttribute("mycart", list);		
 		
 	}

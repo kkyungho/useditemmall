@@ -46,21 +46,7 @@ public class AdminController {
 		ResponseEntity<String> entity = null;
 		
 		AdminVO vo = service.adminLogin(ad_userid);
-		
-		/*
-		// 아이디가 존재한다면
-		if(!StringUtils.isEmpty(vo)) {
-			
-			// 비밀번호가 일치한다면(인증성공)
-			if(cryptPassEnc.matches(ad_userpw, vo.getAd_userpw())) {
 				
-				session.setAttribute("adminStatus", vo);
-				String redirectUrl = "/admin/main";
-			}
-			
-		}		
-		*/
-		
 		if(vo == null) { // id가 존재안하는 의미.
 			result = "idFail";			
 		}else { // id가 존재하는 의미.

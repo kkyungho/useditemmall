@@ -34,11 +34,11 @@
 		<ul class="nav nav-tabs" id="storelist" role="tablist">
 		  <li class="nav-item" id="myproduct_sub" role="presentation">
 		    <a class="nav-link active" id="myproduct" data-toggle="tab" href="/customer/product/myproduct" 
-		    style="color: black; width: 200px; text-align: center; border-top-color: black; border-left-color: black; border-right-color: black;" role="tab" aria-selected="true">상품<span>${pro_amount }</span></a>
+		    style="color: black; width: 200px; text-align: center; font-weight: 600; border-top-color: black; border-left-color: black; border-right-color: black;" role="tab" aria-selected="true">상품&nbsp;&nbsp;&nbsp;<span>${hmal_id }</span></a>
 		  </li>
 		  <li class="nav-item" id="mycart_sub" role="presentation">
 		    <a class="nav-link " id="mycart" data-toggle="tab" href="/cart/mycart" 
-		    style="color: black; width: 200px; text-align: center; border-bottom-color: black;" role="tab" aria-selected="false">찜</a>		    
+		    style="color: black; width: 200px; text-align: center; font-weight: 600; border-bottom-color: black;" role="tab" aria-selected="false">찜</a>		    
 		  </li>		  
 		</ul>
 	</div>	
@@ -48,7 +48,7 @@
 	  <div class="tab-pane fade show active" id="product" role="tabpanel" aria-labelledby="product-tab">
 	  	<div class="row">
 	      <c:forEach items="${myproduct }" var="productVO" varStatus="status">
-	        <div class="col-md-3 parentDetail">
+	        <div class="col-md-3 parentDetail" >
 	          <div class="card mb-4">
 	          	<a href="${productVO.pro_num}" class="proDetail">                  
 					<img name="productImage" width="100%" height="180" src="/customer/product/displayFile?fileName=s_<c:out value="${productVO.pro_img }"></c:out>&uploadPath=<c:out value="${productVO.pro_uploadpath }"></c:out>">

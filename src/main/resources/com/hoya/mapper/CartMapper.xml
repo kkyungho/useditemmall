@@ -48,6 +48,18 @@
 		
 	</select>
 	
+	<!-- 내상점 찜상품 수량 -->
+	<select id="getCartCount" resultType="int">
+	
+		SELECT
+			count(*)
+		FROM
+			cart_tbl
+		WHERE
+			hmal_id = #{hmal_id}
+	
+	</select>
+	
 	<!-- 찜목록 삭제하기 -->
 	<delete id="cartEmpty">
 		

@@ -66,9 +66,9 @@ public class CustomerServiceImpl implements CustomerService{
 	// 2월11일 작업
 	// 비밀번호 찾기(이메일)
 	@Override
-	public String findPwByEmail(String hmal_email) {
+	public String findPwByEmail(String hmal_name, String hmal_email) {
 		
-		return mapper.findPwByEmail(hmal_email);
+		return mapper.findPwByEmail(hmal_name, hmal_email);
 	}
 
 	// 2월11일 작업

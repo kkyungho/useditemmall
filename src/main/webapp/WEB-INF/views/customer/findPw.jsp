@@ -38,11 +38,14 @@
   		<form id="findPwForm" class="findPwForm" action="/customer/changeOut" method="post" style="padding: 50px 10px;">
 		  <h2 class="form-findPw-heading">비밀번호찾기</h2>
              <br><br>
+             <label for="hmal_name">이름</label>
+             <input type="text" class="form-control" id="hmal_name" name="hmal_name"
+	    			placeholder="이름을 입력해주세요." style="max-width: 630px;"><br>
              <label for="hmal_email">이메일주소</label>
              <input type="text" class="form-control" id="hmal_email" name="hmal_email"
 	    			placeholder="가입하신 이메일주소를 입력해주세요." style="max-width: 630px;"><br>                                 
           <div style="text-align: center">          	
-            <button type="button"  id="btnMailSend" class="btn btn-warning center">메일전송</button>
+            <button type="button"  id="btnMailSend" class="btn btn-warning center">찾기</button>
           </div>          
 		</form>	 
 	  </div> 
@@ -60,10 +63,17 @@
       // 메일인증확인
       $("#btnMailSend").on("click", function(){
     	 
+    	  let hmal_name = $("#hmal_name");
     	  let hmal_email = $("#hmal_email");
     	  
+    	  if(hmal_name.val() == "" || hmal_name.val() == null) {
+      		alert("이름을 입력하세요");
+      		hmal_name.focus();
+      		return;
+      	  }
+    	  
     	  if(hmal_email.val() == "" || hmal_email.val() == null){
-    		  alert("인증코드를 입력하세요.");
+    		  alert("이메일을 입력하세요.");
     		  hmal_email.focus();
     		  return;
     	  }
@@ -72,11 +82,12 @@
     		 url: '/customer/findPw',
     		 type: 'post',
     		 dataType: 'text',
-    		 data: { hmal_email : hmal_email.val() },
+    		 data: { hmal_name : hmal_name.val(), hmal_email : hmal_email.val() },
     		 success: function(data){
     			 
     			 if(data == "success"){
-    				 alert("임시비밀번호가 메일발송했습니다. \n임시비밀번호로 로그인해주세요.");    				 
+    				 alert("임시비밀번호가 메일발송했습니다. \n임시비밀번호로 로그인해주세요."); 
+    				 location.href = "/customer/login";
     			 }else if(data == "fail"){
     				 alert("메일발송시 문제가 발생했습니다. 다시 진행해주세요. \n문제가 발생시 관리자에게 연락주세요.")
     			 }else if(data == "noMail"){

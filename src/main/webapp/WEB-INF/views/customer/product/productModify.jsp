@@ -50,7 +50,7 @@
 			    </div>			    
 			    <div class="col-md-5">
 			      <label for="upload">
-			      	<img alt="이미지 업로드" src="/customer/product/displayFile?fileName=<c:out value="${productVO.pro_img }"></c:out>&uploadPath=<c:out value="${productVO.pro_uploadpath }"></c:out>" height="230" width="230" id="previewImage" style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;">			      	
+			      	<img alt="이미지 업로드" src="/customer/product/displayFile?fileName=<c:out value="${productVO.pro_img }"></c:out>&uploadPath=<c:out value="${productVO.pro_uploadpath }"></c:out>" height="230" width="230" id="previewImage" style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse; border-radius: 5px;">			      	
 			      </label>
 			      <br>			      
 			      <b style="font-size: small; color: red;">* 상품 이미지는 640x640에 최적화 되어 있습니다.</b>
@@ -120,7 +120,7 @@
 			      <label for="pro_content" style="font-weight: 800;">상품설명</label>
 				</div>
 				<div class="col-md-10">
-			      <textarea id="pro_content" name="pro_content" rows="10" cols="100" style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;"><c:out value="${productVO.pro_content}" /></textarea>
+			      <textarea id="pro_content" name="pro_content" rows="10" cols="100" style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse; border-radius: 5px;"><c:out value="${productVO.pro_content}" /></textarea>
 			    </div>
 			  </div>
 			  <br><br>			 
@@ -290,7 +290,9 @@
 
 		$("#btnProductModify").on("click", function(){		
 			let result = confirm("상품을 수정하시겠습니까?");			
-			let pro_num = $(this).data("pro_num");			
+			let pro_num = $(this).data("pro_num");	
+			
+			// 상품가격 보여지는 쉼표처리이후 DB로 넘어갈때는 쉼표를 빼주는 구문
 			let value = $("#pro_price").val().replace(/[^\d]+/g, "");			
 			$("#pro_price").val(value);
 			

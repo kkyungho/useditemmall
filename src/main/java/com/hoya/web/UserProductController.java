@@ -25,6 +25,7 @@ import com.hoya.domain.Criteria;
 import com.hoya.domain.CustomerVO;
 import com.hoya.domain.PageDTO;
 import com.hoya.domain.ProductVO;
+import com.hoya.service.ReviewService;
 import com.hoya.service.UserProductService;
 import com.hoya.util.UploadFileUtils;
 
@@ -42,6 +43,9 @@ public class UserProductController {
 	
 	@Inject
 	private UserProductService service;
+	
+	@Inject
+	private ReviewService rService;
 
 	// 상품등록
 	@GetMapping("/productInsert")
@@ -301,11 +305,16 @@ public class UserProductController {
 	// 상품상세정보
 	@GetMapping("/productDetail")
 	public void productDetail(@RequestParam(value = "type", defaultValue = "Y" ) String type, @ModelAttribute("cri") Criteria cri, @RequestParam("cate_code") Integer cate_code, @RequestParam("pro_num") Integer pro_num, Model model) {
-		
+				
 		ProductVO vo = service.productDetail(pro_num);
 		vo.setPro_uploadpath(vo.getPro_uploadpath().replace("\\", "/"));
 		
-		model.addAttribute("productVO", vo);
+		int total = rService.getTotalCount(pro_num);
+		
+		model.addAttribute("pageMaker", new PageDTO(cri, total));	
+		model.addAttribute("reviewVO", rService.getReviewListWithPaging(cri, pro_num));
+		
+		model.addAttribute("productVO", vo);		
 		model.addAttribute("type", type);
 		
 	}
@@ -339,8 +348,8 @@ public class UserProductController {
 			vo.setPro_uploadpath(vo.getPro_uploadpath().replace("\\", "/"));
 		}
 		
+		model.addAttribute("hmal_id", service.getProductCount(hmal_id));
 		
-								
 		model.addAttribute("myproduct", list);		
 		
 	}

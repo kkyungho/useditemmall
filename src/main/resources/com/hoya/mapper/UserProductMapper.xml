@@ -76,16 +76,7 @@
 			</foreach>
 		</trim> 
 	</sql>
-	
-	 
-	<!-- 검색조건 -->
-	<!-- 
-	<sql id="criteria">
-		<if test="keyword != null">
-			pro_name like '%' || #{keyword} '%' and
-		</if>
-	</sql>
-	 -->
+		
 	<!-- 상품검색 -->
 	<select id="getProductList" resultType="com.hoya.domain.ProductVO">
 		
@@ -285,6 +276,18 @@
 		WHERE
 			hmal_id = #{hmal_id}
 			
+	</select>
+	
+	<!-- 내상점 등록상품 수량 -->
+	<select id="getProductCount" resultType="int">
+	
+		SELECT
+			count(*)
+		FROM
+			product_tbl
+		WHERE
+			hmal_id = #{hmal_id}
+	
 	</select>
 	
 	<select id="productModify" resultType="com.hoya.domain.ProductVO">

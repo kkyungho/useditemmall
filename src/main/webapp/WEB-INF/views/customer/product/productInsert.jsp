@@ -50,7 +50,7 @@
 			    </div>
 			    <div class="col-md-5">
 			      <label for="upload">
-			      	<img alt="이미지 업로드" src="/resources/img/camera.png" height="230" width="230" id="previewImage" style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;">			      	
+			      	<img alt="이미지 업로드" src="/resources/img/camera.png" height="230" width="230" id="previewImage" style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse; border-radius: 5px;">			      	
 			      </label>
 			      <br>		      
 			      <b style="font-size: small; color: red;">* 상품 이미지는 640x640에 최적화 되어 있습니다.</b>
@@ -111,7 +111,7 @@
 			      <label for="pro_content" style="font-weight: 800;">상품설명</label>
 				</div>
 				<div class="col-md-10">
-			      <textarea id="pro_content" name="pro_content" rows="10" cols="100" style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;" placeholder="상품 설명을 입력해주세요."></textarea>
+			      <textarea id="pro_content" name="pro_content" rows="10" cols="100" style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse; border-radius: 5px;" placeholder="상품 설명을 입력해주세요."></textarea>
 			    </div>
 			  </div>
 			  <br><br>			 

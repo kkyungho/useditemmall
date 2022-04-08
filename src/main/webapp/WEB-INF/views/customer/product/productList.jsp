@@ -47,7 +47,7 @@
       <c:if test="${not empty productList}">
       <c:forEach items="${productList }" var="productVO" varStatus="status">
         <div class="col-md-3">
-          <div class="card mb-4">
+          <div class="card mb-4" style="border-radius: 5px;">
           	<a href="${productVO.pro_num}" class="proDetail">                   
 				<img name="productImage" width="100%" height="225" src="/customer/product/displayFile?fileName=s_<c:out value="${productVO.pro_img }"></c:out>&uploadPath=<c:out value="${productVO.pro_uploadpath }"></c:out>">
 			</a>

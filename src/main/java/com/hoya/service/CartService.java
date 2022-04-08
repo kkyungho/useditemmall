@@ -13,4 +13,6 @@ public interface CartService {
 	
 	public void cartEmpty(Integer cart_code);
 	
+	public int getCartCount(String hmal_id);
+	
 }

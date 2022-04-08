@@ -12,4 +12,6 @@ public interface CartMapper {
 	public List<CartListVO> mycart(String hmal_id);
 	
 	public void cartEmpty(Integer cart_code);
+	
+	public int getCartCount(String hmal_id);
 }

@@ -3,7 +3,6 @@ package com.hoya.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hoya.domain.CategoryVO;
 import com.hoya.domain.Criteria;
@@ -38,9 +37,12 @@ public interface UserProductMapper {
 	public int productDelete(Integer pro_num);
 	
 	// 상품검색
-	public List<ProductVO> getProductList(Criteria cri);
+	public List<ProductVO> getProductList(Criteria cri);	
 	
-	// 상품총개수
+	// 상품 검색 상품수량
 	public int getTotalProduct(Criteria cri);
+	
+	// 내상점 상품개수
+	public int getProductCount(String hmal_id);
 
 }

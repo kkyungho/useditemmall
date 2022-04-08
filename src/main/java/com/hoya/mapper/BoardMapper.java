@@ -23,5 +23,8 @@ public interface BoardMapper {
 	
 	// 게시물 불러오기
 	public BoardVO get(Long brd_bno);
+	
+	// 게시판 수정하기
+	public int modify(BoardVO board);
 
 }

@@ -34,11 +34,11 @@
 		<ul class="nav nav-tabs" id="storelist" role="tablist">
 		  <li class="nav-item" id="myproduct_sub" role="presentation">
 		    <a class="nav-link " id="myproduct" data-toggle="tab" href="/customer/product/myproduct" 
-		    style="color: black; width: 200px; text-align: center; border-bottom-color: black;" role="tab" aria-selected="false">상품</a>
+		    style="color: black; width: 200px; text-align: center; font-weight: 600; border-bottom-color: black;" role="tab" aria-selected="false">상품</a>
 		  </li>
 		  <li class="nav-item" id="mycart_sub" role="presentation">
 		    <a class="nav-link active" id="mycart" data-toggle="tab" href="/cart/mycart" 
-		    style="color: black; width: 200px; text-align: center; border-top-color: black; border-left-color: black; border-right-color: black;" role="tab" aria-selected="true">찜</a>		    
+		    style="color: black; width: 200px; text-align: center; font-weight: 600; border-top-color: black; border-left-color: black; border-right-color: black;" role="tab" aria-selected="true">찜&nbsp;&nbsp;&nbsp;<span>${hmal_id }</span></a>		    
 		  </li>		  
 		</ul>
 	</div>	

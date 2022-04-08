@@ -29,7 +29,7 @@ public class AdUserController {
 	private AdUserService service;
 	
 	// 게시물목록
-	@GetMapping("/list")
+	@GetMapping("/list") 
 	public void list(@ModelAttribute("cri") Criteria cri, @ModelAttribute("hmal_id") String hmal_id, Model model) {
 		
 		List<CustomerVO> list = service.getListWithPaging(hmal_id, cri);

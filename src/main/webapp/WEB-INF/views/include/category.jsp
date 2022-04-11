@@ -15,36 +15,38 @@
 <body>
 
 <div class="container border-bottom" style="padding-top: 55px; padding-bottom: 5px;">
-	<div class="first dropdown drop-tabs">	
-	<button type="button" class="btn btn-outline-dark dropdown" style="font-size: 20px; font-weight: bold; margin-bottom: 5px;" data-toggle="dropdown">카테고리</button>
-		<div class="dropdown-menu">
-		  <c:forEach items="${userCategory}" var="categoryVO">
-			  <div class="dropdown-item">
-			    <a class="dropdown-item" data-toggle="dropdown" href="${categoryVO.cate_code }" role="button">${categoryVO.cate_name }</a>			    
-			  </div>
-			  <div class="hover-menu" style="text-align: center;">
-				  <div class="subCategory" id="subCategory_${categoryVO.cate_code }">
+	<div class="row">
+	<!-- 카테고리 -->
+	 <div class="col-md-3">
+	 	<div class="first dropdown drop-tabs">	
+		<button type="button" class="btn btn-outline-dark dropdown" style="font-size: 20px; font-weight: bold; margin-bottom: 5px;" data-toggle="dropdown">카테고리</button>
+			<div class="dropdown-menu">
+			  <c:forEach items="${userCategory}" var="categoryVO">
+				  <div class="dropdown-item">
+				    <a class="dropdown-item" data-toggle="dropdown" href="${categoryVO.cate_code }" role="button">${categoryVO.cate_name }</a>			    
 				  </div>
-			  </div>
-		  </c:forEach>
-		 </div>
-		 <!-- 검색창 -->	
-		 <!-- 		 	 		  	 
-		 <div class="second" style="text-align: center;"> 
-			 <form id="searchForm" action="/customer/product/search" method="get">
-			 <select name="type">
-				<option value=""
-					<c:out value="${pageMaker.cri.type == null? 'selected':'' }" />>--</option>
-				<option value="N"
-					<c:out value="${pageMaker.cri.type eq 'N'? 'selected':'' }" />>상품명</option>	
-			 </select>			 	  			  			  		
-			 <input type="search" name="keyword" style="width:400px;" 
-			  	value="<c:out value="${pageMaker.cri.keyword }" />">			 
-			 <button class="btn search_btn">검색</button>		
-			 </form>
-		 </div>
-		  -->
-		 <!-- 판매하기, 내상점 -->	 
+				  <div class="hover-menu" style="text-align: center;">
+					  <div class="subCategory" id="subCategory_${categoryVO.cate_code }">
+					  </div>
+				  </div>
+			  </c:forEach>
+			</div>
+		</div>
+	 </div>
+	 <!-- 검색창 -->
+	 <div class="col-md-5">
+		<form id="searchForm" action="/customer/product/search" method="get">			 		 	  			  			  		
+		<input type="text" name="keyword" style="width:500px; height:35px; float:left; border: 0.01px solid orange; border-collapse: collapse; border-radius: 5px;" 
+			 value="<c:out value="${pageMaker.cri.keyword }" />">	    
+		</form>
+	 </div>
+	 <div class="col-md-1">
+	 	<a class="search-icon" href="#">
+	 		<img src="/resources/img/search.png" style="height: 16px;">
+	 	</a>
+	 </div>	 
+	 <!-- 판매하기, 내상점 -->
+	 <div class="col-md-3">
 	 	 <!-- 로그인 상태가 아님 -->	 	 	 	 	 	
 		 <c:if test="${sessionScope.loginStatus == null }">	
 		 	 <a href="/customer/login">
@@ -54,7 +56,7 @@
 	    		<img alt="판매하기" src="/resources/img/selling.png" width="95" height="32" style="float: right;">  	
 	    	 </a>	    	 
 	   	 </c:if> 	
-	  	 	 <!-- 로그인 상태 -->
+	  	 <!-- 로그인 상태 -->
 	   	 <c:if test="${sessionScope.loginStatus != null }">    	 	 		 	 
 	   	 	 <a href="/customer/product/myproduct" >
 	    		<img alt="내상점" src="/resources/img/mypage.png" width="85" height="30" style="float: right; margin-left: 10px;">
@@ -62,8 +64,9 @@
 			 <a href="/customer/product/productInsert">
 			 	<img alt="판매하기" src="/resources/img/selling.png" width="95" height="32" style="float: right;">	    		  	
 	    	 </a>	    	 
-	   	 </c:if>	   	 	    	 
-	 </div>    	  	 	  
+	   	 </c:if>
+	 </div>	
+	</div>    	  	 	  
 </div> 
 
 <script>

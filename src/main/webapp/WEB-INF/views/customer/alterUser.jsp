@@ -33,14 +33,13 @@
 <br>
 <!-- 사이드메뉴 -->
 <%@include file="/WEB-INF/views/include/sideMenu.jsp" %>
-<br>
+
+<!-- 내 정보 수정 --> 
 <div class="container">
-  
-  <!-- 회원수정 -->  
   	<div class="container" style="width: 100%; background-color: white; font-size: 16px;">
   		<form class="alterUserForm" action="/customer/alterUser" method="post" id="alterUserForm">
 		  <div class="container" style="width: 900px; padding: 3% 2px;">
-		  	<h4>회원수정</h4><br><br>
+		  	<h4>내 정보 수정</h4><br><br>
 		  	<b style="margin-left: 160px;">✔ 아래 항목을 수정해주세요.</b><br><br>
 		    <div class="form-group" style="width: 100%; margin-left: 160px;">
 			    <label for="hmal_id">아이디</label><br />
@@ -50,8 +49,7 @@
 			<div class="form-group" style="width: 100%; margin-left: 160px;">
 	    		<label for="hmal_pw">비밀번호</label><br />
 	    		<input type="password" class="form-control" id="hmal_pw" name="hmal_pw"
-	    			style="max-width: 400px; width: calc(100% - 100px); margin-right: 5px; display: inline-block;" value='<c:out value="${customerVO.hmal_pw }" />' readonly>
-	    		<input type="button" class="btn btn-outline-dark" id="btnChangePw" name="btnChangePw" value="비밀번호변경"><br>
+	    			style="max-width: 400px; width: calc(100% - 100px); margin-right: 5px; display: inline-block;" value='<c:out value="${customerVO.hmal_pw }" />' readonly>	    			    		
 	    	</div>	    		    	
 			<div class="form-group" style="width: 100%; margin-left: 160px;">
 			    <label for="hmal_name">이름</label>
@@ -80,7 +78,7 @@
       		 		 style="max-width: 400px;">
       		 </div><br>      		  
 	  		 <div class="form-group text-center">
-	  		 	<button type="button" id="btnAlterUser" class="btn btn-outline-dark">회원수정</button>
+	  		 	<button type="button" id="btnAlterUser" class="btn btn-outline-dark">수정</button>
 	  			<button type="reset" id="btnCancle" class="btn btn-danger">취소</button>
 	  		 </div> 
 	  	   </div> 
@@ -137,27 +135,21 @@
 			
 			
 		});
+				
 		
-		// 비밀번호변경버튼 클릭시
-		$("#btnChangePw").on("click", function(){
-			
-			location.href = "/customer/changeOut";
-		});
-		
-		/* 취소 버튼 클릭 시 */
+		// 취소 버튼 클릭 시 
 		$("#btnCancle").on("click", function(){
 			
 			console.log("취소버튼");
 			
-			let result = confirm("회원수정을 취소하시겠습니까?");
+			let result = confirm("수정을 취소하시겠습니까?");
 			
 			if(result){
 				location.href="/"; 
 			} else{}
 		});
 		
-		
-		//폼에서 일반버튼<input type="button">을 클릭하면 호출되는 이벤트설정
+				
 		
 				
 		

@@ -28,8 +28,8 @@
 	    	<a class="btn_logout" href="/customer/logout" style="text-decoration: none;">
 	    		<button type="button" class="btn btn-outline-dark">로그아웃</button>
 	    	</a>
-	    	<a class="btn_alterUser" href="/customer/alterUser" style="text-decoration: none;">
-	    		<button type="button" class="btn btn-outline-primary">회원수정</button>
+	    	<a class="btn_mypage" href="/customer/mypage" style="text-decoration: none;">
+	    		<button type="button" class="btn btn-outline-primary">마이페이지</button>
 	    	</a>    	   	    	
 	     </div>	
 	    </c:if>       

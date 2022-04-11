@@ -35,15 +35,18 @@
   		</a>  				  	  		  	
 	  </div>
 	  <br>
-      <div class="row">
-      <!-- 등록상품이 없을 때 -->
-      <c:if test="${empty productList}">
-		<tr role="row"
-			class="<c:if test="${status.count % 2 == 0 }">odd</c:if><c:if test="${status.count % 2 != 0 }">even</c:if>">
-			<td>상품이 없습니다.</td>
-		</tr>
-	  </c:if>
+	  <!-- 등록상품이 없을 때 -->
+      <div class="container" style="margin-left: 200px;">	      
+	      <c:if test="${empty productList}">
+			<tr role="row"
+				class="<c:if test="${status.count % 2 == 0 }">odd</c:if><c:if test="${status.count % 2 != 0 }">even</c:if>">
+				<td colspan="6" ><img src="/resources/img/productEmpty.png"></td>
+			</tr>
+		  </c:if>
+	  </div>
+	  
 	  <!-- 등록상품이 있을 때 -->
+	  <div class="row">	  
       <c:if test="${not empty productList}">
       <c:forEach items="${productList }" var="productVO" varStatus="status">
         <div class="col-md-3">

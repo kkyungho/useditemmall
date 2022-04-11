@@ -11,7 +11,7 @@ public interface AdUserService {
 	public List<CustomerVO> getList();
 	
 	// 검색기능이 포함된 필드(type, keyword)가 사용하게 됨.
-	public List<CustomerVO> getListWithPaging(String hmal_id, Criteria cri);
+	public List<CustomerVO> getListWithPaging(Criteria cri);
 	
 	// 검색기능 포함.
 	public int getTotalCount(String hmal_id);

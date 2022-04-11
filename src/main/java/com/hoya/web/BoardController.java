@@ -48,12 +48,14 @@ public class BoardController {
 		
 		service.insert(board);
 		
-		return "redirect:/";
+		return "redirect:/board/list";
 	}
 	
 	// 게시물 목록
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
+		
+		cri.setAmount(5);
 		
 		log.info("list: " + cri);
 		
@@ -83,6 +85,15 @@ public class BoardController {
 	public String modify(BoardVO board, Criteria cri, RedirectAttributes rttr) {
 		
 		service.modify(board);
+		
+		return "redirect:/board/list" + cri.getListLink();
+	}
+	
+	// 게시물 삭제
+	@PostMapping("/delete")
+	public String delete(@RequestParam("brd_bno") Long brd_bno, Criteria cri, RedirectAttributes rttr) {
+		
+		service.delete(brd_bno);
 		
 		return "redirect:/board/list" + cri.getListLink();
 	}

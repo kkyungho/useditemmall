@@ -41,7 +41,7 @@
   
   <!-- 게시판 -->  
   	<div class="container" style="width: 100%; background-color: white; font-size: 16px;">
-  		<form class="modifyForm" action="/board/modify" method="get" id="modifyForm">
+  		<form class="modifyForm" action="/board/modify" method="post" id="modifyForm">
 		  <div class="container" style="width: 900px; padding: 3% 2px;">
 		  	<h4>Q&amp;A게시판</h4><br><br>
 		  	 <div class="form-row">			    
@@ -76,6 +76,7 @@
 	  		 <div class="form-row" style="float: right; margin-top: 10px;">
 	  		 	<input type="hidden" id="brd_bno" name="brd_bno" value='<c:out value="${ board.brd_bno}" />'>
 	  		 	<button type="button" id="btnModify" data-brd_bno="${board.brd_bno }" class="btn btn-dark" >수정</button>&nbsp;
+	  		 	<button type="button" id="btnDelete" class="btn btn-danger">삭제</button>&nbsp;
 	  			<button type="reset" id="btnCancle" class="btn btn-light">취소</button>&nbsp;
 	  		 </div> 
 	  	   </div> 
@@ -132,6 +133,15 @@
 			location.href="/board/list"; 
 		} else{}
 	});
+    
+    // 삭제버튼 클릭시
+	$("#btnDelete").on("click", function(){
+
+	      if(confirm("게시물을 삭제하겠습니까?")){
+	        form.attr("action", "/board/delete");
+	        form.submit();
+	      }
+	    });
 
   	
     

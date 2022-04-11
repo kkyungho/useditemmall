@@ -13,7 +13,7 @@ public interface AdUserMapper {
 	public List<CustomerVO> getList();
 	
 	// 검색기능이 포함된 필드(type, keyword)가 사용하게 됨.
-	public List<CustomerVO> getListWithPaging(@Param("hmal_id") String hmal_id, @Param("cri") Criteria cri);
+	public List<CustomerVO> getListWithPaging(Criteria cri);
 	
 	// 검색기능 포함.
 	public int getTotalCount(String hmal_id);

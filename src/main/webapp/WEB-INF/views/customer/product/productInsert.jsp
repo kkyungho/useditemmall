@@ -35,10 +35,9 @@
 <br>
 <!-- 사이드메뉴 -->
 <%@include file="/WEB-INF/views/include/sideMenu.jsp" %>
-<br>
+
+<!-- 판매하기 -->  
 <div class="container">
-	  
-  <!-- 판매하기 -->  
   	<div class="container" style="width: 100%; background-color: white; font-size: 16px;">
   		<form class="insertForm" action="/customer/product/productInsert" method="post" id="insertForm" enctype="multipart/form-data">
 		  <div class="container" style="width: 900px; padding: 3% 2px;">
@@ -111,7 +110,8 @@
 			      <label for="pro_content" style="font-weight: 800;">상품설명</label>
 				</div>
 				<div class="col-md-10">
-			      <textarea id="pro_content" name="pro_content" rows="10" cols="100" style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse; border-radius: 5px;" placeholder="상품 설명을 입력해주세요."></textarea>
+			      <textarea id="pro_content" name="pro_content" rows="10" cols="100" wrap="hard"
+			      	style="border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse; border-radius: 5px;" placeholder="상품 설명을 입력해주세요."></textarea>
 			    </div>
 			  </div>
 			  <br><br>			 

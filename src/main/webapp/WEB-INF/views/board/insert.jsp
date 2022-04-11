@@ -59,7 +59,7 @@
 				</div>				
 				<div class="col-md-9">
 					<input type="text" class="form-control" id="hmal_name" name="hmal_name"
-						style="max-width:400px; display: inline-block;" value='<c:out value="${customerVO.hmal_name }" />'>
+						style="max-width:400px; display: inline-block;">
 				</div>
 			 </div>
 			 <br>

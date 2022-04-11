@@ -15,9 +15,9 @@ public class CustomerVO {
 	private String hmal_addr;
 	private String hmal_deaddr;
 	private String hmal_phone;	
-	private Date hmal_date_sub;
-	private Date hmal_date_up;
-	private Date hmal_date_last;		
+	private Date hmal_datesub;
+	private Date hmal_updatedate;
+	private Date hmal_lastlogin;		
 	
 	
 }

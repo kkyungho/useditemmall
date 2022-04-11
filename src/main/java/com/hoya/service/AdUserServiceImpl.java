@@ -28,9 +28,9 @@ public class AdUserServiceImpl implements AdUserService {
 	}
 
 	@Override
-	public List<CustomerVO> getListWithPaging(String hmal_id, Criteria cri) {
+	public List<CustomerVO> getListWithPaging(Criteria cri) {
 		
-		return mapper.getListWithPaging(hmal_id, cri);
+		return mapper.getListWithPaging(cri);
 	}
 
 	@Override

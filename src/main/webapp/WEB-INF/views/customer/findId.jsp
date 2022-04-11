@@ -14,6 +14,12 @@
 	    h2{
 	    	text-align : center;    	
 	    }
+	    
+	    form.findIdForm{
+		  border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;
+		  border-radius: 5px;
+		  padding: 15px;
+	    } 
 	    	    
     
     </style>
@@ -28,25 +34,27 @@
 <br>
 <!-- 사이드메뉴 -->
 <%@include file="/WEB-INF/views/include/sideMenu.jsp" %>
-<br>
 
+<!-- 로그인 --> 
 <div class="container">
-  
-  <!-- 로그인 -->  
   <section class="content container-fluid">
-     <div class="container" style="width: 450px; height: 420px; background-color: white; margin-top: 30px;">
-         <form id="findIdForm" class="findIdForm" action="/customer/findId" method="post" style="padding: 50px 10px;">
-             <h2 class="form-findId-heading">아이디찾기</h2>
-             <br><br>
-             <label for="hmal_name">이름</label>
-             <input type="text" id="hmal_name" name="hmal_name" class="form-control" placeholder="이름을 입력해주세요." 
-             	style="margin-bottom: 15px;" required autofocus>  
-             <label for="hmal_phone">핸드폰번호</label>
-             <input type="text" id="hmal_phone" name="hmal_phone" class="form-control" placeholder="핸드폰번호를 입력해주세요." required>
-             <br>                    
-          <div style="text-align: center">          	
-            <button type="button"  id="btnFindId" class="btn btn-warning center">다음</button>
-          </div>
+     <div class="container" style="width: 100%; background-color: white; font-size: 16px;">
+         <form id="findIdForm" class="findIdForm" action="/customer/findId" method="post">
+         	<div class="container" style="width: 900px; padding: 3% 2px;">
+	             <h2>아이디찾기</h2>
+	             <br>
+	             <div class="form-group" style="margin-left: 250px;">
+		             <label for="hmal_name">이름</label>
+		             <input type="text" id="hmal_name" name="hmal_name" class="form-control" placeholder="이름을 입력해주세요." 
+		             	style="margin-bottom: 15px; max-width: 400px;" required autofocus>  
+		             <label for="hmal_phone">핸드폰번호</label>
+		             <input type="text" id="hmal_phone" name="hmal_phone" class="form-control" placeholder="핸드폰번호를 입력해주세요." 
+		             	style="max-width: 400px;" required>
+	             </div>                  
+		         <div style="text-align: center">          	
+		           <button type="button"  id="btnFindId" class="btn btn-warning center">다음</button>
+		         </div>
+	         </div>
          </form>
      </div>
   </section>

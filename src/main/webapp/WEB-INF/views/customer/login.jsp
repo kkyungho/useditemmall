@@ -14,6 +14,12 @@
 	    h2{
 	    	text-align : center;    	
 	    }
+	    
+	    form.loginForm{
+		  border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;
+		  border-radius: 5px;
+		  padding: 15px;
+	    }
 	    	    
     
     </style>
@@ -28,25 +34,27 @@
 <br>
 <!-- 사이드메뉴 -->
 <%@include file="/WEB-INF/views/include/sideMenu.jsp" %>
-<br>
 
+<!-- 로그인 --> 
 <div class="container">
-  
-  <!-- 로그인 -->  
   <section class="content container-fluid">
-     <div class="container" style="width: 450px; height: 420px; background-color: white; margin-top: 30px;">
+     <div class="container" style="width: 100%; background-color: white; font-size: 16px;">
          <form id="loginForm" class="loginForm" action="/customer/login" method="post" style="padding: 50px 10px;">
-             <h2 class="form-login-heading">로그인</h2>
-             <br><br>
-             <label for="hmal_id" class="sr-only">아이디</label>
-             <input type="text" id="hmal_id" name="hmal_id" class="form-control" placeholder="아이디" 
-             	style="margin-bottom: 15px;" required autofocus>  
-             <label for="hmal_pw" class="sr-only">비밀번호</label>
-             <input type="password" id="hmal_pw" name="hmal_pw" class="form-control" placeholder="비밀번호" required><br><br>                    
-          <div style="text-align: center">          	
-            <button type="button"  id="btnlogin" class="btn btn-warning center">로그인</button>
-            <button type="button"  id="btnFindId" class="btn btn-light center">아이디 찾기</button>	                  
-         	<button type="button"  id="btnFindPw" class="btn btn-light center">비밀번호 찾기</button>                                
+         	<div class="container" style="width: 900px; padding: 3% 2px;">
+	            <h2>로그인</h2>
+	            <br>
+	            <div class="form-group" style="margin-left: 250px;"> 
+		            <label for="hmal_id" class="sr-only">아이디</label>
+		            <input type="text" id="hmal_id" name="hmal_id" class="form-control" placeholder="아이디" 
+		             	style="margin-bottom: 15px; max-width: 400px;" required autofocus>  
+		            <label for="hmal_pw" class="sr-only">비밀번호</label>
+		            <input type="password" id="hmal_pw" name="hmal_pw" class="form-control" placeholder="비밀번호" 
+		            	style="max-width: 400px;" required>
+            	</div>                  
+		        <div style="text-align: center">	                    	
+		          <button type="button"  id="btnlogin" class="btn btn-warning center">로그인</button>
+		          <button type="button"  id="btnFindIdPw" class="btn btn-light center">아이디 찾기/비밀번호찾기</button>
+		        </div>
           </div>
          </form>
      </div>
@@ -106,14 +114,9 @@
         });
       });
       // 아이디 찾기
-      $("#btnFindId").on("click", function(){
+      $("#btnFindIdPw").on("click", function(){
     	 location.href = "/customer/findId"; 
-      });
-    
-      // 비밀번호 찾기
-      $("#btnFindPw").on("click", function(){
-    	 location.href = "/customer/findPw"; 
-      });
+      });      
       
       
   });

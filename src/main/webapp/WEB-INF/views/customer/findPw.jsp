@@ -13,6 +13,12 @@
     
     	h2{
 	    	text-align : center;    	
+	    } 
+	    
+	    form.findPwForm{
+		  border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;
+		  border-radius: 5px;
+		  padding: 15px;
 	    }   	  
 	  		
 	  	  
@@ -29,23 +35,25 @@
 <br>
 <!-- 사이드메뉴 -->
 <%@include file="/WEB-INF/views/include/sideMenu.jsp" %>
-<br>
+
+<!-- 비밀번호 찾기 -->  
 <div class="container">
-  
-  <!-- 회원가입 폼 작업 -->  
   <section class="content container-fluid">
-  	<div class="container" style="width: 450px; height: 420px; background-color: white; margin-top: 30px;">
-  		<form id="findPwForm" class="findPwForm" action="/customer/changeOut" method="post" style="padding: 50px 10px;">
-		  <h2 class="form-findPw-heading">비밀번호찾기</h2>
-             <br><br>
-             <label for="hmal_name">이름</label>
-             <input type="text" class="form-control" id="hmal_name" name="hmal_name"
-	    			placeholder="이름을 입력해주세요." style="max-width: 630px;"><br>
-             <label for="hmal_email">이메일주소</label>
-             <input type="text" class="form-control" id="hmal_email" name="hmal_email"
-	    			placeholder="가입하신 이메일주소를 입력해주세요." style="max-width: 630px;"><br>                                 
-          <div style="text-align: center">          	
-            <button type="button"  id="btnMailSend" class="btn btn-warning center">찾기</button>
+  	<div class="container" style="width: 100%; background-color: white; font-size: 16px;">
+  		<form id="findPwForm" class="findPwForm" action="/customer/changeOut" method="post">
+  		  <div class="container" style="width: 900px; padding: 3% 2px;">
+			  <h2>비밀번호찾기</h2><br>
+			  	<div class="form-group" style="margin-left: 250px;">             
+		            <label for="hmal_name">이름</label>
+		            <input type="text" class="form-control" id="hmal_name" name="hmal_name"
+			    		placeholder="이름을 입력해주세요." style="max-width: 400px;"><br>
+		            <label for="hmal_email">이메일주소</label>
+		            <input type="text" class="form-control" id="hmal_email" name="hmal_email"
+			    		placeholder="가입하신 이메일주소를 입력해주세요." style="width: 400px;">
+		    	</div>                                
+	          <div style="text-align: center">          	
+	            <button type="button"  id="btnMailSend" class="btn btn-warning center">찾기</button>
+	          </div>
           </div>          
 		</form>	 
 	  </div> 

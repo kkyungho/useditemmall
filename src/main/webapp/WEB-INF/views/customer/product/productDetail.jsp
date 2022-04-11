@@ -65,7 +65,7 @@
       <br><br>
       <div class="nav">
 		<ul class="nav nav-tabs" id="myTab" role="tablist">
-		  <li class="nav-item" role="presentation">
+		  <li class="nav-item" role="presentation" >
 		    <a class="nav-link active" id="productInfo_tap" data-toggle="tab" href="#product_info"
 		    style="color: black; width: 200px; text-align: center; font-weight: 600;" role="tab" aria-controls="product_info" aria-selected="true">상품정보</a>
 		  </li>
@@ -125,7 +125,7 @@
 									<tr>												
 										<td>
 											<input type="hidden" name="rew_num" value="${reviewVO.rew_num}">
-											<textarea name="rew_content" rows="3" style="width: 100%;" readonly>${reviewVO.rew_content }</textarea>
+											<textarea name="rew_content" rows="3" style="width: 100%;" wrap="hard" readonly>${reviewVO.rew_content }</textarea>
 											<br> ${fn:substring(reviewVO.hmal_id, 0, 1)  }**** | <fmt:formatDate value="${reviewVO.rew_regdate }" pattern="yyyy-MM-dd HH:mm" />
 										</td>
 										<td>

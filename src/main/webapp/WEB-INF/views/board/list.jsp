@@ -77,7 +77,6 @@
 								</tr>
 							</thead>
 							<tbody>
-
 								<c:forEach items="${list}" var="board" varStatus="status">
 									<tr role="row"
 										class="<c:if test="${status.count % 2 == 0 }">odd</c:if><c:if test="${status.count % 2 != 0 }">even</c:if>">
@@ -95,12 +94,11 @@
 									</tr>
 								</c:forEach>
 							</tbody>
-
 						</table>
 					</div>
 				</div>
 				<div class="container">
-					<div class="col-sm-10 dataTables_info" style="margin-left: 120px;">
+					<div class="col-sm-10 dataTables_info" style="margin-left: 200px;">
 						<form id="searchForm" action="/board/list" method="get">
 							<select name="type">
 								<option value=""
@@ -109,22 +107,17 @@
 									<c:out value="${pageMaker.cri.type eq 'T'? 'selected':'' }" />>제목</option>
 								<option value="C"
 									<c:out value="${pageMaker.cri.type eq 'C'? 'selected':'' }" />>내용</option>
-								<option value="W"
-									<c:out value="${pageMaker.cri.type eq 'W'? 'selected':'' }" />>작성자</option>
-								<option value="TC"
-									<c:out value="${pageMaker.cri.type eq 'TC'? 'selected':'' }" />>제목	or 내용</option>
-								<option value="TW"
-									<c:out value="${pageMaker.cri.type eq 'TW'? 'selected':'' }" />>제목	or 작성자</option>
-								<option value="TCW"
-									<c:out value="${pageMaker.cri.type eq 'TCW'? 'selected':'' }" />>제목 or 내용 or 작성자</option>
+								<option value="N"
+									<c:out value="${pageMaker.cri.type eq 'N'? 'selected':'' }" />>작성자</option>								
 							</select> 
 							<input type="text" name="keyword" style="width: 300px;" value="<c:out value="${pageMaker.cri.keyword }" />">
 							<input type="hidden" name="pageNum"	value="${pageMaker.cri.pageNum}"> 
 							<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 							<button class="btn btn-primary">검색</button>
 						</form>
-					  </div>
-						<div class="col-sm-2" style="margin-left: 350px;">
+					  </div>						
+					</div>
+					<div class="col-sm-12" style="margin-left: 400px;">
 							<div class="dataTables_paginate paging_simple_numbers"
 								id="example2_paginate">
 								<ul class="pagination">
@@ -153,12 +146,11 @@
 							<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
 							<!-- 글번호추가-->
 						</form>
-					</div>
 				  </div>
 				</div>
-	  	  </div> 
-		</form>	 
-	  </div>  
+		     </div>
+		    </form>
+	  	  </div>
 	  <%@include file="/WEB-INF/views/include/footer.jsp" %>
 </div>
 

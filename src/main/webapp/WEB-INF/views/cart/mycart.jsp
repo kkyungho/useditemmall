@@ -43,14 +43,18 @@
 		</ul>
 	</div>	
 	<br>	
-	<div class="tab-content" id="nav-tabContent">		
-	    <c:if test="${empty mycart}">
+	<!-- 찜목록 -->
+	<!-- 찜상품이 없을 때 -->
+	<div class="tab-content" id="nav-tabContent" style="margin-left: 200px;">		
+	    <c:if test="${empty mycart}" >
 			<tr role="row"
 				class="<c:if test="${status.count % 2 == 0 }">odd</c:if><c:if test="${status.count % 2 != 0 }">even</c:if>">
-				<td colspan="6">찜한 상품이 없습니다.</td>
+				<td colspan="6"><img src="/resources/img/productEmpty.png"></td>
 			</tr>
 		</c:if>
-		<!-- 찜목록 -->
+	</div>
+	<!-- 찜상품이 있을 때 -->	
+	<div class="tab-content" id="nav-tabContent">
 		<c:if test="${not empty mycart}">	     
 	    <div class="tab-pane fade fade show active" id="mycart" role="tabpanel" aria-labelledby="cart-tab">
 	  	<div class="row">

@@ -38,8 +38,7 @@ public class OrderServiceImpl implements OrderService {
 			oDetail.setOrd_code(ord_code);
 			mapper.orderDetailInsert(oDetail);
 		});
-		
-		// 3)장바구니 삭제
+				
 		
 	}
 

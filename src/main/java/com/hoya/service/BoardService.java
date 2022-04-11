@@ -22,5 +22,8 @@ public interface BoardService {
 	
 	// 게시판 수정하기
 	public int modify(BoardVO board);
+	
+	// 게시판 삭제하기
+	public int delete(Long brd_bno);
 
 }

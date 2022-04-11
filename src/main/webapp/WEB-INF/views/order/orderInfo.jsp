@@ -137,12 +137,14 @@
 	<div class="col-md-10">
 	    <textarea rows="3" style="width: 50%" name="ord_message" id="ord_message"></textarea>
 	</div>
+	<!-- 
 	<div class="col-md-2">
 	    <label for="ord_depositor">무통장 입금자명</label>
 	</div>
 	<div class="col-md-10">
 	    <input type="text" style="width: 250px" id="ord_depositor" name="ord_depositor">(주문자와 같을경우 생략가능)
 	</div>
+	 -->
 	<br><br>
 	<div class="col-md-12" style="text-align: center; padding-top: 20px;">
 		<button type="submit" id="btnOrder" name="btnOrder" class="btn btn-outline-dark">주문하기</button>

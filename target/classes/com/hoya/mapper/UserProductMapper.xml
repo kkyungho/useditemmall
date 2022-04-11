@@ -116,6 +116,8 @@
 				FROM 
 					product_tbl
 				WHERE 
+					pro_name like '%' || #{keyword} || '%'
+				AND
 		]]>     
 		    
 		<include refid="criteria"></include>

@@ -36,10 +36,9 @@
 <br>
 <!-- 사이드메뉴 -->
 <%@include file="/WEB-INF/views/include/sideMenu.jsp" %>
-<br>
+
+<!-- 게시판 -->  
 <div class="container">
-  
-  <!-- 게시판 -->  
   	<div class="container" style="width: 100%; background-color: white; font-size: 16px;">
   		<form class="getForm" action="/board/get" method="get" id="getForm">  		
 		  <div class="container" style="width: 900px; padding: 3% 2px;">
@@ -81,7 +80,7 @@
 	  	   </div> 
 		</form>	 
 	  </div>  
-	  <%@include file="/WEB-INF/views/include/footer.jsp" %>
+<%@include file="/WEB-INF/views/include/footer.jsp" %>
 </div>
 
 

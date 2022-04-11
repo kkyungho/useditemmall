@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hoya.domain.BoardVO;
 import com.hoya.domain.Criteria;
@@ -30,9 +31,11 @@ public class AdUserController {
 	
 	// 게시물목록
 	@GetMapping("/list") 
-	public void list(@ModelAttribute("cri") Criteria cri, @ModelAttribute("hmal_id") String hmal_id, Model model) {
+	public void list(@ModelAttribute("cri") Criteria cri, @RequestParam(value = "hmal_id", required = false) String hmal_id, Model model) {
 		
-		List<CustomerVO> list = service.getListWithPaging(hmal_id, cri);
+		cri.setAmount(5);
+		
+		List<CustomerVO> list = service.getListWithPaging(cri);
 		model.addAttribute("list", list);
 		
 		int total = service.getTotalCount(hmal_id);

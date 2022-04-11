@@ -53,5 +53,11 @@ public class AdBoardController {
 		BoardVO board = service.get(brd_bno);
 		model.addAttribute("board", board);
 	}
+	
+	// 문의하기
+	@GetMapping("/answer")
+	public void answer() {
+		
+	}
 
 }

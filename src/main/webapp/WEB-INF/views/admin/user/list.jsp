@@ -68,19 +68,10 @@ desired effect
 												class="table table-bordered table-hover dataTable"
 												role="grid" aria-describedby="example2_info">
 												<thead>
-													<tr role="row">
-														<th class="sorting_asc" tabindex="0"
-															aria-controls="example2" rowspan="1" colspan="1"
-															aria-sort="ascending"
-															aria-label="Rendering engine: activate to sort column descending">번호</th>
-														<th class="sorting" tabindex="0" aria-controls="example2"
+													<tr role="row">														
+														<th class="sorting_asc" tabindex="0" aria-controls="example2"
 															rowspan="1" colspan="1"
-															aria-label="Browser: activate to sort column ascending">아이디</th>
-														<!-- 
-														<th class="sorting" tabindex="0" aria-controls="example2"
-															rowspan="1" colspan="1"
-															aria-label="Platform(s): activate to sort column ascending">비밀번호</th>
-															 -->
+															aria-label="Browser: activate to sort column ascending">아이디</th>														
 														<th class="sorting" tabindex="0" aria-controls="example2"
 															rowspan="1" colspan="1"
 															aria-label="Engine version: activate to sort column ascending">이름</th>
@@ -102,33 +93,29 @@ desired effect
 														<th class="sorting" tabindex="0" aria-controls="example2"
 															rowspan="1" colspan="1"
 															aria-label="CSS grade: activate to sort column ascending">가입일</th>
-														<th class="sorting" tabindex="0" aria-controls="example2"
-															rowspan="1" colspan="1"
-															aria-label="CSS grade: activate to sort column ascending">수정일</th>
-														<th class="sorting" tabindex="0" aria-controls="example2"
-															rowspan="1" colspan="1"
-															aria-label="CSS grade: activate to sort column ascending">접속시간</th>
 													</tr>
 												</thead>
 												<tbody>
 
-													<c:forEach items="${list}" var="customer" varStatus="status">
+													<c:forEach items="${list}" var="customerVO" varStatus="status">
 														<tr role="row"
-															class="<c:if test="${status.count % 2 == 0 }">odd</c:if><c:if test="${status.count % 2 != 0 }">even</c:if>">
-															<td class="sorting_1"><c:out value="${customer.brd_bno }"></c:out></td>
-															<td><a class="move" href="<c:out value="${customer.brd_bno }">
-																</c:out>"><c:out value="${customer.hmal_id }"></c:out>																
+															class="<c:if test="${status.count % 2 == 0 }">odd</c:if><c:if test="${status.count % 2 != 0 }">even</c:if>">															
+															<td><a class="move"
+																href='<c:out value="${customerVO.hmal_id }"></c:out>' data-hmal_id='<c:out value="${customerVO.hmal_id }"></c:out>'>
+																<c:out value="${customerVO.hmal_id }"></c:out>																
 																</a>
 															</td>
-															<td><c:out value="${customer.hmal_name }"></c:out></td>
-															<td><c:out value="${customer.hmal_email }"></c:out></td>
-															<td><c:out value="${customer.hmal_zipcode }"></c:out></td>
-															<td><c:out value="${customer.hmal_deaddr }"></c:out></td>
-															<td><c:out value="${customer.hmal_phone }"></c:out></td>															
-															<td><fmt:formatDate value="${customer.hmal_datesub }"
+															<td><c:out value="${customerVO.hmal_name }"></c:out></td>
+															<td><c:out value="${customerVO.hmal_email }"></c:out></td>
+															<td><c:out value="${customerVO.hmal_zipcode }"></c:out></td>
+															<td><c:out value="${customerVO.hmal_addr }"></c:out></td>
+															<td><c:out value="${customerVO.hmal_deaddr }"></c:out></td>	
+															<td><c:out value="${customerVO.hmal_phone }"></c:out></td>														
+															<td><fmt:formatDate value="${customerVO.hmal_datesub }"
 																	pattern="yyyy-MM-dd" /></td>
-															<td><fmt:formatDate value="${customer.hmal_updatedate }"
-																	pattern="yyyy-MM-dd" /></td>
+															<td><input type="button" class="btn btn-primary" value="수정">
+																<input type="button" class="btn btn-danger" value="삭제"></td>
+																												
 														</tr>
 													</c:forEach>
 												</tbody>
@@ -142,11 +129,11 @@ desired effect
 												<select name="type">
 													<option value=""
 														<c:out value="${pageMaker.cri.type == null? 'selected':'' }" />>--</option>
-													<option value="T"
+													<option value="I"
 														<c:out value="${pageMaker.cri.type eq 'I'? 'selected':'' }" />>아이디</option>
-													<option value="C"
+													<option value="N"
 														<c:out value="${pageMaker.cri.type eq 'N'? 'selected':'' }" />>이름</option>
-													<option value="W"
+													<option value="E"
 														<c:out value="${pageMaker.cri.type eq 'E'? 'selected':'' }" />>이메일</option>													
 												</select> 
 												<input type="text" name="keyword" value="<c:out value="${pageMaker.cri.keyword }" />">
@@ -155,10 +142,6 @@ desired effect
 												<button class="btn btn-primary">Search</button>
 											</form>
 
-											<!--
-											<div class="dataTables_info" id="example2_info" role="status"
-												aria-live="polite">Showing 1 to 10 of 57 entries</div>
-												-->
 										    </div>
 											<div class="col-sm-7">
 												<div class="dataTables_paginate paging_simple_numbers"
@@ -181,7 +164,7 @@ desired effect
 												</div>
 											</div>
 											<!--prev,page number,next 를 클릭하면 아래 form이 작동된다.-->
-											<form id="actionForm" action="/board/list" method="get">
+											<form id="actionForm" action="/board/user/list" method="get">
 												<!--list.jsp 가 처음 실행되었을 때 pageNum의 값을 사용자가 선택한 번호의 값으로 변경-->
 												<input type="hidden" name="pageNum"	value="${pageMaker.cri.pageNum}"> 
 												<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
@@ -215,22 +198,21 @@ desired effect
 	<script>
 		$(document).ready(function() {
 
-				let actionForm = $("#actionForm");
+				let actionForm = $("#actionForm");				
 				
 				// 리스트에서 제목 클릭시 동작
 				$(".move").on("click", function(e) {
 
-					e.preventDefault(); // <a>태그의 기본적인 이벤트기능을 취소. 즉 링크기능취소.      
+					e.preventDefault(); // <a>태그의 기본적인 이벤트기능을 취소. 즉 링크기능취소.  
+					
+					let hmal_id = $(this).data("hmal_id");
+					
+					console.log("아이디: " + hmal_id);
+						
+					/*
+					actionForm.attr("action", "/board/user/info");
 
-					let bno = $(this).attr("href");
-					console.log("글번호" + bno);
-
-					// location.href = "/board/get?bno=" + bno; // /board/get?bno=1
-
-					actionForm.append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");										
-					actionForm.attr("action", "/board/get");
-
-				    actionForm.submit();
+				    actionForm.submit();*/
 
 				});
 			
@@ -243,7 +225,7 @@ desired effect
 
 					console.log("click");
 
-					actionForm.submit();
+					//actionForm.submit();
 				});
 			});
 	</script>

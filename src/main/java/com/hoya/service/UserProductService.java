@@ -44,5 +44,6 @@ public interface UserProductService {
 	
 	// 내상점 상품개수
 	public int getProductCount(String hmal_id);
+	
 
 }

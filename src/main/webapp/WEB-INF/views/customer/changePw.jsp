@@ -14,7 +14,13 @@
 	  
 		h4{
 		   text-align : center;    	
-		  }
+		}
+		
+		form.changePwForm{
+		  border: 0.01px solid rgb(224, 224, 224); border-collapse: collapse;
+		  border-radius: 5px;
+		  padding: 15px;
+	    } 
 		  
 	  	  
   	</style>
@@ -30,37 +36,27 @@
 <br>
 <!-- 사이드메뉴 -->
 <%@include file="/WEB-INF/views/include/sideMenu.jsp" %>
-<br>
+
+<!-- 비밀번호변경 -->
 <div class="container">
-  
-  <!-- 비밀번호변경/회원탈퇴 -->
   <section class="content container-fluid">
-  	<div class="container" style="width: 100%; min-width: 900px; background-color: white; font-size: 16px; margin-top: 30px;">
-  		<form class="changeOutForm" action="/customer/changeOut" method="post">
-		  <div class="container" style="width: 800px; padding: 3% 2px;">
-		  	<h4>비밀번호 변경/회원탈퇴</h4>
-		  	<br><br>		    
-			<div class="form-group" style="margin-left: 60px;">
+  	<div class="container" style="width: 100%; background-color: white; font-size: 16px;">
+  		<form class="changePwForm" action="/customer/changePw" method="post">
+		  <div class="container" style="width: 900px; padding: 3% 2px;">
+		  	<h4>비밀번호 변경</h4>
+		  	<br>		    
+			<div class="form-group" style="margin-left: 200px;">
 	    		<label for="ori_hmal_pw">현재 비밀번호</label>
 	    		<input type="password" class="form-control" id="ori_hmal_pw" name="ori_hmal_pw"
-	    			placeholder="현재 비밀번호를 입력해주세요." style="max-width: 630px;">
+	    			placeholder="현재 비밀번호를 입력해주세요." style="max-width: 400px;">
 	    	</div>
-	    	<div class="form-group" style="margin-left: 60px;">
+	    	<div class="form-group" style="margin-left: 200px;">
 			    <label for="alter_hmal_pw">변경 비밀번호</label>
 			    <input type="password" class="form-control" id="alter_hmal_pw" name="alter_hmal_pw"
-			    	placeholder="변경할 비밀번호를 입력해주세요." style="width: 630px;"><br>
+			    	placeholder="변경할 비밀번호를 입력해주세요." style="width: 400px;"><br>
 			    <label for="ori_hmal_pw"></label>
 			    <button type="button" id="btnAlterPw" class="btn btn-warning">비밀번호변경</button>
-			</div>
-			<br>
-			<div class="form-group" style="margin-left: 60px;">
-				<label for="hmal_pw">현재비밀번호(회원탈퇴)</label>
-	   			<input type="password" class="form-control" id="hmal_pw" name="hmal_pw" 
-	   				placeholder="현재 비밀번호를 입력해주세요." style="max-width: 630px;"><br>
-	   			<label for="hmal_pw"></label>
-    			<button type="button" id="btnUserDelete" class="btn btn-danger" >회원탈퇴</button>
-			</div>			     		  
-	  		
+			</div>			
 	  	   </div> 
 		</form>	 
 	  </div> 
@@ -111,40 +107,7 @@
 					}
 				}
 			});
-		});		
-		
-		// 회원탈퇴
-		$("#btnUserDelete").on("click", function(){
-			
-			let hmal_pw = $("#hmal_pw");
-			
-			if(hmal_pw.val() == "" || hmal_pw.val() == null){
-				alert("현재 비밀번호를 입력하세요.");
-				hmal_pw.focus();
-				return;
-			}
-			
-			$.ajax({
-				url: '/customer/userDelete',
-				type: 'post',
-				dataType: 'text',
-				data: { hmal_pw : hmal_pw.val() },
-				success: function(data){
-					
-					if(data == "1"){
-						alert("회원탈퇴가 완료되었습니다.");
-						location.href = "/";
-					}else if(data == "0"){
-						alert("현재 비밀번호가 다릅니다. 확인하세요.");
-						hmal_pw.val("");
-						hmal_pw.focus();
-					}
-				}
-				
-			});
-			
-			// location.href = "/customer/userDelete";			
-		});
+		});				
 	
 	});
 </script>

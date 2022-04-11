@@ -10,10 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hoya.domain.CustomerVO;
 import com.hoya.domain.OrderDetailList;
@@ -76,7 +78,7 @@ public class OrderController {
 	}
 	
 	@PostMapping("/orderAction")
-	public String orderAction(OrderVO order, OrderDetailList orderDetail, HttpSession session) {
+	public String orderAction(OrderVO order, OrderDetailList orderDetail, HttpSession session, RedirectAttributes rttr) {
 		
 		order.setHmal_id(((CustomerVO) session.getAttribute("loginStatus")).getHmal_id());
 		
@@ -85,7 +87,21 @@ public class OrderController {
 		
 		oService.orderInsert(order, orderDetail);
 		
-		return "redirect:/";
+		// 예> 주문번호:100 [상품 5 건]
+		String pro_name = String.format("주문번호:%d [상품 %d 건]", order.getOrd_code(), orderDetail.getOrderDetailList().size());
+		
+		// 카카오페이 결제시 필요한 정보.
+		rttr.addAttribute("ord_name", order.getOrd_name()); // 주문자
+		rttr.addAttribute("ord_price", order.getOrd_price()); // 주문가격
+		rttr.addAttribute("ord_zipcode", order.getOrd_zipcode()); // 주문자 우편번호
+		rttr.addAttribute("pro_name", pro_name ); // 상품명
+		
+		return "redirect:/order/orderPayView";
+	}
+	
+	@GetMapping("/orderPayView")
+	public void orderPayView(@ModelAttribute("order") OrderVO order, @ModelAttribute("pro_name") String pro_name) {
+		
 	}
 	
 }

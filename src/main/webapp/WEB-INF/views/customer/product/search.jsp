@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -25,15 +27,26 @@
 <br>
 <!-- 사이드메뉴 -->
 <%@include file="/WEB-INF/views/include/sideMenu.jsp" %>
-<br>
 <div class="container">
 	  <div class="container">	  	
   		<a title="홈페이지 이동" id="home" href="/" style="color: black;">
   			<img alt="Home" src="/resources/img/home.png" width="15" height="15">&nbsp;HOME
   		</a>  				  	  		  	
 	  </div>
-	  <br><br>	
+	  <br>
+	  <!-- 검색상품이 없을 때 -->
+      <div class="container" style="margin-left: 400px;">	      
+	      <c:if test="${empty list}">
+			<tr role="row"
+				class="<c:if test="${status.count % 2 == 0 }">odd</c:if><c:if test="${status.count % 2 != 0 }">even</c:if>">
+				<td colspan="6"><b>판매중인 상품이 없습니다. 검색어를 변경해 보세요.</b></td>
+			</tr>
+		  </c:if>
+	  </div>
+	  <br>
+	  <!-- 검색된 상품이 있을때 -->	  
       <div class="row">
+      <c:if test="${not empty list}">
       <c:forEach items="${list }" var="productVO" varStatus="status">
         <div class="col-md-3">
           <div class="card mb-4">
@@ -43,8 +56,13 @@
             <div class="card-body">
               <p class="card-text">
               	<a href="${productVO.pro_num}" class="proDetail" style="color: black; 
-              	text-decoration: none; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;"> 
-              		<c:out value="${productVO.pro_name }"></c:out><br>
+              	text-decoration: none;"> 
+              		<c:if test="${fn:length(productVO.pro_name) > 13 }">
+              			<c:out value="${fn:substring(productVO.pro_name, 0, 13) }"></c:out>...<br>
+              		</c:if>
+              		<c:if test="${fn:length(productVO.pro_name) <= 13 }">
+              			<c:out value="${fn:substring(productVO.pro_name, 0, 13) }"></c:out><br>
+              		</c:if>
               	</a>
               	<label style="font-size: 1.100em; font-weight: bold;"><fmt:formatNumber type="currency" pattern="###,###,###" value="${productVO.pro_price }" />원</label>
               	<input type="hidden" name="pro_num" value="${productVO.pro_num }">
@@ -53,9 +71,10 @@
             </div>
           </div>
         </div>
-       </c:forEach> 
-      </div>
-      <!-- 페이징 출력 -->
+       </c:forEach>
+       </c:if>        
+      </div>      
+      <!-- 페이징 출력 
       <div class="com-sm-12">      
 		 <nav aria-label="Page navigation example">
 		  <ul class="pagination justify-content-center">
@@ -79,6 +98,7 @@
 		  </ul>
 		</nav>
 	 </div>
+	 -->
 	 <!--prev,page number, next 를 클릭하면 아래 form이 작동된다.-->
 	 <form id="actionForm" action="/customer/product/productList" method="get">
 		<!--list.jsp 가 처음 실행되었을 때 pageNum의 값을 사용자가 선택한 번호의 값으로 변경-->

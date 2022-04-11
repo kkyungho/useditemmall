@@ -180,7 +180,7 @@ public class UserProductController {
 		
 		int total = service.getTotalCount(cate_code);
 		
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		model.addAttribute("pageMaker", new PageDTO(cri, total));		
 		model.addAttribute("productList", list);
 	}
 	
@@ -424,6 +424,12 @@ public class UserProductController {
 			model.addAttribute("listcheck", "empty");
 			
 			return "/customer/product/search";
+		}
+		
+		// 슬래시로 바꾸는 구문.
+		for(int i=0; i<list.size(); i++) {
+			ProductVO vo = list.get(i);
+			vo.setPro_uploadpath(vo.getPro_uploadpath().replace("\\", "/"));
 		}
 		
 		model.addAttribute("pageMaker", new PageDTO(cri, service.getTotalProduct(cri)));

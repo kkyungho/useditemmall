@@ -66,4 +66,10 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.modify(board);
 	}
 
+	@Override
+	public int delete(Long brd_bno) {
+		
+		return mapper.delete(brd_bno);
+	}
+
 }

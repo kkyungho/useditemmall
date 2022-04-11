@@ -52,7 +52,7 @@ desired effect
 					<div class="col-xs-12">
 						<div class="box">
 							<div class="box-header">
-								<h3 class="box-title">게시판목록</h3>
+								<h3 class="box-title">Q&amp;A게시판목록</h3>
 							</div>
 							<!-- /.box-header -->
 							<div class="box-body">
@@ -122,23 +122,14 @@ desired effect
 														<c:out value="${pageMaker.cri.type eq 'C'? 'selected':'' }" />>내용</option>
 													<option value="W"
 														<c:out value="${pageMaker.cri.type eq 'W'? 'selected':'' }" />>작성자</option>
-													<option value="TC"
-														<c:out value="${pageMaker.cri.type eq 'TC'? 'selected':'' }" />>제목	or 내용</option>
-													<option value="TW"
-														<c:out value="${pageMaker.cri.type eq 'TW'? 'selected':'' }" />>제목	or 작성자</option>
-													<option value="TCW"
-														<c:out value="${pageMaker.cri.type eq 'TCW'? 'selected':'' }" />>제목 or 내용 or 작성자</option>
+													
 												</select> 
 												<input type="text" name="keyword" value="<c:out value="${pageMaker.cri.keyword }" />">
 												<input type="hidden" name="pageNum"	value="${pageMaker.cri.pageNum}"> 
 												<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-												<button class="btn btn-primary">Search</button>
+												<button class="btn btn-primary">검색</button>
 											</form>
 
-											<!--
-											<div class="dataTables_info" id="example2_info" role="status"
-												aria-live="polite">Showing 1 to 10 of 57 entries</div>
-												-->
 										    </div>
 											<div class="col-sm-7">
 												<div class="dataTables_paginate paging_simple_numbers"
@@ -163,6 +154,7 @@ desired effect
 											<!--prev,page number,next 를 클릭하면 아래 form이 작동된다.-->
 											<form id="actionForm" action="/board/list" method="get">
 												<!--list.jsp 가 처음 실행되었을 때 pageNum의 값을 사용자가 선택한 번호의 값으로 변경-->
+												<input type="hidden" id="brd_bno" name="brd_bno" value='<c:out value="${board.brd_bno}" />'>
 												<input type="hidden" name="pageNum"	value="${pageMaker.cri.pageNum}"> 
 												<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 												<input type="hidden" name="type" value="${pageMaker.cri.type}"> 
@@ -202,15 +194,11 @@ desired effect
 
 					e.preventDefault(); // <a>태그의 기본적인 이벤트기능을 취소. 즉 링크기능취소.      
 
-					let bno = $(this).attr("href");
-					console.log("글번호" + bno);
+					let brd_bno = $(this).attr("href");
+					console.log("글번호" + brd_bno);
 
-					// location.href = "/board/get?bno=" + bno; // /board/get?bno=1
-
-					actionForm.append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");										
-					actionForm.attr("action", "/board/get");
-
-				    actionForm.submit();
+					location.href = "/admin/board/get?brd_bno=" + brd_bno; // /board/get?bno=1
+				
 
 				});
 			

@@ -157,8 +157,8 @@ public class CustomerController {
 	}
 		
 	// 2월11일 작업
-	// 회원수정 폼	
-	@GetMapping(value = {"/alterUser", "/changeOut"})
+	// 마이페이지, 회원수정, 비밀번호변경, 회원탈퇴
+	@GetMapping(value = {"/mypage", "/alterUser", "/changePw", "/userOut"})
 	public void alterUser(HttpSession session, Model model) {
 		
 		CustomerVO vo = (CustomerVO) session.getAttribute("loginStatus");

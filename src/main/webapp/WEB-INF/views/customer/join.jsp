@@ -92,10 +92,9 @@
 			    <input type="hidden" id="sample2_extraAddress" placeholder="참고항목">			        
 			 </div>
 			 <div class="form-group" style="width: 100%; margin-left: 160px;">
-		  	 	<label for="hmal_phone">✔  전화번호</label>&nbsp;&nbsp;
-		  	 	<label style="color: red;">(— 생략하고 입력해주세요.)</label>
+		  	 	<label for="hmal_phone">✔  전화번호</label>&nbsp;&nbsp;		  	 	
       		 	<input type="tel" class="form-control" id="hmal_phone" name="hmal_phone"
-      		 		placeholder="휴대폰번호를 입력해주세요." style="max-width: 400px;">
+      		 		placeholder="- 생략하고 입력해주세요." style="max-width: 400px;">
       		 </div><br>      		  
 	  		 <div class="form-group text-center">
 	  		 	<button type="submit" id="btnJoin" class="btn btn-light">회원가입</button>

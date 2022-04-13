@@ -38,7 +38,7 @@
 		  </li>
 		  <li class="nav-item" id="mycart_sub" role="presentation">
 		    <a class="nav-link active" id="mycart" data-toggle="tab" href="/cart/mycart" 
-		    style="color: black; width: 200px; text-align: center; font-weight: 600; border-top-color: black; border-left-color: black; border-right-color: black;" role="tab" aria-selected="true">찜&nbsp;&nbsp;&nbsp;<span>${hmal_id }</span></a>		    
+		    style="color: black; width: 200px; text-align: center; font-weight: 600; border-top-color: black; border-bottom-color: white; border-left-color: black; border-right-color: black;" role="tab" aria-selected="true">찜&nbsp;&nbsp;&nbsp;<span>${hmal_id }</span></a>		    
 		  </li>		  
 		</ul>
 	</div>	

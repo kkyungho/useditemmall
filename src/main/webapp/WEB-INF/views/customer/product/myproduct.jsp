@@ -34,7 +34,7 @@
 		<ul class="nav nav-tabs" id="storelist" role="tablist">
 		  <li class="nav-item" id="myproduct_sub" role="presentation">
 		    <a class="nav-link active" id="myproduct" data-toggle="tab" href="/customer/product/myproduct" 
-		    style="color: black; width: 200px; text-align: center; font-weight: 600; border-top-color: black; border-left-color: black; border-right-color: black;" role="tab" aria-selected="true">상품&nbsp;&nbsp;&nbsp;<span>${hmal_id }</span></a>
+		    style="color: black; width: 200px; text-align: center; font-weight: 600; border-top-color: black; border-bottom-color: white; border-left-color: black; border-right-color: black;" role="tab" aria-selected="true">상품&nbsp;&nbsp;&nbsp;<span>${hmal_id }</span></a>
 		  </li>
 		  <li class="nav-item" id="mycart_sub" role="presentation">
 		    <a class="nav-link " id="mycart" data-toggle="tab" href="/cart/mycart" 

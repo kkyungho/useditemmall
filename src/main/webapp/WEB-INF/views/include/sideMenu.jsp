@@ -167,13 +167,11 @@ ul, li {
 						<!-- /board/insert 주소바꾸기 /board/list -->
 						<!-- 로그인 이전상태 표시 -->
 	    				<c:if test="${sessionScope.loginStatus == null }">
-							<a href="/customer/login" class="new_side_btn01" style="color: black; text-decoration: none;">Q&amp;A</a>
-							<a href="#"	class="new_side_btn01" style="color: black; text-decoration: none;">검색</a>
+							<a href="/customer/login" class="new_side_btn01" style="color: black; text-decoration: none;">Q&amp;A</a>							
 						</c:if>						
 						<!-- 로그인 이후상태 표시 -->
 	    				<c:if test="${sessionScope.loginStatus != null }">
-	    					<a href="/board/list" class="new_side_btn01" style="color: black; text-decoration: none;">Q&amp;A</a>
-							<a href="#"	class="new_side_btn01" style="color: black; text-decoration: none;">검색</a>
+	    					<a href="/board/list" class="new_side_btn01" style="color: black; text-decoration: none;">Q&amp;A</a>							
 	    				</c:if>
 					</div>
 				</div>

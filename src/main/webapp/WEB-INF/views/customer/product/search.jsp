@@ -43,7 +43,6 @@
 			</tr>
 		  </c:if>
 	  </div>
-	  <br>
 	  <!-- 검색된 상품이 있을때 -->	  
       <div class="row">
       <c:if test="${not empty list}">
@@ -73,32 +72,8 @@
         </div>
        </c:forEach>
        </c:if>        
-      </div>      
-      <!-- 페이징 출력 
-      <div class="com-sm-12">      
-		 <nav aria-label="Page navigation example">
-		  <ul class="pagination justify-content-center">
-		  <c:if test="${pageMaker.prev }">
-		    <li class="page-item">
-		      <a class="page-link" href="#" aria-label="Previous">
-		        <span aria-hidden="true">&laquo;</span>
-		      </a>
-		    </li>
-		   </c:if>
-		   <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="num">
-		    <li class="page-item ${pageMaker.cri.pageNum == num ? 'active':'' }"><a class="page-link" href="${num}">${num}</a></li>
-		   </c:forEach>
-		   <c:if test="${pageMaker.next }">
-		    <li class="page-item">
-		      <a class="page-link" href="#" aria-label="Next">
-		        <span aria-hidden="true">&raquo;</span>
-		      </a>
-		    </li>
-		   </c:if>
-		  </ul>
-		</nav>
-	 </div>
-	 -->
+      </div>   
+      
 	 <!--prev,page number, next 를 클릭하면 아래 form이 작동된다.-->
 	 <form id="actionForm" action="/customer/product/productList" method="get">
 		<!--list.jsp 가 처음 실행되었을 때 pageNum의 값을 사용자가 선택한 번호의 값으로 변경-->
